@@ -52,7 +52,7 @@ The website supports multiple themes (dark mode, light mode, pastel mode, eye-so
 A "Back to Top" button appears when the user scrolls down the page. Clicking this button will smoothly scroll the user back to the top of the page.
 
 ## Project Structure
-
+```bash
 minimal-portfolio/
 ├── _site/                  # Generated site output
 ├── src/                    # Source files
@@ -71,7 +71,7 @@ minimal-portfolio/
 ├── package.json            # Project metadata and dependencies
 ├── styles.css              # Global styles
 └── README.md               # Project documentation
-
+```
 ## Customization
 
 ### Styles
