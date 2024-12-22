@@ -1,0 +1,326 @@
+/* Existing CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Courier Prime', monospace;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+header {
+  background-color: var(--header-background-color);
+  color: var(--header-text-color);
+  padding: 1rem;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Courier Prime', monospace;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--header-text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  transition: max-height 0.3s ease-out; /* Smooth opening animation */
+  overflow: hidden;
+  max-height: none; /* Ensure the navbar is visible in desktop view */
+}
+
+.nav-menu.open {
+  max-height: 500px; /* Adjust as needed */
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-menu ul li {
+  margin-right: 1rem;
+}
+
+.theme-controls {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.theme-controls button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+main {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  font-family: 'Courier Prime', monospace;
+  word-wrap: break-word; /* Ensure text wraps properly */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+footer {
+  background-color: var(--footer-background-color);
+  color: var(--footer-text-color);
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid #000;
+  font-family: 'Courier Prime', monospace;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier Prime', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card-background-color);
+  padding: 1rem;
+  border: 1px solid #000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Dark mode variables */
+.dark-mode {
+  --background-color: #333;
+  --text-color: #f0f0f0;
+  --header-background-color: #282a36;
+  --header-text-color: #f8f8f2;
+  --footer-background-color: #282a36;
+  --footer-text-color: #f8f8f2;
+  --card-background-color: #444;
+  --link-color: #007acc;
+  --link-hover-color: #005f99;
+}
+
+/* Light mode variables */
+.light-mode {
+  --background-color: #f0f0f0;
+  --text-color: #333;
+  --header-background-color: #fff;
+  --header-text-color: #000;
+  --footer-background-color: #fff;
+  --footer-text-color: #000;
+  --card-background-color: #fff;
+  --link-color: #000;
+  --link-hover-color: #333;
+}
+
+/* Pastel mode variables */
+.pastel-mode {
+  --background-color: #f7e1e1;
+  --text-color: #333;
+  --header-background-color: #f7e1e1;
+  --header-text-color: #333;
+  --footer-background-color: #f7e1e1;
+  --footer-text-color: #333;
+  --card-background-color: #fff;
+  --link-color: #333;
+  --link-hover-color: #555;
+}
+
+/* Eye-soothing mode variables */
+.eye-soothing-mode {
+  --background-color: #e0f7fa;
+  --text-color: #004d40;
+  --header-background-color: #e0f7fa;
+  --header-text-color: #004d40;
+  --footer-background-color: #e0f7fa;
+  --footer-text-color: #004d40;
+  --card-background-color: #fff;
+  --link-color: #004d40;
+  --link-hover-color: #00332e;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0; /* Initially hidden */
+  }
+
+  .nav-menu.open {
+    max-height: 500px; /* Adjust as needed */
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-menu ul li {
+    margin: 0;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #000;
+  }
+
+  .theme-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%; /* Ensure it takes full width */
+    padding: 1rem 0; /* Add padding for better spacing */
+  }
+
+  .theme-controls button {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  main {
+    padding: 1rem 0.5rem; /* Adjust padding for mobile */
+    border-left: none; /* Remove border on mobile */
+    border-right: none; /* Remove border on mobile */
+    margin: 0; /* Remove margin on mobile */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-interests {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .skills-interests ul {
+    padding: 0;
+  }
+
+  .skills-interests li {
+    margin: 0.5rem 0;
+    text-align: left;
+  }
+}
+
+pre {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.repo-card {
+  background: var(--card-background-color);
+  padding: 1rem;
+  border: 1px solid #000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.repo-card:hover {
+  transform: translateY(-5px);
+}
+
+.repo-card h3 {
+  margin-top: 0;
+}
+
+.repo-card p {
+  margin-bottom: 0;
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+}
+
+#back-to-top.show {
+  display: block;
+}
