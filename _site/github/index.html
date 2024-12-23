@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="">
@@ -42,55 +43,85 @@
   </header>
   <main class="container">
     <h1>GitHub Repos</h1>
+<h2>GitHub Profile</h2>
+<div class="profile-card">
+  <img src="https://avatars.githubusercontent.com/u/85604341?v=4" alt="Udaysinh's avatar" class="profile-picture"/>
+  <div class="profile-info">
+    <h2>
+      Udaysinh
+      <!-- GitHub Profile Link -->
+      <a href="https://github.com/udaysinh-git" target="_blank" class="github-link" aria-label="Visit GitHub Profile">
+        <!-- GitHub Icon SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="github-icon" viewBox="0 0 24 24">
+          <path d="M12,0.296C5.373,0.296,0,5.668,0,12.3c0,5.303,3.438,9.8,8.205,11.387c0.6,0.111,0.82-0.261,0.82-0.577c0-0.285-0.01-1.04-0.016-2.04c-3.338,0.725-4.042-1.61-4.042-1.61C4.422,18.07,3.633,17.7,3.633,17.7c-1.087-0.744,0.083-0.729,0.083-0.729c1.205,0.084,1.84,1.234,1.84,1.234c1.07,1.836,2.809,1.305,3.495,0.997c0.108-0.775,0.418-1.305,0.76-1.605c-2.665-0.3-5.466-1.334-5.466-5.93c0-1.31,0.469-2.38,1.235-3.22c-0.124-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.3,1.23c0.96-0.267,1.98-0.4,3-0.405c1.02,0.005,2.04,0.138,3,0.405c2.28-1.552,3.285-1.23,3.285-1.23c0.653,1.653,0.242,2.873,0.118,3.176c0.77,0.84,1.233,1.91,1.233,3.22c0,4.61-2.807,5.625-5.479,5.92c0.43,0.372,0.823,1.102,0.823,2.222c0,1.606-0.014,2.896-0.014,3.286c0,0.315,0.216,0.694,0.826,0.576C20.565,21.1,24,16.596,24,12.3C24,5.668,18.627,0.296,12,0.296z"/>
+        </svg>
+      </a>
+    </h2>
+    <p>I love machines <3</p>
+    <p>Followers: 18</p>
+    <p>Following: 28</p>
+    <p>Total Commits: 869</p>
+  </div>
+</div>
+<div class="graphs">
+  <div class="graph-container">
+    <h3>Contributions Over Last 5 Years</h3>
+    <canvas id="contributionsChart"></canvas>
+  </div>
+  <div class="graph-container">
+    <h3>Language Usage</h3>
+    <canvas id="languagePieChart"></canvas>
+  </div>
+</div>
 <h2>Pinned Repositories</h2>
 <div class="timeline pinned">
   <div class="timeline-item">
     <span class="timeline-date">Created: 2022-02-10</span>
     <h3><a href="https://github.com/udaysinh-git/Scam-Protection" target="_blank">Scam-Protection</a></h3>
     <p>Scam Protection bot for fake nitro links</p>
-    <p class="star">⭐ 0</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2022-11-12</p></p>
+    <p class="star">0</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2022-11-12</p></p>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">Created: 2022-07-08</span>
     <h3><a href="https://github.com/udaysinh-git/Old-Ultimate-Discord-Bot" target="_blank">Old-Ultimate-Discord-Bot</a></h3>
     <p>This is a ultimate discord bot ( Under Development ) . This will have A lot of features all that you need for your server. Youtube Upload Ping , Instagram Statistics , Ticket System , VC Statistics like (total members , total subscribers, total views ,total followers), Dynamic Leaderboard, Leveling Systems , Welcome and Leave events , Voice chat statistics, Music 24/7 , Moderation , Protections from spam and raids and other type of bad things,many more such things there are for a bot and yeah its all gonna be open source :) okie bye.</p>
-    <p class="star">⭐ 2</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2022-10-21</p></p>
+    <p class="star">2</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2022-10-21</p></p>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">Created: 2021-07-23</span>
     <h3><a href="https://github.com/udaysinh-git/portfolio-site" target="_blank">portfolio-site</a></h3>
     <p></p>
-    <p class="star">⭐ 0</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2023-10-28</p></p>
+    <p class="star">0</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2023-10-28</p></p>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">Created: 2022-12-05</span>
     <h3><a href="https://github.com/udaysinh-git/Panic-Button" target="_blank">Panic-Button</a></h3>
     <p>This is a chrome extension that does a simple thing when clicked on its icon removes the history of the browser. Pin it and click it and it clears the history. Its disguised as a note extension so you know what i mean.</p>
-    <p class="star">⭐ 1</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2022-12-05</p></p>
+    <p class="star">1</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2022-12-05</p></p>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">Created: 2022-12-05</span>
     <h3><a href="https://github.com/udaysinh-git/Panic-Button-V2" target="_blank">Panic-Button-V2</a></h3>
     <p>This is a chrome extension that does a simple thing when clicked on its icon removes the history and all the working tabs in your browser. Pin it and click it and it clears the history and all tabs. Its disguised as a note extension for obvious reasons</p>
-    <p class="star">⭐ 1</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2022-12-05</p></p>
+    <p class="star">1</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2022-12-05</p></p>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">Created: 2024-02-16</span>
     <h3><a href="https://github.com/udaysinh-git/Socrative-Attendance" target="_blank">Socrative-Attendance</a></h3>
     <p>Socrative Discord Bot named Chotu , made to automate attendance on socrative</p>
-    <p class="star">⭐ 0</p>
-    <p class="fork">🍴 0</p>
-<p><p class="active">🕒 Last Active: 2024-02-17</p></p>
+    <p class="star">0</p>
+    <p class="fork">0</p>
+<p><p class="active">Last Active: 2024-02-17</p></p>
   </div>
 </div>
 <h2>Latest Repositories</h2>
@@ -99,7 +130,7 @@
 </div>
 <!-- Repository Data -->
 <script id="repo-data" type="application/json">
-[{"name":"minimal-portfolio","description":":)","html_url":"https://github.com/udaysinh-git/minimal-portfolio","created_at":"2024-12-22T19:41:39Z","pushed_at":"2024-12-22T21:28:36Z","stargazers_count":0,"forks_count":0},{"name":"matlab_codes_S3","description":null,"html_url":"https://github.com/udaysinh-git/matlab_codes_S3","created_at":"2024-11-28T23:25:43Z","pushed_at":"2024-11-29T01:13:18Z","stargazers_count":0,"forks_count":0},{"name":"Finger-Funk","description":"Virtual canvas—all through the motion of your hands, captured by your webcam (Finger Funk: Your Hands, Your Canvas)","html_url":"https://github.com/udaysinh-git/Finger-Funk","created_at":"2024-11-23T08:50:15Z","pushed_at":"2024-11-23T08:53:34Z","stargazers_count":0,"forks_count":0},{"name":"securebyte_v2","description":"working on this a retry into this stuff","html_url":"https://github.com/udaysinh-git/securebyte_v2","created_at":"2024-11-21T20:31:35Z","pushed_at":"2024-11-22T11:17:19Z","stargazers_count":1,"forks_count":0},{"name":"BudgetAllocation","description":"project for tushar","html_url":"https://github.com/udaysinh-git/BudgetAllocation","created_at":"2024-11-19T17:41:04Z","pushed_at":"2024-11-20T02:04:31Z","stargazers_count":0,"forks_count":0},{"name":"SecureByte","description":null,"html_url":"https://github.com/udaysinh-git/SecureByte","created_at":"2024-11-15T10:05:29Z","pushed_at":"2024-11-15T12:16:13Z","stargazers_count":0,"forks_count":0},{"name":"ieee-conference-latex","description":"VSCode LaTeX Template for IEEE Conference Paper format","html_url":"https://github.com/udaysinh-git/ieee-conference-latex","created_at":"2024-10-24T07:54:17Z","pushed_at":"2023-06-13T11:03:47Z","stargazers_count":0,"forks_count":0},{"name":"my_blog_site","description":"working on my blog site :)","html_url":"https://github.com/udaysinh-git/my_blog_site","created_at":"2024-10-15T23:41:51Z","pushed_at":"2024-11-29T22:16:59Z","stargazers_count":0,"forks_count":0},{"name":"Deepfake_detection_using_deep_learning","description":"This projects aims in detection of video deepfakes using deep learning techniques like RestNext and LSTM. We have achived deepfake detection by using transfer learning where the pretrained RestNext CNN is used to obtain a feature vector, further the LSTM layer is trained using the features. For more details follow the documentaion.","html_url":"https://github.com/udaysinh-git/Deepfake_detection_using_deep_learning","created_at":"2024-09-02T07:50:54Z","pushed_at":"2024-07-28T14:25:17Z","stargazers_count":0,"forks_count":0},{"name":"MAT_DP_IU","description":"meow","html_url":"https://github.com/udaysinh-git/MAT_DP_IU","created_at":"2024-05-02T19:33:39Z","pushed_at":"2024-05-02T19:39:44Z","stargazers_count":0,"forks_count":0},{"name":"readmission-prediction","description":"Hospital readmission prediction using machine learning methods","html_url":"https://github.com/udaysinh-git/readmission-prediction","created_at":"2024-03-29T09:06:41Z","pushed_at":"2018-07-22T06:04:47Z","stargazers_count":0,"forks_count":0},{"name":"reflex","description":"🕸️ Web apps in pure Python 🐍","html_url":"https://github.com/udaysinh-git/reflex","created_at":"2024-03-28T07:07:59Z","pushed_at":"2024-03-28T03:15:23Z","stargazers_count":0,"forks_count":0},{"name":"moodle-hacks-enhanced","description":"I dont know what but i am just adding some fixes and stuff to the code","html_url":"https://github.com/udaysinh-git/moodle-hacks-enhanced","created_at":"2024-03-23T19:32:05Z","pushed_at":"2024-03-23T19:41:03Z","stargazers_count":0,"forks_count":0},{"name":"SecurByte","description":"A handy tool to encrypt text in C","html_url":"https://github.com/udaysinh-git/SecurByte","created_at":"2024-03-17T06:29:58Z","pushed_at":"2024-04-26T00:21:19Z","stargazers_count":0,"forks_count":1},{"name":"m3u8_To_MP4","description":"Python downloader for saving m3u8 videos to local MP4 files.","html_url":"https://github.com/udaysinh-git/m3u8_To_MP4","created_at":"2024-02-22T11:08:45Z","pushed_at":"2023-10-03T19:44:53Z","stargazers_count":0,"forks_count":0},{"name":"blog-page","description":"Notion + Craft.do + Next.js = Notionic (blog-page)","html_url":"https://github.com/udaysinh-git/blog-page","created_at":"2024-02-21T07:50:49Z","pushed_at":"2024-01-02T15:25:21Z","stargazers_count":0,"forks_count":0},{"name":"Socrative-Attendance","description":"Socrative Discord Bot named Chotu , made to automate attendance on socrative","html_url":"https://github.com/udaysinh-git/Socrative-Attendance","created_at":"2024-02-16T09:22:32Z","pushed_at":"2024-02-17T09:54:19Z","stargazers_count":0,"forks_count":0},{"name":"Venn-Games","description":"Games Made for Venn's Event","html_url":"https://github.com/udaysinh-git/Venn-Games","created_at":"2024-02-16T09:01:53Z","pushed_at":"2024-02-28T11:44:04Z","stargazers_count":0,"forks_count":0},{"name":"super-mario-python","description":"super mario where you use physical movements to make mario run ","html_url":"https://github.com/udaysinh-git/super-mario-python","created_at":"2024-02-14T08:05:53Z","pushed_at":"2024-02-02T04:28:26Z","stargazers_count":0,"forks_count":0},{"name":"Ask-her-for-date","description":"A web-page insipired from windows-95 to ask a girl out on date. ","html_url":"https://github.com/udaysinh-git/Ask-her-for-date","created_at":"2023-12-23T18:09:34Z","pushed_at":"2024-01-22T11:23:36Z","stargazers_count":4,"forks_count":4},{"name":"ClearVision-v6-personal","description":"Highly customizable theme for Vencord.","html_url":"https://github.com/udaysinh-git/ClearVision-v6-personal","created_at":"2023-10-31T04:49:20Z","pushed_at":"2023-10-31T05:05:07Z","stargazers_count":0,"forks_count":0},{"name":"card","description":null,"html_url":"https://github.com/udaysinh-git/card","created_at":"2023-10-30T09:48:51Z","pushed_at":"2023-10-30T10:01:26Z","stargazers_count":0,"forks_count":0},{"name":"udaysinh-git.github.io","description":null,"html_url":"https://github.com/udaysinh-git/udaysinh-git.github.io","created_at":"2023-10-27T19:30:29Z","pushed_at":"2024-06-24T09:03:10Z","stargazers_count":0,"forks_count":0},{"name":"vennGitEvent","description":null,"html_url":"https://github.com/udaysinh-git/vennGitEvent","created_at":"2023-10-26T12:14:02Z","pushed_at":"2023-10-26T12:23:31Z","stargazers_count":0,"forks_count":0},{"name":"Real-Time-Object-Detection-Assignment","description":null,"html_url":"https://github.com/udaysinh-git/Real-Time-Object-Detection-Assignment","created_at":"2023-10-05T19:09:25Z","pushed_at":"2023-10-06T04:19:03Z","stargazers_count":0,"forks_count":0},{"name":"Level-3-GenAI","description":null,"html_url":"https://github.com/udaysinh-git/Level-3-GenAI","created_at":"2023-09-24T06:36:56Z","pushed_at":"2023-09-14T14:46:47Z","stargazers_count":0,"forks_count":0},{"name":"node-snapdrop-vercel","description":"Node.js version of the original Snapdrop","html_url":"https://github.com/udaysinh-git/node-snapdrop-vercel","created_at":"2023-07-11T05:51:52Z","pushed_at":"2023-07-10T10:20:57Z","stargazers_count":0,"forks_count":0},{"name":"snapdrop-vercel","description":"A Progressive Web App for local file sharing ","html_url":"https://github.com/udaysinh-git/snapdrop-vercel","created_at":"2023-07-11T05:46:18Z","pushed_at":"2023-07-05T13:09:17Z","stargazers_count":0,"forks_count":0},{"name":"discord-plus","description":"A sleek, customizable Discord theme.","html_url":"https://github.com/udaysinh-git/discord-plus","created_at":"2023-07-09T14:21:08Z","pushed_at":"2023-07-09T14:27:35Z","stargazers_count":0,"forks_count":0},{"name":"first-contributions","description":"🚀✨ Help beginners to contribute to open source projects","html_url":"https://github.com/udaysinh-git/first-contributions","created_at":"2023-06-10T11:59:59Z","pushed_at":"2023-06-10T12:17:32Z","stargazers_count":0,"forks_count":0}]
+[{"name":"minimal-portfolio","description":":)","html_url":"https://github.com/udaysinh-git/minimal-portfolio","created_at":"2024-12-22T19:41:39Z","pushed_at":"2024-12-23T15:44:54Z","stargazers_count":0,"forks_count":0},{"name":"matlab_codes_S3","description":null,"html_url":"https://github.com/udaysinh-git/matlab_codes_S3","created_at":"2024-11-28T23:25:43Z","pushed_at":"2024-11-29T01:13:18Z","stargazers_count":0,"forks_count":0},{"name":"Finger-Funk","description":"Virtual canvas—all through the motion of your hands, captured by your webcam (Finger Funk: Your Hands, Your Canvas)","html_url":"https://github.com/udaysinh-git/Finger-Funk","created_at":"2024-11-23T08:50:15Z","pushed_at":"2024-11-23T08:53:34Z","stargazers_count":0,"forks_count":0},{"name":"securebyte_v2","description":"working on this a retry into this stuff","html_url":"https://github.com/udaysinh-git/securebyte_v2","created_at":"2024-11-21T20:31:35Z","pushed_at":"2024-11-22T11:17:19Z","stargazers_count":1,"forks_count":0},{"name":"BudgetAllocation","description":"project for tushar","html_url":"https://github.com/udaysinh-git/BudgetAllocation","created_at":"2024-11-19T17:41:04Z","pushed_at":"2024-11-20T02:04:31Z","stargazers_count":0,"forks_count":0},{"name":"SecureByte","description":null,"html_url":"https://github.com/udaysinh-git/SecureByte","created_at":"2024-11-15T10:05:29Z","pushed_at":"2024-11-15T12:16:13Z","stargazers_count":0,"forks_count":0},{"name":"ieee-conference-latex","description":"VSCode LaTeX Template for IEEE Conference Paper format","html_url":"https://github.com/udaysinh-git/ieee-conference-latex","created_at":"2024-10-24T07:54:17Z","pushed_at":"2023-06-13T11:03:47Z","stargazers_count":0,"forks_count":0},{"name":"my_blog_site","description":"working on my blog site :)","html_url":"https://github.com/udaysinh-git/my_blog_site","created_at":"2024-10-15T23:41:51Z","pushed_at":"2024-11-29T22:16:59Z","stargazers_count":0,"forks_count":0},{"name":"Deepfake_detection_using_deep_learning","description":"This projects aims in detection of video deepfakes using deep learning techniques like RestNext and LSTM. We have achived deepfake detection by using transfer learning where the pretrained RestNext CNN is used to obtain a feature vector, further the LSTM layer is trained using the features. For more details follow the documentaion.","html_url":"https://github.com/udaysinh-git/Deepfake_detection_using_deep_learning","created_at":"2024-09-02T07:50:54Z","pushed_at":"2024-07-28T14:25:17Z","stargazers_count":0,"forks_count":0},{"name":"MAT_DP_IU","description":"meow","html_url":"https://github.com/udaysinh-git/MAT_DP_IU","created_at":"2024-05-02T19:33:39Z","pushed_at":"2024-05-02T19:39:44Z","stargazers_count":0,"forks_count":0},{"name":"readmission-prediction","description":"Hospital readmission prediction using machine learning methods","html_url":"https://github.com/udaysinh-git/readmission-prediction","created_at":"2024-03-29T09:06:41Z","pushed_at":"2018-07-22T06:04:47Z","stargazers_count":0,"forks_count":0},{"name":"reflex","description":"🕸️ Web apps in pure Python 🐍","html_url":"https://github.com/udaysinh-git/reflex","created_at":"2024-03-28T07:07:59Z","pushed_at":"2024-03-28T03:15:23Z","stargazers_count":0,"forks_count":0},{"name":"moodle-hacks-enhanced","description":"I dont know what but i am just adding some fixes and stuff to the code","html_url":"https://github.com/udaysinh-git/moodle-hacks-enhanced","created_at":"2024-03-23T19:32:05Z","pushed_at":"2024-03-23T19:41:03Z","stargazers_count":0,"forks_count":0},{"name":"SecurByte","description":"A handy tool to encrypt text in C","html_url":"https://github.com/udaysinh-git/SecurByte","created_at":"2024-03-17T06:29:58Z","pushed_at":"2024-04-26T00:21:19Z","stargazers_count":0,"forks_count":1},{"name":"m3u8_To_MP4","description":"Python downloader for saving m3u8 videos to local MP4 files.","html_url":"https://github.com/udaysinh-git/m3u8_To_MP4","created_at":"2024-02-22T11:08:45Z","pushed_at":"2023-10-03T19:44:53Z","stargazers_count":0,"forks_count":0},{"name":"blog-page","description":"Notion + Craft.do + Next.js = Notionic (blog-page)","html_url":"https://github.com/udaysinh-git/blog-page","created_at":"2024-02-21T07:50:49Z","pushed_at":"2024-01-02T15:25:21Z","stargazers_count":0,"forks_count":0},{"name":"Socrative-Attendance","description":"Socrative Discord Bot named Chotu , made to automate attendance on socrative","html_url":"https://github.com/udaysinh-git/Socrative-Attendance","created_at":"2024-02-16T09:22:32Z","pushed_at":"2024-02-17T09:54:19Z","stargazers_count":0,"forks_count":0},{"name":"Venn-Games","description":"Games Made for Venn's Event","html_url":"https://github.com/udaysinh-git/Venn-Games","created_at":"2024-02-16T09:01:53Z","pushed_at":"2024-02-28T11:44:04Z","stargazers_count":0,"forks_count":0},{"name":"super-mario-python","description":"super mario where you use physical movements to make mario run ","html_url":"https://github.com/udaysinh-git/super-mario-python","created_at":"2024-02-14T08:05:53Z","pushed_at":"2024-02-02T04:28:26Z","stargazers_count":0,"forks_count":0},{"name":"Ask-her-for-date","description":"A web-page insipired from windows-95 to ask a girl out on date. ","html_url":"https://github.com/udaysinh-git/Ask-her-for-date","created_at":"2023-12-23T18:09:34Z","pushed_at":"2024-01-22T11:23:36Z","stargazers_count":4,"forks_count":4},{"name":"ClearVision-v6-personal","description":"Highly customizable theme for Vencord.","html_url":"https://github.com/udaysinh-git/ClearVision-v6-personal","created_at":"2023-10-31T04:49:20Z","pushed_at":"2023-10-31T05:05:07Z","stargazers_count":0,"forks_count":0},{"name":"card","description":null,"html_url":"https://github.com/udaysinh-git/card","created_at":"2023-10-30T09:48:51Z","pushed_at":"2023-10-30T10:01:26Z","stargazers_count":0,"forks_count":0},{"name":"udaysinh-git.github.io","description":null,"html_url":"https://github.com/udaysinh-git/udaysinh-git.github.io","created_at":"2023-10-27T19:30:29Z","pushed_at":"2024-06-24T09:03:10Z","stargazers_count":0,"forks_count":0},{"name":"vennGitEvent","description":null,"html_url":"https://github.com/udaysinh-git/vennGitEvent","created_at":"2023-10-26T12:14:02Z","pushed_at":"2023-10-26T12:23:31Z","stargazers_count":0,"forks_count":0},{"name":"Real-Time-Object-Detection-Assignment","description":null,"html_url":"https://github.com/udaysinh-git/Real-Time-Object-Detection-Assignment","created_at":"2023-10-05T19:09:25Z","pushed_at":"2023-10-06T04:19:03Z","stargazers_count":0,"forks_count":0},{"name":"Level-3-GenAI","description":null,"html_url":"https://github.com/udaysinh-git/Level-3-GenAI","created_at":"2023-09-24T06:36:56Z","pushed_at":"2023-09-14T14:46:47Z","stargazers_count":0,"forks_count":0},{"name":"node-snapdrop-vercel","description":"Node.js version of the original Snapdrop","html_url":"https://github.com/udaysinh-git/node-snapdrop-vercel","created_at":"2023-07-11T05:51:52Z","pushed_at":"2023-07-10T10:20:57Z","stargazers_count":0,"forks_count":0},{"name":"snapdrop-vercel","description":"A Progressive Web App for local file sharing ","html_url":"https://github.com/udaysinh-git/snapdrop-vercel","created_at":"2023-07-11T05:46:18Z","pushed_at":"2023-07-05T13:09:17Z","stargazers_count":0,"forks_count":0},{"name":"discord-plus","description":"A sleek, customizable Discord theme.","html_url":"https://github.com/udaysinh-git/discord-plus","created_at":"2023-07-09T14:21:08Z","pushed_at":"2023-07-09T14:27:35Z","stargazers_count":0,"forks_count":0},{"name":"first-contributions","description":"🚀✨ Help beginners to contribute to open source projects","html_url":"https://github.com/udaysinh-git/first-contributions","created_at":"2023-06-10T11:59:59Z","pushed_at":"2023-06-10T12:17:32Z","stargazers_count":0,"forks_count":0}]
 </script>
 <!-- Add Loader -->
 <div class="loader" id="loader">Loading more repositories...</div>
@@ -121,9 +152,9 @@
           <span class="timeline-date">Created: ${new Date(repo.created_at).toISOString().split('T')[0]}</span>
           <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
           <p>${repo.description || 'No description available.'}</p>
-          <p class="star">⭐ ${repo.stargazers_count}</p>
-          <p class="fork">🍴 ${repo.forks_count}</p>
-          ${repo.pushed_at ? `<p class="active">🕒 Last Active: ${new Date(repo.pushed_at).toISOString().split('T')[0]}</p>` : ''}
+          <p class="star">${repo.stargazers_count}</p>
+          <p class="fork">${repo.forks_count}</p>
+          ${repo.pushed_at ? `<p class="active">Last Active: ${new Date(repo.pushed_at).toISOString().split('T')[0]}</p>` : ''}
         `;
         
         repoContainer.appendChild(repoItem);
@@ -149,6 +180,71 @@
 
   // Initial Load
   loadRepos();
+
+  // Contributions Chart
+  const contributionsData = {"labels":["2020","2021","2022","2023","2024"],"data":[0,423,331,109,118]};
+  const ctxContributions = document.getElementById('contributionsChart').getContext('2d');
+  const contributionsChart = new Chart(ctxContributions, {
+    type: 'line', // Changed from 'bar' to 'line'
+    data: {
+      labels: contributionsData.labels,
+      datasets: [{
+        label: 'Commits',
+        data: contributionsData.data,
+        fill: false,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: { 
+          display: true, 
+          title: { display: true, text: 'Year' } 
+        },
+        y: { 
+          display: true, 
+          title: { display: true, text: 'Number of Commits' },
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+        tooltip: {
+          enabled: true,
+        }
+      }
+    }
+  });
+
+  // Language Pie Chart
+  const languageData = {"Python":5112829,"JavaScript":692223,"HTML":189516,"CSS":181829,"Dockerfile":2175,"Shell":11205,"C":18446,"SCSS":319892,"Cuda":241198,"C++":150092,"Jupyter Notebook":31837769,"Batchfile":1352,"TeX":323669,"MATLAB":27671,"Roff":829,"Go":23598,"Nunjucks":6439};
+  const ctxLanguages = document.getElementById('languagePieChart').getContext('2d');
+  const languagePieChart = new Chart(ctxLanguages, {
+    type: 'pie',
+    data: {
+      labels: Object.keys(languageData),
+      datasets: [{
+        data: Object.values(languageData),
+        backgroundColor: [
+          '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+          '#9966FF', '#FF9F40', '#E7E9ED', '#76A346'
+        ],
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'right',
+        }
+      }
+    }
+  });
 </script>
   </main>
   <footer>
