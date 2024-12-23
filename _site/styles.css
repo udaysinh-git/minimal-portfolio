@@ -48,24 +48,10 @@ header .container {
   box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--header-text-color);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
 .nav-menu {
   display: flex;
-  transition: max-height 0.3s ease-out; /* Smooth opening animation */
-  overflow: hidden;
-  max-height: none; /* Ensure the navbar is visible in desktop view */
-}
-
-.nav-menu.open {
-  max-height: 500px; /* Adjust as needed */
+  justify-content: center;
+  width: 100%;
 }
 
 .nav-menu ul {
@@ -73,10 +59,23 @@ header .container {
   padding: 0;
   margin: 0;
   display: flex;
+  gap: 1rem;
 }
 
 .nav-menu ul li {
-  margin-right: 1rem;
+  margin: 0;
+}
+
+.nav-menu ul li a {
+  color: var(--header-text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.nav-menu ul li a.active {
+  background-color: var(--link-hover-color);
+  color: var(--background-color);
 }
 
 .theme-controls {
@@ -202,42 +201,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Media queries for mobile responsiveness */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    width: 100%;
-    max-height: 0; /* Initially hidden */
-  }
-
-  .nav-menu.open {
-    max-height: 500px; /* Adjust as needed */
-  }
-
   .nav-menu ul {
     flex-direction: column;
-    width: 100%;
+    align-items: center;
   }
 
-  .nav-menu ul li {
-    margin: 0;
-    text-align: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #000;
-  }
-
-  .theme-controls {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%; /* Ensure it takes full width */
-    padding: 1rem 0; /* Add padding for better spacing */
-  }
-
-  .theme-controls button {
-    margin-left: 0;
-    margin-top: 0.5rem;
+  .nav-menu ul li a {
+    padding: 0.5rem;
   }
 
   main {
@@ -324,3 +294,248 @@ pre {
 #back-to-top.show {
   display: block;
 }
+
+
+/* Hover effect for nav items */
+.nav-menu ul li a:hover {
+  background-color: var(--link-hover-color);
+  color: var(--background-color);
+}
+
+/* Keep navigation in a single line on mobile */
+@media (max-width: 768px) {
+  .nav-menu ul {
+    /* Remove flex-direction: column to keep items on one line */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Reduce nav bar height on mobile; keep items on one line */
+@media (max-width: 768px) {
+  .nav-menu {
+    padding: 0.5rem 0;
+  }
+  .nav-menu ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .nav-menu ul li a {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    border-right-width: -2;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    padding-right: 30px;
+  }
+}
+.nav-menu ul li a {
+  padding: 0.3rem 0.5rem;
+}
+
+/* Timeline layout */
+/* Enhance Timeline Layout */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-left: 0;
+}
+
+.timeline-item {
+  background: var(--card-background-color);
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.timeline::before {
+  display: none;
+}
+
+.timeline-item::before {
+  content: none;
+}
+
+.timeline-item h3 a {
+  font-size: 1.2rem;
+  color: var(--link-color);
+}
+
+.timeline-item p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin: 0.5rem 0;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+/* Card Icons */
+.timeline-item .star::before {
+  content: "⭐";
+  margin-right: 0.5rem;
+}
+
+.timeline-item .fork::before {
+  content: "🍴";
+  margin-right: 0.5rem;
+}
+
+.timeline-item .active::before {
+  content: "🕒";
+  margin-right: 0.5rem;
+}
+
+/* Responsive Layout */
+@media (min-width: 768px) {
+  .timeline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .timeline-item {
+    flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .timeline-item {
+    flex: 1 1 calc(33.333% - 2rem);
+  }
+}
+
+
+/* Loader Styles */
+.loader {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+/* Ensure timeline-item has proper spacing */
+.timeline-item {
+  margin-bottom: 1rem;
+}
+
+/* Responsive Layout Adjustments */
+/* @media (min-width: 768px) {
+  .timeline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .timeline-item {
+    flex: 1 1 calc(50% - 2rem);
+  }
+} */
+
+@media (min-width: 1024px) {
+  .timeline-item {
+    flex: 1 1 calc(33.333% - 2rem);
+  }
+}
+
+/* ... existing styles ... */
+
+/* Add fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Enhance timeline-item styles for better presentation */
+.timeline-item {
+  background: var(--card-background-color);
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item h3 a {
+  font-size: 1.2rem;
+  color: var(--link-color);
+  transition: color 0.3s;
+}
+
+.timeline-item h3 a:hover {
+  color: var(--link-hover-color);
+}
+
+.timeline-item p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin: 0.5rem 0;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+/* Loader Styles */
+.loader {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+/* Responsive Layout Adjustments */
+@media (min-width: 768px) {
+  .timeline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .timeline-item {
+    flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .timeline-item {
+    flex: 1 1 calc(33.333% - 2rem);
+  }
+}
+

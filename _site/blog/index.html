@@ -11,20 +11,33 @@
 <body class="">
   <header>
     <div class="container">
-      <h1>My Portfolio</h1>
-      <button id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></button>
       <nav id="nav-menu" class="nav-menu">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/achievements">Achievements</a></li>
-          <li><a href="/github">GitHub Repos</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/resume">Resume</a></li>
+          <li>
+            <a href="/" class="">~/home</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/achievements" class="">Achievements</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/github" class="">GitHub Repos</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/blog" class="active">Blog</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/resume" class="">Resume</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="#" id="theme-toggle">themes</a>
+          </li>
         </ul>
       </nav>
-      <div class="theme-controls">
-        <button id="theme-toggle" class="icon-button"><i class="fas fa-adjust"></i></button>
-      </div>
     </div>
   </header>
   <main class="container">
@@ -32,10 +45,10 @@
 <p>Welcome to my blog! Here you will find my latest posts on various topics related to software development, AI, and more.</p>
 <ul>
 <p><li>
-<a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - 2024-12-23
+<a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - Invalid DateTime
 </li></p>
 <p><li>
-<a href="/posts/2023-10-01-my-first-post/">My First Post</a> - 2024-12-23
+<a href="/posts/2023-10-01-my-first-post/">My First Post</a> - Invalid DateTime
 </li></p>
 </ul>
   </main>
@@ -51,8 +64,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <script>
     const themeToggle = document.getElementById('theme-toggle');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
     const backToTopButton = document.getElementById('back-to-top');
 
     const themes = ['dark-mode', 'light-mode', 'pastel-mode', 'eye-soothing-mode'];
@@ -64,38 +75,14 @@
       localStorage.setItem('theme', themes[currentThemeIndex]);
     });
 
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      if (navMenu.classList.contains('open')) {
-        navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
-      } else {
-        navMenu.style.maxHeight = '0';
-      }
-    });
-
-    // Load the saved theme from localStorage
+    // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       document.body.className = savedTheme;
       currentThemeIndex = themes.indexOf(savedTheme);
     }
 
-    // Initialize Clipboard.js
-    new ClipboardJS('.copy-button');
-
-    // Add copy buttons to code blocks
-    document.querySelectorAll('pre').forEach((pre, index) => {
-      const code = pre.querySelector('code');
-      const id = `code-block-${index}`;
-      code.setAttribute('id', id);
-      const button = document.createElement('button');
-      button.className = 'copy-button';
-      button.textContent = 'Copy';
-      button.setAttribute('data-clipboard-target', `#${id}`);
-      pre.appendChild(button);
-    });
-
-    // Show back to top button
+    // Show back-to-top
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         backToTopButton.classList.add('show');

@@ -11,34 +11,49 @@
 <body class="">
   <header>
     <div class="container">
-      <h1>My Portfolio</h1>
-      <button id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></button>
       <nav id="nav-menu" class="nav-menu">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/achievements">Achievements</a></li>
-          <li><a href="/github">GitHub Repos</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/resume">Resume</a></li>
+          <li>
+            <a href="/" class="active">~/home</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/achievements" class="">Achievements</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/github" class="">GitHub Repos</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/blog" class="">Blog</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/resume" class="">Resume</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="#" id="theme-toggle">themes</a>
+          </li>
         </ul>
       </nav>
-      <div class="theme-controls">
-        <button id="theme-toggle" class="icon-button"><i class="fas fa-adjust"></i></button>
-      </div>
     </div>
   </header>
   <main class="container">
-    <h1>Welcome to My Portfolio</h1>
-<div style="display: flex; flex-wrap: wrap; align-items: center; margin-top: 2rem;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; margin-top: 2rem;">
   <div style="flex: 1; text-align: center; min-width: 300px;">
     <img src="https://www.imghost.net/ib/Xh8QaNMRNSaPA3a_1734898317.webp" alt="Udaysinh Sapate" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
   </div>
   <div style="flex: 2; padding-left: 2rem; min-width: 300px;">
-    <p>Hello! I'm <strong>Udaysinh Sapate</strong>, a <strong>Software Developer & AI Specialist</strong>. Welcome to my portfolio where you can find my achievements, projects, blog posts, and more.</p>
+    <p>Hello! I'm <strong>Udaysinh Sapate</strong>, a <strong>Software Developer & AI Specialist</strong>. Welcome to my website where you can find my achievements, projects, blog posts, and more.</p>
   </div>
 </div>
-<h2>About Me</h2>
-<p>I'm a passionate coder who loves to build innovative solutions. When I'm not coding, you can find me exploring new technologies, playing video games, or watching anime.</p>
+<div style="padding: 1rem; margin-top: 1rem;">
+  <p style="margin: 0.5rem 0; text-align: center;">
+    I'm a passionate coder who loves to build innovative solutions. When I'm not coding, you can find me exploring new technologies, playing video games, or watching anime.
+  </p>
+</div>
 <div class="skills-interests">
   <h2 style="text-align: center;">Skills & Interests</h2>
   <ul style="list-style-type: none; padding: 0;">
@@ -49,7 +64,11 @@
     <li style="margin: 0.5rem 0; text-align: center;">🎮 <strong>Interests:</strong> Video Games, Anime, Tech Gadgets</li>
   </ul>
 </div>
-<p>Feel free to explore the different sections to know more about my work and experience.</p>
+<div style="padding: 1rem; margin-top: 1rem;">
+  <p style="margin: 0.5rem 0; text-align: center;">
+    Feel free to explore the different sections to know more about my work and experience.
+  </p>
+</div>
 
   </main>
   <footer>
@@ -64,8 +83,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <script>
     const themeToggle = document.getElementById('theme-toggle');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
     const backToTopButton = document.getElementById('back-to-top');
 
     const themes = ['dark-mode', 'light-mode', 'pastel-mode', 'eye-soothing-mode'];
@@ -77,38 +94,14 @@
       localStorage.setItem('theme', themes[currentThemeIndex]);
     });
 
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      if (navMenu.classList.contains('open')) {
-        navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
-      } else {
-        navMenu.style.maxHeight = '0';
-      }
-    });
-
-    // Load the saved theme from localStorage
+    // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       document.body.className = savedTheme;
       currentThemeIndex = themes.indexOf(savedTheme);
     }
 
-    // Initialize Clipboard.js
-    new ClipboardJS('.copy-button');
-
-    // Add copy buttons to code blocks
-    document.querySelectorAll('pre').forEach((pre, index) => {
-      const code = pre.querySelector('code');
-      const id = `code-block-${index}`;
-      code.setAttribute('id', id);
-      const button = document.createElement('button');
-      button.className = 'copy-button';
-      button.textContent = 'Copy';
-      button.setAttribute('data-clipboard-target', `#${id}`);
-      pre.appendChild(button);
-    });
-
-    // Show back to top button
+    // Show back-to-top
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         backToTopButton.classList.add('show');
