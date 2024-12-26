@@ -117,6 +117,7 @@ Remote</p>
     </div>
   </footer>
   <button id="back-to-top">Top</button>
+  <div id="theme-toast" class="theme-toast">Theme changed to: <span id="theme-name"></span></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
@@ -124,8 +125,24 @@ Remote</p>
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     const backToTopButton = document.getElementById('back-to-top');
+    const themeToast = document.getElementById('theme-toast');
+    const themeName = document.getElementById('theme-name');
 
-    const themes = ['dark-mode', 'light-mode', 'pastel-mode', 'eye-soothing-mode'];
+    const themes = [
+      'dark-mode', 
+      'light-mode', 
+      'pastel-mode', 
+      'eye-soothing-mode', 
+      'solarized-dark-mode', 
+      'solarized-light-mode', 
+      'monokai-mode',
+      'dracula-mode',
+      'gruvbox-dark-mode',
+      'nord-mode',
+      'one-dark-mode',
+      'material-dark-mode',
+      'material-light-mode'
+    ];
     let currentThemeIndex = 0;
 
     // Detect user's preferred color scheme
@@ -150,8 +167,16 @@ Remote</p>
 
     themeToggle.addEventListener('click', () => {
       currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-      document.body.className = themes[currentThemeIndex];
-      localStorage.setItem('theme', themes[currentThemeIndex]);
+      const newTheme = themes[currentThemeIndex];
+      document.body.className = newTheme;
+      localStorage.setItem('theme', newTheme);
+
+      // Show toast notification
+      themeName.textContent = newTheme.replace(/-/g, ' ');
+      themeToast.classList.add('show');
+      setTimeout(() => {
+        themeToast.classList.remove('show');
+      }, 3000);
     });
 
     // Show back-to-top
