@@ -70,18 +70,31 @@
     const themes = ['dark-mode', 'light-mode', 'pastel-mode', 'eye-soothing-mode'];
     let currentThemeIndex = 0;
 
+    // Detect user's preferred color scheme
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+    // Load saved theme or set based on user's preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.body.className = savedTheme;
+      currentThemeIndex = themes.indexOf(savedTheme);
+    } else if (prefersDarkScheme) {
+      document.body.className = 'dark-mode';
+      currentThemeIndex = themes.indexOf('dark-mode');
+    } else if (prefersLightScheme) {
+      document.body.className = 'light-mode';
+      currentThemeIndex = themes.indexOf('light-mode');
+    } else {
+      document.body.className = 'light-mode'; // Default to light mode if no preference
+      currentThemeIndex = themes.indexOf('light-mode');
+    }
+
     themeToggle.addEventListener('click', () => {
       currentThemeIndex = (currentThemeIndex + 1) % themes.length;
       document.body.className = themes[currentThemeIndex];
       localStorage.setItem('theme', themes[currentThemeIndex]);
     });
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.body.className = savedTheme;
-      currentThemeIndex = themes.indexOf(savedTheme);
-    }
 
     // Show back-to-top
     window.addEventListener('scroll', () => {

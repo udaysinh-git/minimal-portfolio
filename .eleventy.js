@@ -308,6 +308,7 @@ module.exports = function(eleventyConfig) {
       return { labels: [], data: [] };
     }
   });
+  
   // Add current year to global data
   eleventyConfig.addGlobalData("currentYear", () => {
     return new Date().getFullYear();
