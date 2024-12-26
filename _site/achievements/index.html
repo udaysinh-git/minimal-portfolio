@@ -141,6 +141,21 @@
     backToTopButton.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+      const increaseFontButton = document.getElementById('increase-font');
+    const decreaseFontButton = document.getElementById('decrease-font');
+    const blogContent = document.querySelector('main');
+
+    increaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) + 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
+    });
+
+    decreaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) - 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
+    });
   </script>
 </body>
 </html>

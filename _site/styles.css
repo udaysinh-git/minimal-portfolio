@@ -70,3 +70,56 @@
     text-align: left;
   }
 }
+
+/* Floating Action Button (FAB) */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.fab:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* FAB Options */
+.fab-options {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  display: none;
+}
+
+.fab-options button {
+  background-color: var(--link-color);
+  color: var(--background-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fab-options button:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* Show FAB Options */
+.fab.show-options + .fab-options {
+  display: flex;
+}

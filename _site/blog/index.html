@@ -44,11 +44,15 @@
   <main class="container">
     <h1>Blog</h1>
 <p>Welcome to my blog! Here you will find my latest posts on various topics related to software development, AI, and more.</p>
-<ul>
-<p><li>
+<div class="font-controls">
+  <button id="increase-font">A+</button>
+  <button id="decrease-font">A-</button>
+</div>
+<ul class="blog-list">
+<p><li class="blog-item">
 <a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - Invalid DateTime
 </li></p>
-<p><li>
+<p><li class="blog-item">
 <a href="/posts/2023-10-01-my-first-post/">My First Post</a> - Invalid DateTime
 </li></p>
 </ul>
@@ -132,6 +136,21 @@
 
     backToTopButton.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+      const increaseFontButton = document.getElementById('increase-font');
+    const decreaseFontButton = document.getElementById('decrease-font');
+    const blogContent = document.querySelector('main');
+
+    increaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) + 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
+    });
+
+    decreaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) - 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
     });
   </script>
 </body>

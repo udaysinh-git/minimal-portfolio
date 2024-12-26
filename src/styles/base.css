@@ -1,20 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
-
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: 'Courier Prime', monospace;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #000;
-  scroll-behavior: smooth;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+.post-content {
+    --font-family: 'Courier Prime', monospace; /* Define CSS variable for post */
+    font-family: var(--font-family); /* Use CSS variable */
 }
-
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -26,10 +28,10 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Courier Prime', monospace;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+    font-family: var(--font-family); /* Use CSS variable */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
 .grid {
   display: grid;

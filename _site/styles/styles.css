@@ -349,3 +349,130 @@
   height: 16px;
   margin-left: 4px;
 }
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Font controls */
+.font-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.font-controls button {
+  background-color: var(--link-color);
+  color: var(--background-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.font-controls button:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* Blog list styles */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-item {
+  margin-bottom: 1rem;
+}
+
+.blog-item a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.blog-item a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  .font-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .font-controls button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-list {
+    padding: 0 1rem;
+  }
+}
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure images do not break the layout on mobile devices */
+@media (max-width: 768px) {
+  img {
+    max-height: 300px; /* Set a maximum height for images on mobile */
+    width: auto; /* Ensure the width is auto to maintain aspect ratio */
+  }
+}
+/* Floating Action Button (FAB) */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem; /* Change from right to left */
+  background-color: var(--link-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.fab:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* FAB Options */
+.fab-options {
+  position: fixed;
+  bottom: 6rem;
+  left: 2rem; /* Change from right to left */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  display: none;
+}
+
+.fab-options button {
+  background-color: var(--link-color);
+  color: var(--background-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fab-options button:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* Show FAB Options */
+.fab.show-options + .fab-options {
+  display: flex;
+}
