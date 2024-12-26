@@ -215,6 +215,9 @@ else:
     const fonts = [
       { name: 'Inter', family: "'Inter', sans-serif" },
       { name: 'Montserrat', family: "'Montserrat', sans-serif" },
+      { name: 'Open Sans', family: "'Open Sans', sans-serif" },
+      { name: 'Roboto', family: "'Roboto', sans-serif" },
+      { name: 'Lato', family: "'Lato', sans-serif" },
       { name: 'Courier Prime', family: "'Courier Prime', monospace" }
     ];
     let currentFontIndex = 0;
@@ -286,7 +289,7 @@ else:
       blogContent.style.fontSize = `${newFontSize}px`;
     });
 
-        const postContent = document.querySelector('.post-content');
+    const postContent = document.querySelector('.post-content');
 
     fontSwitcherButton.addEventListener('click', () => {
       currentFontIndex = (currentFontIndex + 1) % fonts.length;
