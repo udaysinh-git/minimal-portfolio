@@ -1,0 +1,23 @@
+main {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  font-family: 'Courier Prime', monospace;
+  word-wrap: break-word; /* Ensure text wraps properly */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem 0.5rem; /* Adjust padding for mobile */
+    border-left: none; /* Remove border on mobile */
+    border-right: none; /* Remove border on mobile */
+    margin: 0; /* Remove margin on mobile */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+}

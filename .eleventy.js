@@ -315,7 +315,12 @@ module.exports = function(eleventyConfig) {
   });
 
   // Passthrough copy for CSS
-  eleventyConfig.addPassthroughCopy("src/styles.css");
+  eleventyConfig.addPassthroughCopy("src/styles/base.css");
+  eleventyConfig.addPassthroughCopy("src/styles/footer.css");
+  eleventyConfig.addPassthroughCopy("src/styles/header.css");
+  eleventyConfig.addPassthroughCopy("src/styles/main.css");
+  eleventyConfig.addPassthroughCopy("src/styles/themes.css");
+  eleventyConfig.addPassthroughCopy("src/styles/styles.css");
 
   return {
     dir: {

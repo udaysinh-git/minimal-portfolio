@@ -1,0 +1,51 @@
+/* Dark mode variables */
+.dark-mode {
+  --background-color: #333;
+  --text-color: #f0f0f0;
+  --header-background-color: #282a36;
+  --header-text-color: #f8f8f2;
+  --footer-background-color: #282a36;
+  --footer-text-color: #f8f8f2;
+  --card-background-color: #444;
+  --link-color: #007acc;
+  --link-hover-color: #005f99;
+}
+
+/* Light mode variables */
+.light-mode {
+  --background-color: #f0f0f0;
+  --text-color: #333;
+  --header-background-color: #fff;
+  --header-text-color: #000;
+  --footer-background-color: #fff;
+  --footer-text-color: #000;
+  --card-background-color: #fff;
+  --link-color: #000;
+  --link-hover-color: #333;
+}
+
+/* Pastel mode variables */
+.pastel-mode {
+  --background-color: #f7e1e1;
+  --text-color: #333;
+  --header-background-color: #f7e1e1;
+  --header-text-color: #333;
+  --footer-background-color: #f7e1e1;
+  --footer-text-color: #333;
+  --card-background-color: #fff;
+  --link-color: #333;
+  --link-hover-color: #555;
+}
+
+/* Eye-soothing mode variables */
+.eye-soothing-mode {
+  --background-color: #e0f7fa;
+  --text-color: #004d40;
+  --header-background-color: #e0f7fa;
+  --header-text-color: #004d40;
+  --footer-background-color: #e0f7fa;
+  --footer-text-color: #004d40;
+  --card-background-color: #fff;
+  --link-color: #004d40;
+  --link-hover-color: #00332e;
+}

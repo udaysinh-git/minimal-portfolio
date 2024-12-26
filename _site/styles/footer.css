@@ -1,0 +1,16 @@
+footer {
+  background-color: var(--footer-background-color);
+  color: var(--footer-text-color);
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid #000;
+  font-family: 'Courier Prime', monospace;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
