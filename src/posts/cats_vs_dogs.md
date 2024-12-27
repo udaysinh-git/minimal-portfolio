@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: Building a Simple Cat vs Dog Classifier Using Python
-date: 2023-10-02
+date: 2024-12-27
 ---
 ## Introduction
 
