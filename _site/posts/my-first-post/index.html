@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{ title }}</title>
+  <title>My First Post</title>
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/main.css">
@@ -13,29 +13,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="{{ theme }}">
+<body class="">
   <header>
     <div class="container">
       <nav id="nav-menu" class="nav-menu">
         <ul>
           <li>
-            <a href="/" class="{% if title == 'Home' %}active{% endif %}">~/home</a>
+            <a href="/" class="">~/home</a>
           </li>
           <li>/</li>
           <li>
-            <a href="/achievements" class="{% if title == 'Achievements' %}active{% endif %}">Achievements</a>
+            <a href="/achievements" class="">Achievements</a>
           </li>
           <li>/</li>
           <li>
-            <a href="/github" class="{% if title == 'GitHub Repos' %}active{% endif %}">GitHub Repos</a>
+            <a href="/github" class="">GitHub Repos</a>
           </li>
           <li>/</li>
           <li>
-            <a href="/blog" class="{% if title == 'Blog' %}active{% endif %}">Blog</a>
+            <a href="/blog" class="">Blog</a>
           </li>
           <li>/</li>
           <li>
-            <a href="/resume" class="{% if title == 'Resume' %}active{% endif %}">Resume</a>
+            <a href="/resume" class="">Resume</a>
           </li>
           <li>/</li>
           <li>
@@ -47,20 +47,36 @@
   </header>
   <main class="container">
     <article class="post-content">
-      <h1>{{ title }}</h1>
-      {{ content | safe }}
+      <h1>My First Post</h1>
+      <h1>My First Blog Post: Excitement and Vision</h1>
+<p>Hello everyone!</p>
+<p>I am thrilled to share my first blog post on this website. As a passionate Software Developer and AI Specialist, I have always been fascinated by the endless possibilities that technology offers. This website is a culmination of my experiences, skills, and aspirations, and I am excited to embark on this new journey of sharing my knowledge and ideas with you all.</p>
+<h2>Why I Created This Website</h2>
+<p>Over the years, I have had the privilege of working on various projects, from developing custom software solutions to founding a startup. My journey has been filled with learning, innovation, and collaboration. This website is a platform where I can document my experiences, share insights, and connect with like-minded individuals.</p>
+<h2>My Vision</h2>
+<p>I envision this website as a hub for tech enthusiasts, developers, and anyone interested in AI, cybersecurity, and web development. Here, I will be sharing:</p>
+<ul>
+<li><strong>Technical Tutorials</strong>: Step-by-step guides on programming, AI models, and web development.</li>
+<li><strong>Project Highlights</strong>: Detailed breakdowns of my major project.</li>
+<li><strong>Industry Insights</strong>: My thoughts on the latest trends and advancements in technology.</li>
+<li><strong>Personal Experiences</strong>: Stories from my journey as a freelancer, startup founder, and continuous learner.</li>
+</ul>
+<h2>My Journey So Far</h2>
+<p>As highlighted in my <a href="https://udaysinh.me">resume</a>, my journey has been diverse and enriching. From creating custom software solutions to managing a team at Citta Hub, I have gained valuable experience that I am eager to share. My educational background in Computer Science Engineering and continuous learning have equipped me with a versatile skill set that I am excited to leverage in this blog.</p>
+<h2>Join Me on This Journey</h2>
+<p>I invite you all to join me on this exciting journey. Whether you are a seasoned developer or just starting, I hope to provide valuable content that inspires and educates. Feel free to reach out, share your thoughts, and engage with the content. Together, let's explore the fascinating world of technology and innovation.</p>
+<p>Thank you for visiting, and I look forward to sharing more with you soon!</p>
+<p>Best regards,
+Udaysinh Sapate</p>
+
     </article>
   </main>
   <footer>
-    <div class="footer-container">
-      <div class="footer-left">
-        <p>&copy; {{ currentYear }} Udaysinh's Portfolio</p>
-      </div>
-      <div class="footer-right">
+    <div class="container">
+      <p>&copy; 2024 Udaysinh's Portfolio</p>
       <a href="https://github.com/udaysinh-git/minimal-portfolio" target="_blank" rel="noopener noreferrer" class="github-link">
-      View Source on GitHub
-      </a>
-      </div>
+      <i class="fab fa-github"></i> View Source on GitHub
+    </a>
     </div>
   </footer>
   <button id="back-to-top">Top</button>

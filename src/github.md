@@ -154,13 +154,22 @@ title: GitHub Repos
 
   // Language Pie Chart
   const languageData = {{ languageStats | jsonify }};
+  
+  // Calculate total bytes
+  const totalBytes = Object.values(languageData).reduce((a, b) => a + b, 0);
+  
+  // Calculate percentage for each language
+  const languagePercentages = Object.fromEntries(
+    Object.entries(languageData).map(([lang, bytes]) => [lang, ((bytes / totalBytes) * 100).toFixed(2)])
+  );
+
   const ctxLanguages = document.getElementById('languagePieChart').getContext('2d');
   const languagePieChart = new Chart(ctxLanguages, {
     type: 'pie',
     data: {
-      labels: Object.keys(languageData),
+      labels: Object.keys(languagePercentages),
       datasets: [{
-        data: Object.values(languageData),
+        data: Object.values(languagePercentages),
         backgroundColor: [
           '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
           '#9966FF', '#FF9F40', '#E7E9ED', '#76A346'
@@ -172,6 +181,15 @@ title: GitHub Repos
       plugins: {
         legend: {
           position: 'right',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.label || '';
+              const value = context.parsed || 0;
+              return `${label}: ${value}%`;
+            }
+          }
         }
       }
     }
