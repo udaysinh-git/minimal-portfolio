@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blog</title>
+  <title>Posts tagged with &quot;{{ tag }}&quot;</title>
   <link rel="stylesheet" href="/styles/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
@@ -27,7 +27,7 @@
           </li>
           <li>/</li>
           <li>
-            <a href="/blog" class="active">Blog</a>
+            <a href="/blog" class="">Blog</a>
           </li>
           <li>/</li>
           <li>
@@ -43,95 +43,16 @@
   </header>
   <main class="container">
     
-<h1>Blog</h1>
-
-<p>Welcome to my blog! Here you will find my latest posts on various topics related to software development, AI, and more.</p>
+<h1>Posts tagged with "Projects"</h1>
 
 <ul class="blog-list">
   
-    <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/cats_vs_dogs/')">
-      <a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - <span class="post-date" data-date="Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)">Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)</span>
-      <ul class="tag-list">
-        
-          <li class="tag-item"><a href="/tag/machine-learning/">machine learning</a></li>
-        
-          <li class="tag-item"><a href="/tag/python/">python</a></li>
-        
-          <li class="tag-item"><a href="/tag/image-classification/">image classification</a></li>
-        
-          <li class="tag-item"><a href="/tag/deep-learning/">deep learning</a></li>
-        
-          <li class="tag-item"><a href="/tag/neural-networks/">neural networks</a></li>
-        
-          <li class="tag-item"><a href="/tag/tensorflow/">TensorFlow</a></li>
-        
-          <li class="tag-item"><a href="/tag/keras/">Keras</a></li>
-        
-          <li class="tag-item"><a href="/tag/ai/">AI</a></li>
-        
-          <li class="tag-item"><a href="/tag/computer-vision/">computer vision</a></li>
-        
-          <li class="tag-item"><a href="/tag/tutorial/">tutorial</a></li>
-        
-      </ul>
-    </li>
-  
-    <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/my-first-post/')">
+    <li class="blog-item">
       <a href="/posts/my-first-post/">My First Post</a> - <span class="post-date" data-date="Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)">Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)</span>
-      <ul class="tag-list">
-        
-          <li class="tag-item"><a href="/tag/software-development/">Software Development</a></li>
-        
-          <li class="tag-item"><a href="/tag/projects/">Projects</a></li>
-        
-          <li class="tag-item"><a href="/tag/personal-experiences/">Personal Experiences</a></li>
-        
-          <li class="tag-item"><a href="/tag/ai/">AI</a></li>
-        
-          <li class="tag-item"><a href="/tag/cybersecurity/">Cybersecurity</a></li>
-        
-          <li class="tag-item"><a href="/tag/web-development/">Web Development</a></li>
-        
-          <li class="tag-item"><a href="/tag/tutorials/">Tutorials</a></li>
-        
-          <li class="tag-item"><a href="/tag/industry-insights/">Industry Insights</a></li>
-        
-          <li class="tag-item"><a href="/tag/freelancing/">Freelancing</a></li>
-        
-          <li class="tag-item"><a href="/tag/startup/">Startup</a></li>
-        
-          <li class="tag-item"><a href="/tag/innovation/">Innovation</a></li>
-        
-          <li class="tag-item"><a href="/tag/technology-trends/">Technology Trends</a></li>
-        
-      </ul>
     </li>
   
 </ul>
 
-<style>
-  .blog-item {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .blog-item:active {
-    transform: scale(0.98);
-  }
-
-  .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-</style>
-
-<script>
-  function handleBlogClick(url) {
-    document.body.classList.add('fade-out');
-    setTimeout(() => {
-      window.location.href = url;
-    }, 500); // Ensure this duration matches the CSS transition duration
-  }
-</script>
   </main>
   <footer>
     <div class="footer-container">

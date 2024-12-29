@@ -1,10 +1,21 @@
 const { DateTime } = require("luxon");
 require('dotenv').config();
 
-module.exports = function(eleventyConfig) {
-  // Add a custom date filter
-  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-MM-dd") => {
-    return DateTime.fromISO(dateObj).toFormat(format);
+  module.exports = function(eleventyConfig) {
+    // Add a custom date filter
+    eleventyConfig.addFilter("date", (dateObj, format = "yyyy-MM-dd") => {
+      return DateTime.fromISO(dateObj).toFormat(format);
+    });
+
+  // Add a custom filter to filter blog posts by tag
+    eleventyConfig.addFilter("filterByTag", (posts, tag) => {
+      return posts.filter(post => {
+        return post && post.data && Array.isArray(post.data.tags) && post.data.tags.includes(tag);
+      });
+    });
+
+  eleventyConfig.addFilter("intersect", function(array1, array2) {
+    return array1.filter(value => array2.includes(value));
   });
 
   // Add a collection for blog posts
@@ -12,6 +23,17 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => {
       return b.date - a.date;
     });
+  });
+
+  // Add a collection for unique tags
+  eleventyConfig.addCollection("tagsList", function(collectionApi) {
+    let tags = new Set();
+    collectionApi.getAll().forEach(item => {
+      if("tags" in item.data) {
+        item.data.tags.forEach(tag => tags.add(tag));
+      }
+    });
+    return Array.from(tags);
   });
 
   // Add GitHub profile data
@@ -314,12 +336,14 @@ module.exports = function(eleventyConfig) {
     return new Date().getFullYear();
   });
 
+
   // Passthrough copy for CSS
   eleventyConfig.addPassthroughCopy("src/styles/base.css");
   eleventyConfig.addPassthroughCopy("src/styles/footer.css");
   eleventyConfig.addPassthroughCopy("src/styles/header.css");
   eleventyConfig.addPassthroughCopy("src/styles/main.css");
   eleventyConfig.addPassthroughCopy("src/styles/themes.css");
+  eleventyConfig.addPassthroughCopy("src/styles/blogs.css");
   eleventyConfig.addPassthroughCopy("src/styles/styles.css");
 
   return {

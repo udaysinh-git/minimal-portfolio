@@ -3,6 +3,7 @@
 @import url('./main.css');
 @import url('./footer.css');
 @import url('./themes.css');
+@import url('./blogs.css');
 
 /* Additional styles */
 .theme-controls {
@@ -200,12 +201,23 @@
 }
 
 @keyframes fadeIn {
+  from { opacity: 0; }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* Add fade-out animation */
+.fade-out {
+  opacity: 0;
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
 /* Optional: Enhance timeline-item styles for better presentation */
 .timeline-item {
   background: var(--card-background-color);
@@ -476,3 +488,4 @@ img {
 .fab.show-options + .fab-options {
   display: flex;
 }
+

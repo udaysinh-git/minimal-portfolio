@@ -2,6 +2,17 @@
 layout: post.njk
 title: Building a Simple Cat vs Dog Classifier Using Python
 date: 2024-12-27
+tags:
+    - machine learning
+    - python
+    - image classification
+    - deep learning
+    - neural networks
+    - TensorFlow
+    - Keras
+    - AI
+    - computer vision
+    - tutorial
 ---
 ## Introduction
 
