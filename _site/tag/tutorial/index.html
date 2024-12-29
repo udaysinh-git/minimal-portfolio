@@ -51,7 +51,27 @@
       <a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - <span class="post-date" data-date="Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)">Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)</span>
     </li>
   
+    <li class="blog-item">
+      <a href="/posts/my-first-post/">My First Post</a> - <span class="post-date" data-date="Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)">Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)</span>
+    </li>
+  
 </ul>
+
+<script>
+    document.querySelectorAll('.blog-item a').forEach(item => {
+        item.addEventListener('click', function(event) {
+            event.preventDefault();
+            handleBlogClick(this.href);
+        });
+    });
+
+    function handleBlogClick(url) {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 500);
+    }
+</script>
 
   </main>
   <footer>

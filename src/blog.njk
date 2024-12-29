@@ -4,6 +4,9 @@ title: Blog
 ---
 
 <h1>Blog</h1>
+<a href="/rss.xml" class="rss-button" onclick="handleRSSClick(event)">
+  <i class="fas fa-rss"></i>
+</a>
 
 <p>Welcome to my blog! Here you will find my latest posts on various topics related to software development, AI, and more.</p>
 
@@ -20,26 +23,31 @@ title: Blog
   {% endfor %}
 </ul>
 
-<style>
-  .blog-item {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .blog-item:active {
-    transform: scale(0.98);
-  }
-
-  .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-</style>
-
 <script>
   function handleBlogClick(url) {
     document.body.classList.add('fade-out');
     setTimeout(() => {
       window.location.href = url;
-    }, 500); // Ensure this duration matches the CSS transition duration
+    }, 500);
+    }
+
+    function handleRSSClick(event) {
+    event.preventDefault();
+    const rssLink = window.location.origin + '/rss.xml';
+    navigator.clipboard.writeText(rssLink).then(() => {
+      showToast('RSS link copied to clipboard!');
+      window.open(rssLink, '_blank');
+    }).catch(() => {
+      showToast('Failed to copy RSS link.');
+    });
+    }
+
+  function showToast(message) {
+    const toast = document.querySelector('.theme-toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
   }
 </script>

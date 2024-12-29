@@ -9,7 +9,7 @@ tags:
     - AI
     - Cybersecurity
     - Web Development
-    - Tutorials
+    - tutorial
     - Industry Insights
     - Freelancing
     - Startup

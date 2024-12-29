@@ -73,3 +73,24 @@
 		transform: translateY(0);
 	}
 }
+
+/* rss buttons */
+.rss-button {
+	position: relative;
+	display: inline-block;
+	margin-top: 20px;
+	cursor: pointer;
+	font-size: 24px;
+	color: var(--link-color);
+}
+.rss-button:hover {
+	color: var(--link-hover-color);
+  }
+
+  .blog-item {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .blog-item:active {
+    transform: scale(0.98);
+  }

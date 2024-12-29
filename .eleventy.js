@@ -1,7 +1,10 @@
 const { DateTime } = require("luxon");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 require('dotenv').config();
 
+
   module.exports = function(eleventyConfig) {
+    eleventyConfig.addPlugin(pluginRss);
     // Add a custom date filter
     eleventyConfig.addFilter("date", (dateObj, format = "yyyy-MM-dd") => {
       return DateTime.fromISO(dateObj).toFormat(format);
@@ -25,6 +28,16 @@ require('dotenv').config();
     });
   });
 
+  eleventyConfig.addFilter("rss_date", (dateObj) => {
+    return DateTime.fromISO(dateObj).toRFC2822();
+  });
+  // eleventyConfig.addCollection("rss", function(collectionApi) {
+  //   return collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => {
+  //     return b.date - a.date;
+  //   });
+  // });
+  
+  // eleventyConfig.addPassthroughCopy({ "src/rss-feed.njk": "rss.xml" })
   // Add a collection for unique tags
   eleventyConfig.addCollection("tagsList", function(collectionApi) {
     let tags = new Set();

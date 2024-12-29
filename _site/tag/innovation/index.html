@@ -53,6 +53,22 @@
   
 </ul>
 
+<script>
+    document.querySelectorAll('.blog-item a').forEach(item => {
+        item.addEventListener('click', function(event) {
+            event.preventDefault();
+            handleBlogClick(this.href);
+        });
+    });
+
+    function handleBlogClick(url) {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 500);
+    }
+</script>
+
   </main>
   <footer>
     <div class="footer-container">
