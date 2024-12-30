@@ -1,16 +1,54 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-  <channel>
-    <title></title>
-    <link></link>
-    <description></description>
-    <language>en-us</language>
-    <lastBuildDate></lastBuildDate>
-    
-    <item>
-      <title>Creating a Real-Time Hand-Tracking Drawing Application with Python</title>
-      <link>/posts/Finger-Funk/</link>
-      <description><![CDATA[<h2>Introduction</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Creating a Real-Time Hand-Tracking Drawing Application with Python</title>
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+  <link rel="stylesheet" href="/styles/themes.css">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="">
+  <header>
+    <div class="container">
+      <nav id="nav-menu" class="nav-menu">
+        <ul>
+          <li>
+            <a href="/" class="">~/home</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/achievements" class="">Achievements</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/github" class="">GitHub Repos</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/blog" class="">Blog</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="/resume" class="">Resume</a>
+          </li>
+          <li>/</li>
+          <li>
+            <a href="#" id="theme-toggle">themes</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article class="post-content fade-in">
+      <h1>Creating a Real-Time Hand-Tracking Drawing Application with Python</h1>
+      <h2>Introduction</h2>
 <p>Welcome to <strong>Finger-Funk</strong>! In this blog post, we will build a real-time hand-tracking drawing application using Python, OpenCV, and MediaPipe. This application allows users to draw on the screen using hand gestures, change colors, adjust brush thickness, and erase drawings—all without touching the screen. By the end of this tutorial, you'll have a functional drawing tool that leverages computer vision for an interactive experience.</p>
 <h3>🎥 Demo</h3>
 <p>Check out this demo of <strong>Finger-Funk</strong> in action:</p>
@@ -262,161 +300,161 @@ cv2.destroyAllWindows()
 <li>MediaPipe</li>
 </ul>
 <p>Enjoy drawing with your hands! 🎨🖐️</p>
-]]></description>
-      <pubDate></pubDate>
-      <guid>/posts/Finger-Funk/</guid>
-    </item>
-    
-    <item>
-      <title>Building a Simple Cat vs Dog Classifier Using Python</title>
-      <link>/posts/cats_vs_dogs/</link>
-      <description><![CDATA[<h2>Introduction</h2>
-<p>In this blog post, we will walk through the process of creating a simple artificial intelligence model that can differentiate between images of cats and dogs. We will use Python and some popular libraries to achieve this. By the end of this tutorial, you will have a basic understanding of how to build and train a machine learning model for image classification.</p>
-<h2>Prerequisites</h2>
-<p>Before we start, make sure you have the following installed:</p>
-<ul>
-<li>Python 3.x</li>
-<li>TensorFlow</li>
-<li>Keras</li>
-<li>NumPy</li>
-<li>Matplotlib</li>
-<li>Requests</li>
-</ul>
-<p>You can install these libraries using pip:</p>
-<pre><code class="language-bash">pip install tensorflow keras numpy matplotlib requests
-</code></pre>
-<h2>Step 1: Import Libraries</h2>
-<p>First, let's import the necessary libraries.</p>
-<pre><code class="language-python">import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
-import numpy as np
-import matplotlib.pyplot as plt
-import requests
-from PIL import Image
-from io import BytesIO
-</code></pre>
-<h2>Step 2: Load and Preprocess Data</h2>
-<p>For this tutorial, we will use images from two APIs: <a href="https://api.thecatapi.com/v1/images/search">The Cat API</a> for cat images and <a href="https://dog.ceo/api/breeds/image/random">Dog CEO's Dog API</a> for dog images.</p>
-<h3>Fetching Cat Images</h3>
-<pre><code class="language-python">cat_url = &quot;https://api.thecatapi.com/v1/images/search&quot;
-response = requests.get(cat_url)
-cat_data = response.json()
-cat_image_url = cat_data[0]['url']
 
-response = requests.get(cat_image_url)
-cat_img = Image.open(BytesIO(response.content))
-cat_img = cat_img.resize((128, 128))
-cat_img = np.array(cat_img)
-</code></pre>
-<h3>Fetching Dog Images</h3>
-<pre><code class="language-python">dog_url = &quot;https://dog.ceo/api/breeds/image/random&quot;
-response = requests.get(dog_url)
-dog_data = response.json()
-dog_image_url = dog_data['message']
+    </article>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>&copy; 2024 Udaysinh's Portfolio</p>
+      </div>
+      <div class="footer-right">
+      <a href="https://github.com/udaysinh-git/minimal-portfolio" target="_blank" rel="noopener noreferrer" class="github-link">
+      View Source on GitHub
+      </a>
+      </div>
+    </div>
+  </footer>
+  <button id="back-to-top">Top</button>
+  <div id="theme-toast" class="theme-toast">Theme changed to: <span id="theme-name"></span></div>
+  <div id="font-toast" class="theme-toast">Font changed to: <span id="font-name"></span></div>
+  <button class="fab" id="fab"><i class="fas fa-cog"></i></button>
+  <div class="fab-options">
+    <button id="increase-font">A+</button>
+    <button id="decrease-font">A-</button>
+    <button id="font-switcher">Switch Font</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const fab = document.getElementById('fab');
+    const fabOptions = document.querySelector('.fab-options');
+    const backToTopButton = document.getElementById('back-to-top');
+    const themeToast = document.getElementById('theme-toast');
+    const themeName = document.getElementById('theme-name');
+    const fontToast = document.getElementById('font-toast');
+    const fontName = document.getElementById('font-name');
+    const fontSwitcherButton = document.getElementById('font-switcher');
 
-response = requests.get(dog_image_url)
-dog_img = Image.open(BytesIO(response.content))
-dog_img = dog_img.resize((128, 128))
-dog_img = np.array(dog_img)
-</code></pre>
-<h3>Displaying the Images</h3>
-<pre><code class="language-python">plt.figure(figsize=(10, 5))
+    const themes = [
+      'dark-mode', 
+      'light-mode', 
+      'pastel-mode', 
+      'eye-soothing-mode', 
+      'solarized-dark-mode', 
+      'solarized-light-mode', 
+      'monokai-mode',
+      'dracula-mode',
+      'gruvbox-dark-mode',
+      'nord-mode',
+      'one-dark-mode',
+      'material-dark-mode',
+      'material-light-mode'
+    ];
+    let currentThemeIndex = 0;
 
-plt.subplot(1, 2, 1)
-plt.title(&quot;Cat&quot;)
-plt.imshow(cat_img)
+    const fonts = [
+      { name: 'Inter', family: "'Inter', sans-serif" },
+      { name: 'Montserrat', family: "'Montserrat', sans-serif" },
+      { name: 'Open Sans', family: "'Open Sans', sans-serif" },
+      { name: 'Roboto', family: "'Roboto', sans-serif" },
+      { name: 'Lato', family: "'Lato', sans-serif" },
+      { name: 'Courier Prime', family: "'Courier Prime', monospace" }
+    ];
+    let currentFontIndex = 0;
 
-plt.subplot(1, 2, 2)
-plt.title(&quot;Dog&quot;)
-plt.imshow(dog_img)
+    // Detect user's preferred color scheme
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
 
-plt.show()
-</code></pre>
-<p><img src="https://cdn2.thecatapi.com/images/MTY5OTE4Nw.jpg" alt="Cat Image">
-<img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg" alt="Dog Image"></p>
-<h2>Step 3: Build the Model</h2>
-<p>We will use a simple Convolutional Neural Network (CNN) for our classifier.</p>
-<pre><code class="language-python">model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(128, 128, 3)),
-    MaxPooling2D((2, 2)),
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D((2, 2)),
-    Flatten(),
-    Dense(128, activation='relu'),
-    Dense(2, activation='softmax')
-])
+    // Load saved theme or set based on user's preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.body.className = savedTheme;
+      currentThemeIndex = themes.indexOf(savedTheme);
+    } else if (prefersDarkScheme) {
+      document.body.className = 'dark-mode';
+      currentThemeIndex = themes.indexOf('dark-mode');
+    } else if (prefersLightScheme) {
+      document.body.className = 'light-mode';
+      currentThemeIndex = themes.indexOf('light-mode');
+    } else {
+      document.body.className = 'light-mode'; // Default to light mode if no preference
+      currentThemeIndex = themes.indexOf('light-mode');
+    }
 
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-</code></pre>
-<h2>Step 4: Train the Model</h2>
-<p>For simplicity, we will use the same images for training. In a real-world scenario, you should use a larger dataset.</p>
-<pre><code class="language-python">X = np.array([cat_img, dog_img])
-y = np.array([0, 1])  # 0 for cat, 1 for dog
+    themeToggle.addEventListener('click', () => {
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      const newTheme = themes[currentThemeIndex];
+      document.body.className = newTheme;
+      localStorage.setItem('theme', newTheme);
 
-model.fit(X, y, epochs=10)
-</code></pre>
-<h2>Step 5: Evaluate the Model</h2>
-<p>Let's test our model with a new image.</p>
-<pre><code class="language-python">test_url = &quot;https://api.thecatapi.com/v1/images/search&quot;
-response = requests.get(test_url)
-test_data = response.json()
-test_image_url = test_data[0]['url']
+      // Show toast notification
+      themeName.textContent = newTheme.replace(/-/g, ' ');
+      themeToast.classList.add('show');
+      setTimeout(() => {
+        themeToast.classList.remove('show');
+      }, 3000);
+    });
 
-response = requests.get(test_image_url)
-test_img = Image.open(BytesIO(response.content))
-test_img = test_img.resize((128, 128))
-test_img = np.array(test_img)
+    fab.addEventListener('click', () => {
+      fab.classList.toggle('show-options');
+    });
 
-prediction = model.predict(np.expand_dims(test_img, axis=0))
-predicted_class = np.argmax(prediction)
+    // Show back-to-top
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    });
 
-if predicted_class == 0:
-    print(&quot;It's a cat!&quot;)
-else:
-    print(&quot;It's a dog!&quot;)
-</code></pre>
-<h2>Conclusion</h2>
-<p>In this tutorial, we built a simple image classifier that can differentiate between cats and dogs using Python and TensorFlow. While this is a basic example, it provides a foundation for more complex image classification tasks. Happy coding!</p>
-<h2>References</h2>
-<ul>
-<li><a href="https://api.thecatapi.com/v1/images/search">The Cat API</a></li>
-<li><a href="https://dog.ceo/api/breeds/image/random">Dog CEO's Dog API</a></li>
-<li><a href="https://www.tensorflow.org/">TensorFlow Documentation</a></li>
-</ul>
-]]></description>
-      <pubDate></pubDate>
-      <guid>/posts/cats_vs_dogs/</guid>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>/posts/my-first-post/</link>
-      <description><![CDATA[<h1>My First Blog Post: Excitement and Vision</h1>
-<p>Hello everyone!</p>
-<p>I am thrilled to share my first blog post on this website. As a passionate Software Developer and AI Specialist, I have always been fascinated by the endless possibilities that technology offers. This website is a culmination of my experiences, skills, and aspirations, and I am excited to embark on this new journey of sharing my knowledge and ideas with you all.</p>
-<h2>Why I Created This Website</h2>
-<p>Over the years, I have had the privilege of working on various projects, from developing custom software solutions to founding a startup. My journey has been filled with learning, innovation, and collaboration. This website is a platform where I can document my experiences, share insights, and connect with like-minded individuals.</p>
-<h2>My Vision</h2>
-<p>I envision this website as a hub for tech enthusiasts, developers, and anyone interested in AI, cybersecurity, and web development. Here, I will be sharing:</p>
-<ul>
-<li><strong>Technical Tutorials</strong>: Step-by-step guides on programming, AI models, and web development.</li>
-<li><strong>Project Highlights</strong>: Detailed breakdowns of my major project.</li>
-<li><strong>Industry Insights</strong>: My thoughts on the latest trends and advancements in technology.</li>
-<li><strong>Personal Experiences</strong>: Stories from my journey as a freelancer, startup founder, and continuous learner.</li>
-</ul>
-<h2>My Journey So Far</h2>
-<p>As highlighted in my <a href="https://udaysinh.me">resume</a>, my journey has been diverse and enriching. From creating custom software solutions to managing a team at Citta Hub, I have gained valuable experience that I am eager to share. My educational background in Computer Science Engineering and continuous learning have equipped me with a versatile skill set that I am excited to leverage in this blog.</p>
-<h2>Join Me on This Journey</h2>
-<p>I invite you all to join me on this exciting journey. Whether you are a seasoned developer or just starting, I hope to provide valuable content that inspires and educates. Feel free to reach out, share your thoughts, and engage with the content. Together, let's explore the fascinating world of technology and innovation.</p>
-<p>Thank you for visiting, and I look forward to sharing more with you soon!</p>
-<p>Best regards,
-Udaysinh Sapate</p>
-]]></description>
-      <pubDate></pubDate>
-      <guid>/posts/my-first-post/</guid>
-    </item>
-    
-  </channel>
-</rss>
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const increaseFontButton = document.getElementById('increase-font');
+    const decreaseFontButton = document.getElementById('decrease-font');
+    const blogContent = document.querySelector('main article');
+
+    increaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) + 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
+    });
+
+    decreaseFontButton.addEventListener('click', () => {
+      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
+      const newFontSize = parseFloat(currentFontSize) - 2;
+      blogContent.style.fontSize = `${newFontSize}px`;
+    });
+
+    const postContent = document.querySelector('.post-content');
+
+    fontSwitcherButton.addEventListener('click', () => {
+      currentFontIndex = (currentFontIndex + 1) % fonts.length;
+      const newFont = fonts[currentFontIndex];
+      postContent.style.setProperty('--font-family', newFont.family); /* Update CSS variable for post */
+      localStorage.setItem('font', newFont.family);
+
+      // Show toast notification
+      fontName.textContent = newFont.name;
+      fontToast.classList.add('show');
+      setTimeout(() => {
+        fontToast.classList.remove('show');
+      }, 3000);
+    });
+
+    // Load saved font for post
+    const savedFont = localStorage.getItem('font');
+    if (savedFont) {
+      postContent.style.setProperty('--font-family', savedFont);
+      currentFontIndex = fonts.findIndex(font => font.family === savedFont);
+    }
+  </script>
+</body>
+</html>
