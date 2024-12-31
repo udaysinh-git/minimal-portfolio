@@ -1,9 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   const recaptchaSiteKey = '6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu';
+  const sessionStartTime = Date.now(); // Track session start time
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default form submission
+
+    // Calculate session duration
+    const sessionDurationMs = Date.now() - sessionStartTime;
+    const hours = Math.floor(sessionDurationMs / 3600000);
+    const minutes = Math.floor((sessionDurationMs % 3600000) / 60000);
+    const seconds = Math.floor((sessionDurationMs % 60000) / 1000);
+    const sessionDuration = `${hours}h ${minutes}m ${seconds}s`;
 
     // Execute reCAPTCHA v3
     grecaptcha.ready(async () => {
@@ -16,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.forEach((value, key) => {
         data[key] = value;
       });
+      data.sessionDuration = sessionDuration; // Add session duration to data
 
       // Send data to Netlify serverless function
       try {
