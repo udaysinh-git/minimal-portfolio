@@ -13,8 +13,9 @@
   from = "/.netlify/functions/*"
   to = "/.netlify/functions/:splat"
   status = 200
-  
-  # Optionally, add a redirect for the root to index.html
+
+[[redirects]]
+  # Redirect all other routes to index.html (useful for single-page applications)
   from = "/*"
   to = "/index.html"
   status = 200
