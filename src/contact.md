@@ -19,7 +19,7 @@ Feel free to reach out to me through the form below or connect with me on my soc
   </a>
 </div>
 
-<form id="contact-form" method="post">
+<form id="contact-form" action="/.netlify/functions/contact" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
 
@@ -37,4 +37,4 @@ Feel free to reach out to me through the form below or connect with me on my soc
 
 <!-- reCAPTCHA v3 Script -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></script>
-<script src="/src/scripts/contact.js"></script>
+<script src="/scripts/contact.js"></script>
