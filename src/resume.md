@@ -16,6 +16,18 @@ Experienced Software Developer with expertise in Python programming, AI, cyberse
 
 ## EXPERIENCE
 
+### AI Engineer
+**LiSYS Technocraft**  
+*March 2024 - September 2024*  
+India
+
+- Designed and implemented AI models with a focus on healthcare analytics.
+- Contributed to optimizing data pipelines and enhancing model accuracy.
+- Collaborated effectively in cross-functional teams to deliver high-impact solutions.
+- Gained valuable experience in problem-solving and innovation within a supportive work environment.
+
+Although I was offered an opportunity to continue my role, personal reasons led me to step away. I'm grateful for the enriching experience and the chance to work alongside inspiring colleagues.
+
 ### Software Developer
 **Freelancer**  
 *2020 - Present*  
