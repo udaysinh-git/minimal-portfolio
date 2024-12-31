@@ -5,9 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default form submission
 
-    // Calculate session duration
+    // Get session start time from localStorage
     const sessionStartTime = localStorage.getItem('sessionStartTime');
-    const sessionDurationMs = Date.now() - sessionStartTime;
+    if (!sessionStartTime) {
+      alert('Session start time not found. Please refresh the page and try again.');
+      return;
+    }
+
+    // Calculate session duration
+    const sessionDurationMs = Date.now() - parseInt(sessionStartTime, 10);
     const hours = Math.floor(sessionDurationMs / 3600000);
     const minutes = Math.floor((sessionDurationMs % 3600000) / 60000);
     const seconds = Math.floor((sessionDurationMs % 60000) / 1000);
