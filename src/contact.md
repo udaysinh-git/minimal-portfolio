@@ -7,6 +7,8 @@ title: Contact
 
 Feel free to reach out to me through the form below or connect with me on my social media profiles.
 
+---
+<br>
 <div class="social-links">
   <a href="https://github.com/udaysinh-git" target="_blank">
     <img src="https://img.icons8.com/ios-glyphs/30/000000/github.png" alt="GitHub">
@@ -18,6 +20,8 @@ Feel free to reach out to me through the form below or connect with me on my soc
     <img src="https://img.icons8.com/ios-glyphs/30/000000/twitter.png" alt="X">
   </a>
 </div>
+
+---
 
 <form id="contact-form" action="/.netlify/functions/contact" method="POST">
   <label for="name">Name:</label>

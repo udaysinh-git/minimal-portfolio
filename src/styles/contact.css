@@ -33,18 +33,22 @@ textarea:focus {
 
 button {
   margin-top: 20px;
-  padding: 10px;
+  padding: 12px 20px; /* Increased padding */
   background-color: var(--button-background-color);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* More rounded corners */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  font-weight: bold; /* Bold text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow */
+  font-family: inherit; /* Use the font-family from the parent element */
 }
 
 button:hover {
   background-color: var(--button-hover-color);
   transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
 /* Social Links Styling */
