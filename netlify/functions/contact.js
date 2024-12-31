@@ -11,6 +11,9 @@ exports.handler = async (event, context) => {
   try {
     const { name, email, message, recaptchaToken } = JSON.parse(event.body);
 
+    // Dynamically import node-fetch
+    const fetch = (await import('node-fetch')).default;
+
     // Verify reCAPTCHA v3
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
@@ -18,7 +21,7 @@ exports.handler = async (event, context) => {
     const recaptchaResponse = await fetch(verificationURL, { method: 'POST' });
     const recaptchaData = await recaptchaResponse.json();
 
-    if (!recaptchaData.success || recaptchaData.score < 0.5) { // Adjust score threshold as needed
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
       return {
         statusCode: 400,
         body: JSON.stringify({ message: 'reCAPTCHA verification failed. Please try again.' }),
