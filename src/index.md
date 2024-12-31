@@ -5,7 +5,10 @@ title: Home
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; margin-top: 2rem;">
   <div style="flex: 1; text-align: center; min-width: 300px;">
-    <img src="https://www.imghost.net/ib/Xh8QaNMRNSaPA3a_1734898317.webp" alt="Udaysinh Sapate" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <picture>
+      <source srcset="https://s6.imgcdn.dev/oq7wo.webp" type="image/webp">
+      <img src="https://s6.imgcdn.dev/oq7wo.webp" alt="Udaysinh Sapate" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" loading="lazy">
+    </picture>
   </div>
   <div style="flex: 2; padding-left: 2rem; min-width: 300px;">
     <p>Hello! I'm <strong>Udaysinh Sapate</strong>, a <strong>Software Developer & AI Specialist</strong>. Welcome to my website where you can find my achievements, projects, blog posts, and more.</p>
