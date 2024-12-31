@@ -1,3 +1,8 @@
+const crypto = require('crypto');
+
+const rateLimitCache = new Map();
+const messageCache = new Map();
+
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
@@ -27,6 +32,27 @@ exports.handler = async (event, context) => {
 
     // Get user's IP address
     const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || event.headers['x-real-ip'] || 'Unknown';
+
+    // Rate limiting
+    const now = Date.now();
+    if (rateLimitCache.has(ip) && now - rateLimitCache.get(ip) < 5000) {
+      return {
+        statusCode: 429,
+        body: JSON.stringify({ message: 'Too many requests. Please wait a few seconds and try again.' }),
+      };
+    }
+    rateLimitCache.set(ip, now);
+
+    // Create a hash of the message to check for duplicates
+    const messageHash = crypto.createHash('sha256').update(`${name}${email}${message}`).digest('hex');
+
+    if (messageCache.has(messageHash)) {
+      return {
+        statusCode: 429,
+        body: JSON.stringify({ message: 'Duplicate message detected. Please modify your message and try again.' }),
+      };
+    }
+    messageCache.set(messageHash, now);
 
     // Fetch user's location using a geolocation API
     const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
