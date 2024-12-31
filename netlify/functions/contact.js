@@ -7,9 +7,9 @@ exports.handler = async (event, context) => {
     }
 
     try {
-              // Dynamically import node-fetch
+      // Dynamically import node-fetch
       const fetch = (await import('node-fetch')).default;
-      const { name, email, message, recaptchaToken } = JSON.parse(event.body);
+      const { name, email, message, recaptchaToken, sessionDuration } = JSON.parse(event.body);
 
       // Verify reCAPTCHA v3
       const secretKey = process.env.RECAPTCHA_SECRET_KEY;
@@ -25,10 +25,35 @@ exports.handler = async (event, context) => {
         };
       }
 
-      // Send message to Discord webhook
+      // Get user's IP address
+      const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'Unknown';
+
+      // Fetch user's location using a geolocation API
+      const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+      const geoData = await geoResponse.json();
+      const location = `${geoData.city || 'Unknown City'}, ${geoData.region || 'Unknown Region'}, ${geoData.country || 'Unknown Country'}`;
+
+      // Get current timestamp
+      const timestamp = new Date().toISOString();
+
+      // Send message to Discord webhook with embed
       const webhookURL = process.env.DISCORD_WEBHOOK_URL;
       const discordPayload = {
-        content: `**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}`,
+        embeds: [{
+          title: 'New Contact Form Submission',
+          color: 3447003,
+          fields: [
+            { name: 'Name', value: name || 'N/A', inline: true },
+            { name: 'Email', value: email || 'N/A', inline: true },
+            { name: 'Message', value: message || 'N/A' },
+            { name: 'Location', value: location, inline: true },
+            { name: 'Timestamp', value: timestamp, inline: true },
+            { name: 'Session Duration', value: sessionDuration ? `${sessionDuration} seconds` : 'N/A', inline: true },
+          ],
+          footer: {
+            text: 'Contact Form',
+          },
+        }]
       };
 
       const discordResponse = await fetch(webhookURL, {
