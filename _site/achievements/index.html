@@ -81,6 +81,12 @@
   </footer>
   <button id="back-to-top">Top</button>
   <div id="theme-toast" class="theme-toast">Theme changed to: <span id="theme-name"></span></div>
+  <script>
+    // Set session start time if not already set
+    if (!localStorage.getItem('sessionStartTime')) {
+      localStorage.setItem('sessionStartTime', Date.now());
+    }
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>

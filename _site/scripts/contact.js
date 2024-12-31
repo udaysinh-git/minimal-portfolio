@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   const recaptchaSiteKey = '6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu';
-  const sessionStartTime = Date.now(); // Track session start time
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default form submission
 
     // Calculate session duration
+    const sessionStartTime = localStorage.getItem('sessionStartTime');
     const sessionDurationMs = Date.now() - sessionStartTime;
     const hours = Math.floor(sessionDurationMs / 3600000);
     const minutes = Math.floor((sessionDurationMs % 3600000) / 60000);
