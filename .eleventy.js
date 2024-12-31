@@ -357,12 +357,17 @@ require('dotenv').config();
   eleventyConfig.addPassthroughCopy("src/styles/main.css");
   eleventyConfig.addPassthroughCopy("src/styles/themes.css");
   eleventyConfig.addPassthroughCopy("src/styles/blogs.css");
+  eleventyConfig.addPassthroughCopy("src/styles/contact.css");
   eleventyConfig.addPassthroughCopy("src/styles/styles.css");
-
+  eleventyConfig.addPassthroughCopy("src/styles");
+  eleventyConfig.addPassthroughCopy("src/scripts");
   return {
     dir: {
       input: "src",
-      output: "_site"
+      output: "_site",
+      includes: "_includes",
+      data: "_data"
+
     }
   };
 };

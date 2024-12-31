@@ -1,0 +1,21 @@
+[build]
+  # Directory where Eleventy outputs the site
+  publish = "_site"
+  
+  # Directory for Netlify functions
+  functions = "netlify/functions"
+  
+  # Build command for Eleventy
+  command = "npx @11ty/eleventy"
+
+[[redirects]]
+  # Redirect API requests to Netlify functions
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  
+  # Optionally, add a redirect for the root to index.html
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true

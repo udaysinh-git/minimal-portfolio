@@ -2,7 +2,6 @@
 layout: layout.njk
 title: Resume
 ---
-
 # Udaysinh Sapate
 **Software Developer & AI Specialist**
 
