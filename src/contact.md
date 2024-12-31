@@ -22,7 +22,8 @@ Feel free to reach out to me through the form below or connect with me on my soc
 </div>
 
 ---
-
+<br>
+<br>
 <form id="contact-form" action="/.netlify/functions/contact" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>

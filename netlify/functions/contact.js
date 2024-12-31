@@ -36,23 +36,27 @@ exports.handler = async (event, context) => {
     // Get current timestamp
     const timestamp = new Date().toISOString();
 
+    // Log user's location and session duration
+    console.log(`User Location: ${location}`);
+    console.log(`Session Duration: ${sessionDuration}`);
+
     // Send message to Discord webhook with embed
     const webhookURL = process.env.DISCORD_WEBHOOK_URL;
     const discordPayload = {
       embeds: [{
-      title: 'New Contact Form Submission',
-      color: 3447003,
-      fields: [
-        { name: 'Name', value: `\`${name || 'N/A'}\``, inline: true },
-        { name: 'Email', value: `\`${email || 'N/A'}\``, inline: true },
-        { name: 'Message', value: `\`${message || 'N/A'}\`` },
-        { name: 'Location', value: `\`${location}\``, inline: true },
-        { name: 'Timestamp', value: `\`${timestamp}\``, inline: true },
-        { name: 'Session Duration', value: `\`${sessionDuration || 'N/A'}\``, inline: true },
-      ],
-      footer: {
-        text: 'Contact Form',
-      },
+        title: 'New Contact Form Submission',
+        color: 3447003,
+        fields: [
+          { name: 'Name', value: `\`${name || 'N/A'}\``, inline: true },
+          { name: 'Email', value: `\`${email || 'N/A'}\``, inline: true },
+          { name: 'Message', value: `\`${message || 'N/A'}\`` },
+          { name: 'Location', value: `\`${location}\``, inline: true },
+          { name: 'Timestamp', value: `\`${timestamp}\``, inline: true },
+          { name: 'Session Duration', value: `\`${sessionDuration || 'N/A'}\``, inline: true },
+        ],
+        footer: {
+          text: 'Contact Form',
+        },
       }]
     };
 
