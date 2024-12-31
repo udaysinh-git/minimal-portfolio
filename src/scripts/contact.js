@@ -1,42 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
-
+  
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      alert('Please complete the reCAPTCHA.');
-      return;
-    }
-
-    const formData = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
-      recaptcha: recaptchaResponse,
-    };
-
-    try {
-      const response = await fetch('/.netlify/functions/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+    // Execute reCAPTCHA v3
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu', {action: 'submit'}).then(async function(token) {
+        // Set the token value in the hidden input field
+        document.getElementById('recaptchaToken').value = token;
+        
+        // Gather form data
+        const formData = new FormData(form);
+        
+        // Convert FormData to JSON
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+        
+        // Send data to Netlify serverless function
+        try {
+          const response = await fetch('/.netlify/functions/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          
+          const result = await response.json();
+          
+          if (response.ok) {
+            alert(result.message);
+            form.reset();
+            grecaptcha.reset(); // Reset reCAPTCHA
+          } else {
+            alert(result.message || 'There was an error submitting the form.');
+          }
+        } catch (error) {
+          alert('There was an error submitting the form. Please try again later.');
+          console.error('Error:', error);
+        }
       });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(result.message);
-        form.reset();
-        grecaptcha.reset();
-      } else {
-        alert(result.message || 'There was an error submitting the form.');
-      }
-    } catch (error) {
-      alert('There was an error submitting the form. Please try again later.');
-      console.error(error);
-    }
+    });
   });
 
   // Existing social icon theme handling

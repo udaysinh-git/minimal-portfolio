@@ -29,11 +29,12 @@ Feel free to reach out to me through the form below or connect with me on my soc
   <label for="message">Message:</label>
   <textarea id="message" name="message" rows="4" required></textarea>
   
-  <!-- Google reCAPTCHA -->
-  <div class="g-recaptcha" data-sitekey="6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></div>
-
+  <!-- Hidden field to store reCAPTCHA token -->
+  <input type="hidden" name="recaptchaToken" id="recaptchaToken">
+  
   <button type="submit">Send</button>
 </form>
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- reCAPTCHA v3 Script -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></script>
 <script src="/src/scripts/contact.js"></script>

@@ -8,20 +8,20 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const { name, email, message, recaptcha } = JSON.parse(event.body);
-
-  // Verify reCAPTCHA
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
-
   try {
+    const { name, email, message, recaptchaToken } = JSON.parse(event.body);
+
+    // Verify reCAPTCHA v3
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+
     const recaptchaResponse = await fetch(verificationURL, { method: 'POST' });
     const recaptchaData = await recaptchaResponse.json();
 
-    if (!recaptchaData.success) {
+    if (!recaptchaData.success || recaptchaData.score < 0.5) { // Adjust score threshold as needed
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: 'reCAPTCHA verification failed.' }),
+        body: JSON.stringify({ message: 'reCAPTCHA verification failed. Please try again.' }),
       };
     }
 
@@ -46,7 +46,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: 'Message sent successfully!' }),
     };
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: 'Internal Server Error' }),

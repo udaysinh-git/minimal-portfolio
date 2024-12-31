@@ -70,11 +70,12 @@
 <input type="email" id="email" name="email" required></p>
 <p><label for="message">Message:</label></p>
   <textarea id="message" name="message" rows="4" required></textarea>
-  <!-- Google reCAPTCHA -->
-  <div class="g-recaptcha" data-sitekey="6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></div>
+  <!-- Hidden field to store reCAPTCHA token -->
+  <input type="hidden" name="recaptchaToken" id="recaptchaToken">
 <p><button type="submit">Send</button></p>
 </form>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- reCAPTCHA v3 Script -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></script>
 <script src="/src/scripts/contact.js"></script>
   </main>
   <footer>
