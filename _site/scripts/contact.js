@@ -1,14 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Clear the formSubmitted flag on page load
+  localStorage.removeItem('formSubmitted');
+
   const form = document.getElementById('contact-form');
+  const submitButton = form.querySelector('button[type="submit"]');
   const recaptchaSiteKey = '6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default form submission
 
+    // Check if the form has already been submitted
+    if (localStorage.getItem('formSubmitted')) {
+      submitButton.textContent = 'Already Submitted';
+      return;
+    }
+
     // Get session start time from localStorage
     const sessionStartTime = localStorage.getItem('sessionStartTime');
     if (!sessionStartTime) {
-      alert('Session start time not found. Please refresh the page and try again.');
+      submitButton.textContent = 'Session Error';
       return;
     }
 
@@ -32,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       data.sessionDuration = sessionDuration; // Add session duration to data
 
+      // Change button text to animated dots
+      submitButton.textContent = '...';
+      submitButton.disabled = true;
+
       // Send data to Netlify serverless function
       try {
         const response = await fetch('/.netlify/functions/contact', {
@@ -43,17 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
 
         if (response.ok) {
-          // Display success message
-          alert(result.message);
+          // Change button text to "Submitted"
+          submitButton.textContent = 'Submitted';
           form.reset(); // Reset the form
+          localStorage.setItem('formSubmitted', 'true'); // Set form submitted flag
         } else {
-          // Display error message from server
-          alert(result.message || 'There was an error submitting the form.');
+          // Change button text to error message
+          submitButton.textContent = 'Error';
         }
       } catch (error) {
-        // Display network error
-        alert('There was an error submitting the form. Please try again later.');
+        // Change button text to network error message
+        submitButton.textContent = 'Network Error';
         console.error('Error:', error);
+      } finally {
+        // Re-enable the button after a delay
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send';
+        }, 3000);
       }
     });
   });
