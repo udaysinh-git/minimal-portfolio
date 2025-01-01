@@ -129,7 +129,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .env
-_site
-_site/
-./_site/
-/_site/
