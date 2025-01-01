@@ -25,10 +25,11 @@ title: Blog
 </ul>
 <script>
   function handleBlogClick(url) {
-    document.body.classList.add('slide-out-left');
+    const article = document.querySelector('.post-content');
+    article.classList.add('slide-out-left');
     setTimeout(() => {
-      document.body.classList.remove('slide-out-left');
-      document.body.classList.add('slide-in-right');
+      article.classList.remove('slide-out-left');
+      article.classList.add('slide-in-right');
       window.location.href = url;
     }, 500);
   }
