@@ -144,8 +144,10 @@
 </ul>
 <script>
   function handleBlogClick(url) {
-    document.body.classList.add('fade-out');
+    document.body.classList.add('slide-out-left');
     setTimeout(() => {
+      document.body.classList.remove('slide-out-left');
+      document.body.classList.add('slide-in-right');
       window.location.href = url;
     }, 500);
   }
