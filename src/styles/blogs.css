@@ -94,3 +94,7 @@
   .blog-item:active {
     transform: scale(0.98);
   }
+  .blog-number {
+	font-weight: bold;
+	margin-right: 0.5rem;
+  }

@@ -13,6 +13,7 @@ title: Blog
 <ul class="blog-list">
   {% for post in collections.blog %}
     <li class="blog-item" style="animation-delay: {{ forloop.index0 * 0.1 }}s;" onclick="handleBlogClick('{{ post.url }}')">
+      <span class="blog-number"></span>
       <a href="{{ post.url }}">{{ post.data.title }}</a> - <span class="post-date" data-date="{{ post.data.date }}">{{ post.data.date }}</span>
       <ul class="tag-list">
         {% for tag in post.data.tags %}
@@ -22,16 +23,15 @@ title: Blog
     </li>
   {% endfor %}
 </ul>
-
 <script>
   function handleBlogClick(url) {
     document.body.classList.add('fade-out');
     setTimeout(() => {
       window.location.href = url;
     }, 500);
-    }
+  }
 
-    function handleRSSClick(event) {
+  function handleRSSClick(event) {
     event.preventDefault();
     const rssLink = window.location.origin + '/rss.xml';
     navigator.clipboard.writeText(rssLink).then(() => {
@@ -40,7 +40,7 @@ title: Blog
     }).catch(() => {
       showToast('Failed to copy RSS link.');
     });
-    }
+  }
 
   function showToast(message) {
     const toast = document.querySelector('.theme-toast');
@@ -50,4 +50,13 @@ title: Blog
       toast.classList.remove('show');
     }, 3000);
   }
+
+  // Assign numbering from bottom to top
+  document.addEventListener('DOMContentLoaded', () => {
+    const blogNumbers = document.querySelectorAll('.blog-number');
+    const total = blogNumbers.length;
+    blogNumbers.forEach((elem, index) => {
+      elem.textContent = `${total - index}.`;
+    });
+  });
 </script>

@@ -60,6 +60,7 @@
 <ul class="blog-list">
   
     <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/Finger-Funk/')">
+      <span class="blog-number"></span>
       <a href="/posts/Finger-Funk/">Creating a Real-Time Hand-Tracking Drawing Application with Python</a> - <span class="post-date" data-date="Mon Dec 30 2024 05:30:00 GMT+0530 (India Standard Time)">Mon Dec 30 2024 05:30:00 GMT+0530 (India Standard Time)</span>
       <ul class="tag-list">
         
@@ -81,6 +82,7 @@
     </li>
   
     <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/cats_vs_dogs/')">
+      <span class="blog-number"></span>
       <a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - <span class="post-date" data-date="Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)">Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)</span>
       <ul class="tag-list">
         
@@ -108,6 +110,7 @@
     </li>
   
     <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/my-first-post/')">
+      <span class="blog-number"></span>
       <a href="/posts/my-first-post/">My First Post</a> - <span class="post-date" data-date="Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)">Wed Dec 25 2024 05:30:00 GMT+0530 (India Standard Time)</span>
       <ul class="tag-list">
         
@@ -139,16 +142,15 @@
     </li>
   
 </ul>
-
 <script>
   function handleBlogClick(url) {
     document.body.classList.add('fade-out');
     setTimeout(() => {
       window.location.href = url;
     }, 500);
-    }
+  }
 
-    function handleRSSClick(event) {
+  function handleRSSClick(event) {
     event.preventDefault();
     const rssLink = window.location.origin + '/rss.xml';
     navigator.clipboard.writeText(rssLink).then(() => {
@@ -157,7 +159,7 @@
     }).catch(() => {
       showToast('Failed to copy RSS link.');
     });
-    }
+  }
 
   function showToast(message) {
     const toast = document.querySelector('.theme-toast');
@@ -167,6 +169,15 @@
       toast.classList.remove('show');
     }, 3000);
   }
+
+  // Assign numbering from bottom to top
+  document.addEventListener('DOMContentLoaded', () => {
+    const blogNumbers = document.querySelectorAll('.blog-number');
+    const total = blogNumbers.length;
+    blogNumbers.forEach((elem, index) => {
+      elem.textContent = `${total - index}.`;
+    });
+  });
 </script>
   </main>
   <footer>
