@@ -37,7 +37,7 @@ I envision this website as a hub for tech enthusiasts, developers, and anyone in
 
 ## My Journey So Far
 
-As highlighted in my [resume](https://udaysinh.me), my journey has been diverse and enriching. From creating custom software solutions to managing a team at Citta Hub, I have gained valuable experience that I am eager to share. My educational background in Computer Science Engineering and continuous learning have equipped me with a versatile skill set that I am excited to leverage in this blog.
+As highlighted in my [resume](https://udaysinh.netlify.app/resume/), my journey has been diverse and enriching. From creating custom software solutions to managing a team at Citta Hub, I have gained valuable experience that I am eager to share. My educational background in Computer Science Engineering and continuous learning have equipped me with a versatile skill set that I am excited to leverage in this blog.
 
 ## Join Me on This Journey
 
