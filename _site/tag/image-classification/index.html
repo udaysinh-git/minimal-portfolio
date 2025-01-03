@@ -54,7 +54,8 @@
 
 <ul class="blog-list">
   
-    <li class="blog-item" onclick="handleBlogClick('/posts/cats_vs_dogs/')">
+    <li class="blog-item" style="animation-delay: NaNs;" onclick="handleBlogClick('/posts/cats_vs_dogs/')">
+      <span class="blog-number"></span>
       <a href="/posts/cats_vs_dogs/">Building a Simple Cat vs Dog Classifier Using Python</a> - <span class="post-date" data-date="Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)">Fri Dec 27 2024 05:30:00 GMT+0530 (India Standard Time)</span>
     </li>
   
@@ -81,6 +82,15 @@
       window.location.href = url;
     }
   }
+
+  // Assign numbering from bottom to top
+  document.addEventListener('DOMContentLoaded', () => {
+    const blogNumbers = document.querySelectorAll('.blog-number');
+    const total = blogNumbers.length;
+    blogNumbers.forEach((elem, index) => {
+      elem.textContent = `${total - index}.`;
+    });
+  });
 </script>
   </main>
   <footer>

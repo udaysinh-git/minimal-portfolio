@@ -12,7 +12,8 @@ title: Posts tagged with "{{ tag }}"
 
 <ul class="blog-list">
   {% for post in collections.blog | filterByTag(tag) %}
-    <li class="blog-item" onclick="handleBlogClick('{{ post.url }}')">
+    <li class="blog-item" style="animation-delay: {{ forloop.index0 * 0.1 }}s;" onclick="handleBlogClick('{{ post.url }}')">
+      <span class="blog-number"></span>
       <a href="{{ post.url }}">{{ post.data.title }}</a> - <span class="post-date" data-date="{{ post.data.date }}">{{ post.data.date }}</span>
     </li>
   {% endfor %}
@@ -39,4 +40,13 @@ title: Posts tagged with "{{ tag }}"
       window.location.href = url;
     }
   }
+
+  // Assign numbering from bottom to top
+  document.addEventListener('DOMContentLoaded', () => {
+    const blogNumbers = document.querySelectorAll('.blog-number');
+    const total = blogNumbers.length;
+    blogNumbers.forEach((elem, index) => {
+      elem.textContent = `${total - index}.`;
+    });
+  });
 </script>
