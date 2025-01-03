@@ -470,3 +470,10 @@ img {
 .slide-out-left {
   animation: slideOutLeft 0.5s forwards;
 }
+.background, .text {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.post-content {
+  transition: font-family 0.3s ease, font-size 0.3s ease;
+}
