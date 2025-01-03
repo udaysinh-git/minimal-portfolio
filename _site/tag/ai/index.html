@@ -64,7 +64,6 @@
   
 </ul>
 
-
 <script>
     document.querySelectorAll('.blog-item a').forEach(item => {
         item.addEventListener('click', function(event) {
@@ -75,12 +74,16 @@
 
   function handleBlogClick(url) {
     const article = document.querySelector('.post-content');
-    article.classList.add('slide-out-left');
-    setTimeout(() => {
-      article.classList.remove('slide-out-left');
-      article.classList.add('slide-in-right');
+    if (article) {
+      article.classList.add('slide-out-left');
+      setTimeout(() => {
+        article.classList.remove('slide-out-left');
+        article.classList.add('slide-in-right');
+        window.location.href = url;
+      }, 500);
+    } else {
       window.location.href = url;
-    }, 500);
+    }
   }
 </script>
   </main>
