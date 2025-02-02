@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Base typography: Apply to whole page */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+/* Title styling: Use a bolder weight and refined letter spacing */
+.creative-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--header-text-color);
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+}
+
+/* Listening status text: Slightly adjusted styling for clarity */
+.listening-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+/* Main container for Spotify status - dynamic and liquid card */
+.spotify-status {
+  font-family: 'Roboto Mono', monospace;
+  color: var(--text-color);
+  background-color: var(--card-background-color);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Details section: album art and track information */
+.spotify-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* Album cover styles with subtle fade-in and pixelated effect */
+.album-cover {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--link-color);
+  display: none;
+  image-rendering: pixelated;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.album-cover.song-change {
+  animation: coverChange 1s ease;
+}
+
+/* Track info styling with bold links and dynamic sizing */
+.spotify-track-info {
+  line-height: 1.4;
+  font-size: 16px;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* Hyperlink styling within track info */
+.spotify-track-info a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px dashed transparent;
+  transition: border-bottom 0.3s ease;
+}
+.spotify-track-info a:hover {
+  border-bottom: 1px dashed var(--link-color);
+}
+
+/* Progress bar container: a row of square segments */
+.spotify-progress-container {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin: 10px 0;
+  width: 100%;
+}
+.spotify-squares {
+  display: flex;
+  gap: 2px;
+}
+.spotify-square {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--link-color);
+  background-color: transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: 0;
+}
+.spotify-square.filled {
+  background-color: var(--link-color);
+}
+
+/* Time display below the progress bar */
+.spotify-time {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Album cover change animation keyframes */
+@keyframes coverChange {
+  0%   { transform: scale(0.9); opacity: 0.5; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Paused state: dim album art and update progress colors */
+.spotify-status.paused .album-cover {
+  filter: grayscale(80%);
+  opacity: 0.6;
+  transform: scale(0.98);
+  animation: none;
+}
+.spotify-status.paused::after {
+  content: '⏸';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: var(--link-color);
+  opacity: 0.8;
+  pointer-events: none;
+}
+.spotify-status.paused .spotify-square {
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+}
+
+/* Typewriter effect styling for the track name */
+.track-name {
+  font-size: 18px;
+  font-weight: 700;
+  font-weight: bold;
+  white-space: normal;
+  overflow: hidden;
+  border-right: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Blinking cursor for typewriter effect */
+.track-name::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--link-color);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Fade-in animation for additional details */
+.track-additional {
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.track-additional.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Optional: hide element before fade-in */
+.track-additional.hidden {
+  opacity: 0;
+}
