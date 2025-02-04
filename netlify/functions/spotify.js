@@ -62,7 +62,6 @@ exports.handler = async (event, context) => {
     if (response.status === 401) {
       try {
         token = await refreshAccessToken();
-        // Optionally update process.env for subsequent calls.
         process.env.SPOTIFY_TOKEN = token;
         response = await fetchSpotifyData(token);
       } catch (refreshError) {
@@ -73,12 +72,30 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // If there is no content (e.g. no track playing), return a valid JSON response.
+    // If there is no content (e.g. no track playing), use fallback from environment variables.
     if (response.status === 204) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false })
-      };
+      if (process.env.SONG_TITLE) {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            item: {
+              name: process.env.SONG_TITLE,
+              external_urls: { spotify: process.env.SONG_URL },
+              artists: process.env.SONG_ARTISTS.split(",").map(name => ({ name: name.trim() })),
+              album: {
+                images: [{ url: process.env.SONG_ART }]
+              }
+            },
+            progress_ms: 0,
+            is_playing: false
+          })
+        };
+      } else {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false })
+        };
+      }
     }
     
     if (!response.ok) {
@@ -97,7 +114,10 @@ exports.handler = async (event, context) => {
       process.env.SONG_ARTISTS = data.item.artists
         ? data.item.artists.map(artist => artist.name).join(", ")
         : "";
-      process.env.SONG_ART = (data.item.album && data.item.album.images && data.item.album.images[0] && data.item.album.images[0].url) || "";
+      process.env.SONG_ART = (data.item.album &&
+                              data.item.album.images &&
+                              data.item.album.images[0] &&
+                              data.item.album.images[0].url) || "";
     } else {
       process.env.SONG_TITLE = "";
       process.env.SONG_URL = "";
