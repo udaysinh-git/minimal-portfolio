@@ -73,6 +73,14 @@ exports.handler = async (event, context) => {
       }
     }
 
+    // If there is no content (e.g. no track playing), return a valid JSON response.
+    if (response.status === 204) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false })
+      };
+    }
+    
     if (!response.ok) {
       return {
         statusCode: response.status,
