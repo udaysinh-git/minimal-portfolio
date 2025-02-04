@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* Base typography: Apply to whole page */
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
@@ -8,7 +7,6 @@ body {
   color: var(--text-color);
 }
 
-/* Title styling: Use a bolder weight and refined letter spacing */
 .creative-title {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
@@ -18,7 +16,6 @@ body {
   letter-spacing: 1.5px;
 }
 
-/* Listening status text: Slightly adjusted styling for clarity */
 .listening-status {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
@@ -30,59 +27,99 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* Main container for Spotify status - dynamic and liquid card */
+/* Enhanced container styling with gradient and shadow */
 .spotify-status {
   font-family: 'Roboto Mono', monospace;
   color: var(--text-color);
-  background-color: var(--card-background-color);
-  border-radius: 8px;
-  padding: 20px;
+  background: linear-gradient(135deg, var(--card-background-color), var(--background-color));
+  border-radius: 12px;
+  padding: 25px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   transition: all 0.3s ease-in-out;
 }
-
-/* Details section: album art and track information */
-.spotify-details {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  justify-content: center;
-  margin-bottom: 15px;
+/* Paused state styling for album art */
+.spotify-status.paused .album-cover {
+  filter: grayscale(80%);
+  opacity: 0.6;
+  transform: scale(0.98);
+  position: relative;
+  z-index: 2;
+}
+.spotify-status.paused .album-cover::after {
+  content: "\f04c"; /* Font Awesome pause icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: var(--link-color);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 3;
 }
 
-/* Album cover styles with subtle fade-in and pixelated effect */
+/* Spotify Card Layout */
+.spotify-card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Album art and canvas container */
+.album-art-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+}
+
+/* Spotify Canvas styling */
+.album-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* Album cover styling */
 .album-cover {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid var(--link-color);
-  display: none;
   image-rendering: pixelated;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  position: relative;
+  z-index: 2;
 }
 .album-cover.song-change {
   animation: coverChange 1s ease;
 }
 
-/* Track info styling with bold links and dynamic sizing */
+/* Track info container */
+.track-info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Track info styling */
 .spotify-track-info {
   line-height: 1.4;
   font-size: 16px;
-  width: 100%;
   word-wrap: break-word;
 }
-
-/* Hyperlink styling within track info */
 .spotify-track-info a {
   color: var(--link-color);
   text-decoration: none;
@@ -94,12 +131,11 @@ body {
   border-bottom: 1px dashed var(--link-color);
 }
 
-/* Progress bar container: a row of square segments */
+/* Progress bar styling */
 .spotify-progress-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2px;
-  margin: 10px 0;
   width: 100%;
 }
 .spotify-squares {
@@ -118,56 +154,28 @@ body {
   background-color: var(--link-color);
 }
 
-/* Time display below the progress bar */
+/* Time display */
 .spotify-time {
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;
-  text-align: center;
-  margin-top: 8px;
 }
 
-/* Album cover change animation keyframes */
+/* Album cover animation keyframes */
 @keyframes coverChange {
   0%   { transform: scale(0.9); opacity: 0.5; }
   50%  { transform: scale(1.05); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Paused state: dim album art and update progress colors */
-.spotify-status.paused .album-cover {
-  filter: grayscale(80%);
-  opacity: 0.6;
-  transform: scale(0.98);
-  animation: none;
-}
-.spotify-status.paused::after {
-  content: '⏸';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 40px;
-  color: var(--link-color);
-  opacity: 0.8;
-  pointer-events: none;
-}
-.spotify-status.paused .spotify-square {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
-}
-
-/* Typewriter effect styling for the track name */
+/* Typewriter effect styling */
 .track-name {
   font-size: 18px;
-  font-weight: 700;
   font-weight: bold;
   white-space: normal;
   overflow: hidden;
   border-right: 2px;
   transition: all 0.3s ease-in-out;
 }
-
-/* Blinking cursor for typewriter effect */
 .track-name::after {
   content: '';
   display: inline-block;
@@ -182,7 +190,7 @@ body {
   50% { opacity: 0; }
 }
 
-/* Fade-in animation for additional details */
+/* Fade-in effect for additional details */
 .track-additional {
   font-size: 16px;
   opacity: 0;
@@ -193,7 +201,15 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-/* Optional: hide element before fade-in */
 .track-additional.hidden {
   opacity: 0;
+}
+
+/* Icon styling for better spacing in details */
+.spotify-track-info i,
+.track-additional i,
+.creative-title i,
+.listening-status i {
+  margin-right: 5px;
+  color: var(--link-color);
 }
