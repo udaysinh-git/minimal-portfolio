@@ -29,27 +29,7 @@ title: Creative
       <div id="spotify-time" class="spotify-time"></div>
       <div id="spotify-progress-container" class="spotify-progress-container">
         <div id="spotify-squares" class="spotify-squares">
-          <!-- 20 square segments -->
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
-          <span class="spotify-square"></span>
+          <!-- Cubes will be generated dynamically based on viewport width -->
         </div>
       </div>
     </div>
@@ -70,6 +50,30 @@ title: Creative
 </style>
 
 <script>
+// Global variables for progress and track and dynamic cube count
+let currentProgress = 0, trackDuration = 0, lastFetchTime = Date.now();
+let totalSquares = 20; // default; will be updated dynamically
+let lastTrackId = null;
+
+// Create cubes dynamically based on screen size.
+function createCubes() {
+  const squaresContainer = document.getElementById('spotify-squares');
+  squaresContainer.innerHTML = "";
+  // For mobile devices (width < 600px), use 10 cubes; otherwise 20.
+  totalSquares = window.innerWidth < 600 ? 10 : 20;
+  for (let i = 0; i < totalSquares; i++) {
+    const span = document.createElement("span");
+    span.classList.add("spotify-square");
+    squaresContainer.appendChild(span);
+  }
+}
+
+// Call createCubes on load and on window resize
+createCubes();
+window.addEventListener("resize", () => {
+  createCubes();
+});
+
 // Typewriter effect that types out text then calls a callback once done.
 function typeWriter(element, text, speed, callback) {
   element.textContent = "";
@@ -93,11 +97,6 @@ function formatTime(ms) {
   const sec = totalSec % 60;
   return `${min}:${sec.toString().padStart(2, '0')}`;
 }
-
-// Global variables for progress and track change detection
-let currentProgress = 0, trackDuration = 0, lastFetchTime = Date.now();
-let lastTrackId = null;
-const totalSquares = 20; // number of square segments in progress bar
 
 async function fetchSpotifyPlayback() {
   try {
