@@ -98,78 +98,91 @@ function formatTime(ms) {
   return `${min}:${sec.toString().padStart(2, '0')}`;
 }
 
+let lastTrackData = null;
+
 async function fetchSpotifyPlayback() {
   try {
     const response = await fetch('/.netlify/functions/spotify');
-    if (response.ok) {
-      const data = await response.json();
-      
-      // When no track is found, update status text accordingly.
-      if (!data.item) {
-        console.error("No track currently playing.");
-        document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I was listening to:`;
-        return;
-      }
-      
-      // Adjust playing status text
-      if (!data.is_playing) {
-        document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I was listening to:`;
-        document.getElementById('spotify-status').classList.add('paused');
-      } else {
-        document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I'm listening to:`;
-        document.getElementById('spotify-status').classList.remove('paused');
-      }
-      
-      // If the track changes, animate album art and launch typewriter effect
-      if (data.item.id !== lastTrackId) {
-        lastTrackId = data.item.id;
-        const albumCover = document.getElementById('album-cover');
-        albumCover.classList.add('song-change');
-        setTimeout(() => albumCover.classList.remove('song-change'), 1000);
-        
-        const trackNameEl = document.querySelector('.track-name');
-        typeWriter(trackNameEl, data.item.name, 60, (finalText) => {
-          trackNameEl.innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank">${finalText}</a>`;
-        });
-        
-        const trackAdditionalEl = document.querySelector('.track-additional');
-        const artistHtml = data.item.artists
-              .map(artist => `<a href="${artist.external_urls.spotify}" target="_blank"><i class="fa-solid fa-user"></i> ${artist.name}</a>`)
-              .join(', ');
-        trackAdditionalEl.innerHTML = `<i class="fa-solid fa-compact-disc"></i> <em>${data.item.album.name}</em> &mdash; ${artistHtml}`;
-        trackAdditionalEl.classList.remove('hidden');
-        void trackAdditionalEl.offsetWidth; // Trigger reflow to restart animation.
-        trackAdditionalEl.classList.add('fade-in');
-      }
-      
-      currentProgress = data.progress_ms;
-      trackDuration = data.item.duration_ms;
-      lastFetchTime = Date.now();
-      
-      // Update album cover display.
-      const albumCoverUrl = (data.item.album.images && data.item.album.images.length) 
-                            ? data.item.album.images[0].url : '';
-      const albumCoverEl = document.getElementById('album-cover');
-      if (albumCoverUrl) {
-        albumCoverEl.src = albumCoverUrl;
-        albumCoverEl.style.display = 'block';
-      } else {
-        albumCoverEl.style.display = 'none';
-      }
-      
-      // Update canvas if available (assuming canvas URL in data.item.canvas_url)
-      const canvasUrl = data.item.canvas_url || '';
-      const canvasEl = document.getElementById('album-canvas');
-      if (canvasUrl) {
-        canvasEl.src = canvasUrl;
-        canvasEl.style.display = 'block';
-      } else {
-        canvasEl.style.display = 'none';
-      }
-      
+    let data = null;
+    // Handle 204 No Content or non-OK responses by falling back to last track data.
+    if (response.status === 204 || !response.ok) {
+      console.error("No current track. Using last track data if available.");
+      data = { is_playing: false, progress_ms: lastTrackData ? lastTrackData.progress_ms : 0, item: null };
     } else {
-      console.error("Error fetching playback data.");
+      data = await response.json();
     }
+    
+    // If no track is found, but we have a last track, restore it.
+    if (!data.item && lastTrackData) {
+      data.item = lastTrackData.item;
+      data.progress_ms = lastTrackData.progress_ms;
+      data.is_playing = false;
+    } else if (data.item) {
+      // Update lastTrackData when new track info is available
+      lastTrackData = { item: data.item, progress_ms: data.progress_ms };
+    }
+    
+    // Adjust playing status text and update UI as before
+    if (!data.item) {
+      document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I was listening to:`;
+      return;
+    }
+    
+    if (!data.is_playing) {
+      document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I was listening to:`;
+      document.getElementById('spotify-status').classList.add('paused');
+    } else {
+      document.getElementById('listening-status').innerHTML = `<i class="fa-solid fa-music"></i> I'm listening to:`;
+      document.getElementById('spotify-status').classList.remove('paused');
+    }
+    
+    // If the track changes, animate album art and launch typewriter effect
+    if (data.item.id !== lastTrackId) {
+      lastTrackId = data.item.id;
+      const albumCover = document.getElementById('album-cover');
+      albumCover.classList.add('song-change');
+      setTimeout(() => albumCover.classList.remove('song-change'), 1000);
+      
+      const trackNameEl = document.querySelector('.track-name');
+      typeWriter(trackNameEl, data.item.name, 60, (finalText) => {
+        trackNameEl.innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank">${finalText}</a>`;
+      });
+      
+      const trackAdditionalEl = document.querySelector('.track-additional');
+      const artistHtml = data.item.artists
+            .map(artist => `<a href="${artist.external_urls.spotify}" target="_blank"><i class="fa-solid fa-user"></i> ${artist.name}</a>`)
+            .join(', ');
+      trackAdditionalEl.innerHTML = `<i class="fa-solid fa-compact-disc"></i> <em>${data.item.album.name}</em> &mdash; ${artistHtml}`;
+      trackAdditionalEl.classList.remove('hidden');
+      void trackAdditionalEl.offsetWidth; // Trigger reflow to restart animation.
+      trackAdditionalEl.classList.add('fade-in');
+    }
+    
+    currentProgress = data.progress_ms;
+    trackDuration = data.item.duration_ms;
+    lastFetchTime = Date.now();
+    
+    // Update album cover display.
+    const albumCoverUrl = (data.item.album.images && data.item.album.images.length) 
+                          ? data.item.album.images[0].url : '';
+    const albumCoverEl = document.getElementById('album-cover');
+    if (albumCoverUrl) {
+      albumCoverEl.src = albumCoverUrl;
+      albumCoverEl.style.display = 'block';
+    } else {
+      albumCoverEl.style.display = 'none';
+    }
+    
+    // Update canvas if available
+    const canvasUrl = data.item.canvas_url || '';
+    const canvasEl = document.getElementById('album-canvas');
+    if (canvasUrl) {
+      canvasEl.src = canvasUrl;
+      canvasEl.style.display = 'block';
+    } else {
+      canvasEl.style.display = 'none';
+    }
+    
   } catch (error) {
     console.error("Error fetching Spotify playback:", error);
   }
