@@ -1,4 +1,7 @@
-const fetch = require("node-fetch");
+async function getFetch() {
+  const { default: fetch } = await import("node-fetch");
+  return fetch;
+}
 
 async function refreshAccessToken() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -11,6 +14,7 @@ async function refreshAccessToken() {
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
   const authString = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
 
+  const fetch = await getFetch();
   const response = await fetch(tokenEndpoint, {
     method: "POST",
     headers: {
@@ -42,6 +46,7 @@ exports.handler = async (event, context) => {
   const spotifyEndpoint = "https://api.spotify.com/v1/me/player/currently-playing";
 
   async function fetchSpotifyData(accessToken) {
+    const fetch = await getFetch();
     return await fetch(spotifyEndpoint, {
       headers: {
         "Authorization": `Bearer ${accessToken}`
