@@ -89,6 +89,22 @@ exports.handler = async (event, context) => {
     }
 
     const data = await response.json();
+
+    // Temporary solution: update environment variables for shared state across users.
+    if (data.item) {
+      process.env.SONG_TITLE = data.item.name || "";
+      process.env.SONG_URL = (data.item.external_urls && data.item.external_urls.spotify) || "";
+      process.env.SONG_ARTISTS = data.item.artists
+        ? data.item.artists.map(artist => artist.name).join(", ")
+        : "";
+      process.env.SONG_ART = (data.item.album && data.item.album.images && data.item.album.images[0] && data.item.album.images[0].url) || "";
+    } else {
+      process.env.SONG_TITLE = "";
+      process.env.SONG_URL = "";
+      process.env.SONG_ARTISTS = "";
+      process.env.SONG_ART = "";
+    }
+
     return {
       statusCode: 200,
       body: JSON.stringify(data)
