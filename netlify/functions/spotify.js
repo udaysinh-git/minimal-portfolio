@@ -79,14 +79,19 @@ exports.handler = async (event, context) => {
           statusCode: 200,
           body: JSON.stringify({
             item: {
+              id: process.env.SONG_ID || "fallback-id",
               name: process.env.SONG_TITLE,
               external_urls: { spotify: process.env.SONG_URL },
-              artists: process.env.SONG_ARTISTS.split(",").map(name => ({ name: name.trim() })),
+              artists: process.env.SONG_ARTISTS
+                ? process.env.SONG_ARTISTS.split(",").map(name => ({ name: name.trim() }))
+                : [],
               album: {
+                name: process.env.SONG_ALBUM || "",
                 images: [{ url: process.env.SONG_ART }]
-              }
+              },
+              canvas_url: ""
             },
-            progress_ms: 0,
+            progress_ms: parseInt(process.env.SONG_PROGRESS_MS || "0", 10),
             is_playing: false
           })
         };
@@ -118,11 +123,18 @@ exports.handler = async (event, context) => {
                               data.item.album.images &&
                               data.item.album.images[0] &&
                               data.item.album.images[0].url) || "";
+      // Optionally update additional fallback details.
+      process.env.SONG_ID = data.item.id || "";
+      process.env.SONG_ALBUM = (data.item.album && data.item.album.name) || "";
+      process.env.SONG_PROGRESS_MS = data.progress_ms ? data.progress_ms.toString() : "0";
     } else {
       process.env.SONG_TITLE = "";
       process.env.SONG_URL = "";
       process.env.SONG_ARTISTS = "";
       process.env.SONG_ART = "";
+      process.env.SONG_ID = "";
+      process.env.SONG_ALBUM = "";
+      process.env.SONG_PROGRESS_MS = "0";
     }
 
     return {
