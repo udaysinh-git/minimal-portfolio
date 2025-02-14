@@ -45,6 +45,16 @@ async function fetchSpotifyData(accessToken) {
     });
 }
 
+async function fetchRecentlyPlayed(accessToken) {
+    const recentlyPlayedEndpoint = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
+    const fetch = await getFetch();
+    return await fetch(recentlyPlayedEndpoint, {
+        headers: {
+            "Authorization": `Bearer ${accessToken}`,
+        },
+    });
+}
+
 async function updateLastPlayed(lastPlayedData, baseUrl) {
     try {
         const fetch = await getFetch();
@@ -56,33 +66,6 @@ async function updateLastPlayed(lastPlayedData, baseUrl) {
     } catch (error) {
         console.error("Error updating last played sheet", error);
     }
-}
-
-async function fetchFallback(baseUrl) {
-    const fetch = await getFetch();
-    const fallbackResponse = await fetch(`${baseUrl}/.netlify/functions/lastPlayed`);
-    if (fallbackResponse.ok) {
-        const fallbackData = await fallbackResponse.json();
-        const row = fallbackData.row;
-        if (row) {
-            return {
-                item: {
-                    id: row[0],
-                    name: row[1],
-                    external_urls: { spotify: row[2] },
-                    artists: row[3].split(",").map(name => ({ name: name.trim() })),
-                    album: {
-                        name: row[4],
-                        images: [],
-                    },
-                },
-                progress_ms: Number(row[5]),
-                is_playing: row[6] === "true" || row[6] === true,
-            };
-        }
-    }
-    // If fallback fails, return a default response.
-    return { item: null, progress_ms: 0, is_playing: false };
 }
 
 exports.handler = async (event, context) => {
@@ -117,12 +100,27 @@ exports.handler = async (event, context) => {
             }
         }
 
-        // If no track is playing (204) or item is missing, fallback to last played.
+        // If no track is playing (HTTP 204) try fetching recently played track.
         if (response.status === 204) {
-            const fallbackData = await fetchFallback(baseUrl);
+            const rpResponse = await fetchRecentlyPlayed(token);
+            if (rpResponse.ok) {
+                const rpData = await rpResponse.json();
+                if (rpData.items && rpData.items.length > 0) {
+                    const track = rpData.items[0].track;
+                    const nowData = {
+                        item: track,
+                        progress_ms: 0,
+                        is_playing: false,
+                    };
+                    return {
+                        statusCode: 200,
+                        body: JSON.stringify(nowData),
+                    };
+                }
+            }
             return {
                 statusCode: 200,
-                body: JSON.stringify(fallbackData),
+                body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false }),
             };
         }
 
@@ -135,7 +133,31 @@ exports.handler = async (event, context) => {
 
         const data = await response.json();
 
-        // If now playing is available update last played asynchronously.
+        // If now playing track is missing, try recently played endpoint.
+        if (!data.item) {
+            const rpResponse = await fetchRecentlyPlayed(token);
+            if (rpResponse.ok) {
+                const rpData = await rpResponse.json();
+                if (rpData.items && rpData.items.length > 0) {
+                    const track = rpData.items[0].track;
+                    const nowData = {
+                        item: track,
+                        progress_ms: 0,
+                        is_playing: false,
+                    };
+                    return {
+                        statusCode: 200,
+                        body: JSON.stringify(nowData),
+                    };
+                }
+            }
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false }),
+            };
+        }
+
+        // If now playing track is available, update last played asynchronously.
         if (data.item) {
             const lastPlayedData = {
                 id: data.item.id,
@@ -146,15 +168,7 @@ exports.handler = async (event, context) => {
                 progress_ms: data.progress_ms,
                 is_playing: data.is_playing,
             };
-            // Pass baseUrl to updateLastPlayed.
             updateLastPlayed(lastPlayedData, baseUrl); // fire and forget
-        } else {
-            // If item is unavailable, fallback to last played.
-            const fallbackData = await fetchFallback(baseUrl);
-            return {
-                statusCode: 200,
-                body: JSON.stringify(fallbackData),
-            };
         }
 
         return {
