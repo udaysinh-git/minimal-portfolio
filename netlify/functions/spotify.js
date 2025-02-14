@@ -45,11 +45,10 @@ async function fetchSpotifyData(accessToken) {
     });
 }
 
-async function updateLastPlayed(lastPlayedData) {
+async function updateLastPlayed(lastPlayedData, baseUrl) {
     try {
         const fetch = await getFetch();
-        // Update the last played sheet by sending a POST request to the lastPlayed function.
-        await fetch(`/.netlify/functions/lastPlayed`, {
+        await fetch(`${baseUrl}/.netlify/functions/lastPlayed`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(lastPlayedData),
@@ -59,9 +58,9 @@ async function updateLastPlayed(lastPlayedData) {
     }
 }
 
-async function fetchFallback() {
+async function fetchFallback(baseUrl) {
     const fetch = await getFetch();
-    const fallbackResponse = await fetch(`/.netlify/functions/lastPlayed`);
+    const fallbackResponse = await fetch(`${baseUrl}/.netlify/functions/lastPlayed`);
     if (fallbackResponse.ok) {
         const fallbackData = await fallbackResponse.json();
         const row = fallbackData.row;
@@ -74,11 +73,11 @@ async function fetchFallback() {
                     artists: row[3].split(",").map(name => ({ name: name.trim() })),
                     album: {
                         name: row[4],
-                        images: []
+                        images: [],
                     },
                 },
                 progress_ms: Number(row[5]),
-                is_playing: row[6] === "true" || row[6] === true
+                is_playing: row[6] === "true" || row[6] === true,
             };
         }
     }
@@ -94,6 +93,11 @@ exports.handler = async (event, context) => {
             body: JSON.stringify({ message: "SPOTIFY_TOKEN environment variable is not set" }),
         };
     }
+
+    // Generate the base URL from the incoming event using the forwarded protocol and host.
+    const protocol = event.headers["x-forwarded-proto"] || "https";
+    const host = event.headers.host;
+    const baseUrl = `${protocol}://${host}`;
 
     try {
         // Try fetching currently playing track using current token.
@@ -115,7 +119,7 @@ exports.handler = async (event, context) => {
 
         // If no track is playing (204) or item is missing, fallback to last played.
         if (response.status === 204) {
-            const fallbackData = await fetchFallback();
+            const fallbackData = await fetchFallback(baseUrl);
             return {
                 statusCode: 200,
                 body: JSON.stringify(fallbackData),
@@ -142,10 +146,11 @@ exports.handler = async (event, context) => {
                 progress_ms: data.progress_ms,
                 is_playing: data.is_playing,
             };
-            updateLastPlayed(lastPlayedData); // fire and forget
+            // Pass baseUrl to updateLastPlayed.
+            updateLastPlayed(lastPlayedData, baseUrl); // fire and forget
         } else {
             // If item is unavailable, fallback to last played.
-            const fallbackData = await fetchFallback();
+            const fallbackData = await fetchFallback(baseUrl);
             return {
                 statusCode: 200,
                 body: JSON.stringify(fallbackData),
