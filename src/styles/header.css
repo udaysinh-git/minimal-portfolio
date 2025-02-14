@@ -3,27 +3,35 @@ header {
   color: var(--header-text-color);
   padding: 1rem;
   width: 100%;
-  border-bottom: 1px solid #000;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1001; /* Ensure header stays above the lines */
   font-family: 'Courier Prime', monospace;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--text-color);
+  max-width: 100vw;
+  overflow: hidden;
+  overflow-x: hidden;
 }
 
 header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 80%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0;
   box-sizing: border-box; /* Include padding and border in element's total width and height */
+  overflow-x: hidden;
+  width: 80%; /* Match main content width */
+  overflow: visible; /* Allow menu items to be visible */
 }
 
 .nav-menu {
   display: flex;
   justify-content: center;
   width: 100%;
+  overflow: visible; /* Allow menu items to be visible */
 }
 
 .nav-menu ul {
@@ -32,6 +40,8 @@ header .container {
   margin: 0;
   display: flex;
   gap: 1rem;
+  flex-wrap: nowrap; /* Prevent wrapping by default */
+  overflow: visible; /* Allow menu items to be visible */
 }
 
 .nav-menu ul li {
@@ -57,12 +67,30 @@ header .container {
 
 /* Media queries for mobile responsiveness */
 @media (max-width: 768px) {
+  header {
+    width: 100%;
+    max-width: 100vw;
+    padding: 0.5rem;
+    overflow-x: hidden;
+  }
+  
+  header .container {
+    width: 100%;
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+
   .nav-menu ul {
-    flex-direction: column;
-    align-items: center;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   .nav-menu ul li a {
-    padding: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
   }
 }

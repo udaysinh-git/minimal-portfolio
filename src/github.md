@@ -70,6 +70,8 @@ title: GitHub Repos
 
 <div class="loader" id="loader">Loading more repositories...</div>
 
+<br>
+<br>
 <!-- Lazy Load Script -->
 
 <script>

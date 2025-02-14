@@ -40,7 +40,8 @@ Feel free to reach out to me through the form below or connect with me on my soc
   
   <button type="submit">Send</button>
 </form>
-
+<br>
+<br>
 <!-- reCAPTCHA v3 Script -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LeTl6oqAAAAAMqp0IdSwgdo1M8mhkxcB2wFVVLu"></script>
 <script src="/scripts/contact.js"></script>
