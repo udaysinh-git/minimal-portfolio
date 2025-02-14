@@ -286,6 +286,7 @@
   overflow: hidden;
   height: 350px; /* Ensures a fixed, neat height */
   position: relative;
+  z-index: 1; /* Ensure it's above other elements */
 }
 .language-container canvas {
   height: auto !important;

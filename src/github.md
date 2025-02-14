@@ -84,7 +84,7 @@ title: GitHub Repos
       setTimeout(() => {
         const repoItem = document.createElement('div');
         repoItem.classList.add('timeline-item', 'fade-in'); // Add 'fade-in' class for animation
-      
+    
         repoItem.innerHTML = `
           <span class="timeline-date">Created: ${new Date(repo.created_at).toISOString().split('T')[0]}</span>
           <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
@@ -93,7 +93,7 @@ title: GitHub Repos
           <p class="fork">${repo.forks_count}</p>
           ${repo.pushed_at ? `<p class="active">Last Active: ${new Date(repo.pushed_at).toISOString().split('T')[0]}</p>` : ''}
         `;
-      
+    
         repoContainer.appendChild(repoItem);
       }, index * 100); // Delay each item by 100ms
     });
@@ -169,6 +169,10 @@ title: GitHub Repos
     Object.entries(languageData).map(([lang, bytes]) => [lang, ((bytes / totalBytes) * 100).toFixed(2)])
   );
 
+  function getThemeTextColor() {
+    return getComputedStyle(document.body).getPropertyValue('--text-color');
+  }
+
   const ctxLanguages = document.getElementById('languagePieChart').getContext('2d');
   const languagePieChart = new Chart(ctxLanguages, {
     type: 'pie',
@@ -184,15 +188,16 @@ title: GitHub Repos
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Allow chart to fill container height
+      maintainAspectRatio: true, // Allow chart to fill container height
       plugins: {
         legend: {
           position: 'bottom', // Place legend below the chart
           labels: {
             boxWidth: 16,
             font: {
-              size: 14
-            }
+              size: 11
+            },
+            color: getThemeTextColor()
           }
         },
         tooltip: {
