@@ -35,6 +35,9 @@
   border: 1px solid #000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-right: 0; /* Remove any extra right margin */
 }
 
 .repo-card:hover {
@@ -82,11 +85,8 @@
 
 @media (max-width: 768px) {
   body {
-    border-right-width: -2;
-    border-left-width: 0px;
-    border-top-width: 0px;
-    border-bottom-width: 0px;
-    padding-right: 30px;
+    border: none;
+    padding-right: 0 !important;
   }
 }
 .nav-menu ul li a {
@@ -109,6 +109,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-right: 0; /* Remove any extra right margin */
 }
 
 .timeline-item:hover {
@@ -229,6 +232,9 @@
   padding: 1rem;
   border-radius: 10px;
   background-color: var(--card-background-color);
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-right: 0; /* Remove any extra right margin */
 }
 
 .profile-picture {
@@ -244,38 +250,64 @@
   font-size: 2rem;
 }
 
+/* Updated layout for charts container and cards */
 .graphs {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
 .graph-container {
-  flex: 1 1 300px;
-  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
+  border: 1px solid #000;
   border-radius: 10px;
   background-color: var(--card-background-color);
+  height: 350px; /* Desktop fixed height */
 }
 
 .graph-container h3 {
+  flex: 0 0 auto;
+  margin: 0 0 0.5rem;
   text-align: center;
-  margin-bottom: 1rem;
 }
 
+.graph-container canvas {
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* New styles for language chart card */
+.language-container { 
+  overflow: hidden;
+  height: 350px; /* Ensures a fixed, neat height */
+  position: relative;
+}
+.language-container canvas {
+  height: auto !important;
+  max-height: calc(100% - 3rem) !important; /* Leave space for header */
+  width: auto !important;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .profile-picture {
-    margin-bottom: 1rem;
-  }
-
   .graphs {
+    display: flex;
     flex-direction: column;
+    gap: 1rem;
+  }
+  .graph-container {
+    height: auto; /* Let content dictate height */
+  }
+  .graph-container canvas {
+    height: auto !important;
+    max-height: 300px !important;
   }
 }
 
@@ -477,4 +509,58 @@ img {
 
 .post-content {
   transition: font-family 0.3s ease, font-size 0.3s ease;
+}
+
+body {
+  padding-right: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    margin-right: 0; /* Remove right margin */
+  }
+
+  .graph-container {
+    width: 100%; /* Ensure the graph container takes full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  .timeline,
+  .timeline-item {
+    padding: 0 0.5rem; /* Reduce side padding on mobile */
+  }
+  body {
+    /* Remove any custom right padding */
+    padding-right: 0;
+    /* Remove any border interfering with layout */
+    border: none;
+  }
+}
+
+/* Center cards in mobile view */ 
+@media (max-width: 768px) {
+  .timeline-item,
+  .repo-card,
+  .profile-card,
+  .graph-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Center cards in mobile view and ensure full width */
+@media (max-width: 768px) {
+  .timeline-item,
+  .repo-card,
+  .profile-card,
+  .graph-container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  body {
+    padding-right: 0 !important;
+  }
 }

@@ -5,6 +5,7 @@ title: GitHub Repos
 # GitHub Repos
 
 ## GitHub Profile
+
 <div class="profile-card">
   <img src="{{ githubProfile.profile.avatar_url }}" alt="{{ githubProfile.profile.name }}'s avatar" class="profile-picture"/>
   <div class="profile-info">
@@ -30,13 +31,14 @@ title: GitHub Repos
     <h3>Contributions Over Last 5 Years</h3>
     <canvas id="contributionsChart"></canvas>
   </div>
-  <div class="graph-container">
+  <div class="graph-container language-container">
     <h3>Language Usage</h3>
     <canvas id="languagePieChart"></canvas>
   </div>
 </div>
 
 ## Pinned Repositories
+
 <div class="timeline pinned">
   {% for repo in pinnedRepos %}
   <div class="timeline-item">
@@ -53,19 +55,23 @@ title: GitHub Repos
 </div>
 
 ## Latest Repositories
+
 <div class="timeline latest" id="latest-repos-container">
   <!-- Repositories will be loaded here -->
 </div>
 
 <!-- Repository Data -->
+
 <script id="repo-data" type="application/json">
 {{ latestRepos | jsonify }}
 </script>
 
 <!-- Add Loader -->
+
 <div class="loader" id="loader">Loading more repositories...</div>
 
 <!-- Lazy Load Script -->
+
 <script>
   const repoContainer = document.getElementById('latest-repos-container');
   const repoData = JSON.parse(document.getElementById('repo-data').textContent);
@@ -78,7 +84,7 @@ title: GitHub Repos
       setTimeout(() => {
         const repoItem = document.createElement('div');
         repoItem.classList.add('timeline-item', 'fade-in'); // Add 'fade-in' class for animation
-        
+      
         repoItem.innerHTML = `
           <span class="timeline-date">Created: ${new Date(repo.created_at).toISOString().split('T')[0]}</span>
           <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
@@ -87,12 +93,12 @@ title: GitHub Repos
           <p class="fork">${repo.forks_count}</p>
           ${repo.pushed_at ? `<p class="active">Last Active: ${new Date(repo.pushed_at).toISOString().split('T')[0]}</p>` : ''}
         `;
-        
+      
         repoContainer.appendChild(repoItem);
       }, index * 100); // Delay each item by 100ms
     });
     currentIndex += reposPerLoad;
-    
+  
     if (currentIndex >= repoData.length) {
       document.getElementById('loader').style.display = 'none';
       window.removeEventListener('scroll', handleScroll);
@@ -178,9 +184,16 @@ title: GitHub Repos
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false, // Allow chart to fill container height
       plugins: {
         legend: {
-          position: 'right',
+          position: 'bottom', // Place legend below the chart
+          labels: {
+            boxWidth: 16,
+            font: {
+              size: 14
+            }
+          }
         },
         tooltip: {
           callbacks: {
