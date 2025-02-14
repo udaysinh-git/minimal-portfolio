@@ -55,19 +55,6 @@ async function fetchRecentlyPlayed(accessToken) {
     });
 }
 
-async function updateLastPlayed(lastPlayedData, baseUrl) {
-    try {
-        const fetch = await getFetch();
-        await fetch(`${baseUrl}/.netlify/functions/lastPlayed`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(lastPlayedData),
-        });
-    } catch (error) {
-        console.error("Error updating last played sheet", error);
-    }
-}
-
 exports.handler = async (event, context) => {
     let token = process.env.SPOTIFY_TOKEN;
     if (!token) {
@@ -80,13 +67,12 @@ exports.handler = async (event, context) => {
     // Generate the base URL from the incoming event using the forwarded protocol and host.
     const protocol = event.headers["x-forwarded-proto"] || "https";
     const host = event.headers.host;
-    const baseUrl = `${protocol}://${host}`;
 
     try {
-        // Try fetching currently playing track using current token.
+        // Try fetching currently playing track using the current token.
         let response = await fetchSpotifyData(token);
 
-        // Token expired? Refresh it.
+        // If the token is expired, refresh it.
         if (response.status === 401) {
             try {
                 token = await refreshAccessToken();
@@ -95,12 +81,15 @@ exports.handler = async (event, context) => {
             } catch (refreshError) {
                 return {
                     statusCode: 500,
-                    body: JSON.stringify({ message: "Error refreshing token", error: refreshError.toString() }),
+                    body: JSON.stringify({
+                        message: "Error refreshing token",
+                        error: refreshError.toString()
+                    }),
                 };
             }
         }
 
-        // If no track is playing (HTTP 204) try fetching recently played track.
+        // If no track is playing (HTTP 204), fall back to fetching recently played track.
         if (response.status === 204) {
             const rpResponse = await fetchRecentlyPlayed(token);
             if (rpResponse.ok) {
@@ -124,6 +113,7 @@ exports.handler = async (event, context) => {
             };
         }
 
+        // If the response isn't OK for some reason, relay the error.
         if (!response.ok) {
             return {
                 statusCode: response.status,
@@ -131,9 +121,10 @@ exports.handler = async (event, context) => {
             };
         }
 
+        // Process the currently playing track response.
         const data = await response.json();
 
-        // If now playing track is missing, try recently played endpoint.
+        // If no track is found in the current data, try the recently played endpoint.
         if (!data.item) {
             const rpResponse = await fetchRecentlyPlayed(token);
             if (rpResponse.ok) {
@@ -157,20 +148,7 @@ exports.handler = async (event, context) => {
             };
         }
 
-        // If now playing track is available, update last played asynchronously.
-        if (data.item) {
-            const lastPlayedData = {
-                id: data.item.id,
-                name: data.item.name,
-                url: (data.item.external_urls && data.item.external_urls.spotify) || "",
-                artists: data.item.artists ? data.item.artists.map(artist => artist.name).join(", ") : "",
-                album: (data.item.album && data.item.album.name) || "",
-                progress_ms: data.progress_ms,
-                is_playing: data.is_playing,
-            };
-            updateLastPlayed(lastPlayedData, baseUrl); // fire and forget
-        }
-
+        // Return the currently playing track details.
         return {
             statusCode: 200,
             body: JSON.stringify(data),
