@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
 
   if (event.httpMethod === "GET") {
     try {
-      // Update the range to include new columns (A2:G2)
+      // Read row A2:G2 to retrieve the cached track.
       const result = await sheets.spreadsheets.values.get({
         spreadsheetId: SHEET_ID,
         range: "Sheet1!A2:G2",
@@ -61,7 +61,7 @@ exports.handler = async (event, context) => {
     }
   } else if (event.httpMethod === "POST") {
     try {
-      // Expect the song data as JSON in the body; now including progress_ms and is_playing
+      // Expect the song data as JSON; ensure all columns are present.
       const data = JSON.parse(event.body);
       if (
         !data.id ||
@@ -83,7 +83,7 @@ exports.handler = async (event, context) => {
         data.progress_ms,
         data.is_playing
       ]];
-      // Update the designated row. Change the range to A2:G2 to accommodate extra columns.
+      // Update the cache row.
       await sheets.spreadsheets.values.update({
         spreadsheetId: SHEET_ID,
         range: "Sheet1!A2:G2",

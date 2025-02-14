@@ -64,9 +64,59 @@ exports.handler = async (event, context) => {
         };
     }
 
-    // Generate the base URL from the incoming event using the forwarded protocol and host.
+    // Determine base URL for this request.
     const protocol = event.headers["x-forwarded-proto"] || "https";
     const host = event.headers.host;
+
+    // Helper function to update Google Sheets cache.
+    async function updateCache(track) {
+        const fetch = await getFetch();
+        const body = {
+            id: track.id,
+            name: track.name,
+            url: (track.external_urls && track.external_urls.spotify) || "",
+            artists: track.artists ? track.artists.map(artist => artist.name).join(", ") : "",
+            album: (track.album && track.album.name) || "",
+            progress_ms: track.progress_ms || 0,
+            is_playing: track.is_playing || false
+        };
+        try {
+            await fetch(`${protocol}://${host}/.netlify/functions/lastPlayed`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        } catch (err) {
+            console.error("Error updating Google Sheets cache:", err);
+        }
+    }
+
+    // Helper function to get fallback cached track from Google Sheets.
+    async function getCachedTrack() {
+        try {
+            const fetch = await getFetch();
+            const lpResponse = await fetch(`${protocol}://${host}/.netlify/functions/lastPlayed`, {
+                method: "GET"
+            });
+            if (lpResponse.ok) {
+                const lpData = await lpResponse.json();
+                if (lpData.row) {
+                    const row = lpData.row;
+                    const track = {
+                        id: row[0],
+                        name: row[1],
+                        external_urls: { spotify: row[2] },
+                        artists: row[3] ? row[3].split(", ") : [],
+                        album: { name: row[4] }
+                    };
+                    return { item: track, progress_ms: Number(row[5]), is_playing: row[6] === "true" };
+                }
+            }
+        } catch (lpError) {
+            console.error("Error retrieving cached track:", lpError.toString());
+        }
+        return null;
+    }
 
     try {
         // Try fetching currently playing track using the current token.
@@ -89,70 +139,69 @@ exports.handler = async (event, context) => {
             }
         }
 
-        // If no track is playing (HTTP 204), fall back to fetching recently played track.
+        let trackData = null;
+
+        // If no track is playing (HTTP 204), try fetching recently played track.
         if (response.status === 204) {
             const rpResponse = await fetchRecentlyPlayed(token);
             if (rpResponse.ok) {
                 const rpData = await rpResponse.json();
                 if (rpData.items && rpData.items.length > 0) {
-                    const track = rpData.items[0].track;
-                    const nowData = {
-                        item: track,
+                    trackData = {
+                        item: rpData.items[0].track,
                         progress_ms: 0,
                         is_playing: false,
                     };
-                    return {
-                        statusCode: 200,
-                        body: JSON.stringify(nowData),
-                    };
                 }
             }
-            return {
-                statusCode: 200,
-                body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false }),
-            };
-        }
-
-        // If the response isn't OK for some reason, relay the error.
-        if (!response.ok) {
+        } else if (!response.ok) {
             return {
                 statusCode: response.status,
                 body: JSON.stringify({ message: "Error fetching data from Spotify" }),
             };
-        }
-
-        // Process the currently playing track response.
-        const data = await response.json();
-
-        // If no track is found in the current data, try the recently played endpoint.
-        if (!data.item) {
-            const rpResponse = await fetchRecentlyPlayed(token);
-            if (rpResponse.ok) {
-                const rpData = await rpResponse.json();
-                if (rpData.items && rpData.items.length > 0) {
-                    const track = rpData.items[0].track;
-                    const nowData = {
-                        item: track,
-                        progress_ms: 0,
-                        is_playing: false,
-                    };
-                    return {
-                        statusCode: 200,
-                        body: JSON.stringify(nowData),
-                    };
+        } else {
+            // Process the currently playing track response.
+            const data = await response.json();
+            if (data.item) {
+                trackData = data;
+            } else {
+                // If no track is found in the current data, try fetching recently played.
+                const rpResponse = await fetchRecentlyPlayed(token);
+                if (rpResponse.ok) {
+                    const rpData = await rpResponse.json();
+                    if (rpData.items && rpData.items.length > 0) {
+                        trackData = {
+                            item: rpData.items[0].track,
+                            progress_ms: 0,
+                            is_playing: false,
+                        };
+                    }
                 }
             }
+        }
+
+        // If we got track data, update the cache permanently.
+        if (trackData && trackData.item) {
+            updateCache(trackData.item); // Asynchronously update Google Sheets cache.
+            return {
+                statusCode: 200,
+                body: JSON.stringify(trackData),
+            };
+        } else {
+            // No track info from Spotify; try to read from the permanent cache.
+            const cached = await getCachedTrack();
+            if (cached) {
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify(cached),
+                };
+            }
+            // If no cache found, return empty result.
             return {
                 statusCode: 200,
                 body: JSON.stringify({ item: null, progress_ms: 0, is_playing: false }),
             };
         }
-
-        // Return the currently playing track details.
-        return {
-            statusCode: 200,
-            body: JSON.stringify(data),
-        };
     } catch (error) {
         return {
             statusCode: 500,

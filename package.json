@@ -13,6 +13,7 @@
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "dotenv": "^16.4.7",
+    "googleapis": "^144.0.0",
     "node-fetch": "^3.3.2"
   }
 }
