@@ -68,7 +68,7 @@ exports.handler = async (event, context) => {
     const protocol = event.headers["x-forwarded-proto"] || "https";
     const host = event.headers.host;
 
-    // Helper function to update Google Sheets cache.
+    // Helper function to update Google Sheets cache with extra fields.
     async function updateCache(track) {
         const fetch = await getFetch();
         const body = {
@@ -77,6 +77,8 @@ exports.handler = async (event, context) => {
             url: (track.external_urls && track.external_urls.spotify) || "",
             artists: track.artists ? track.artists.map(artist => artist.name).join(", ") : "",
             album: (track.album && track.album.name) || "",
+            album_image: (track.album && track.album.images && track.album.images[0] && track.album.images[0].url) || "",
+            duration_ms: track.duration_ms || 0,
             progress_ms: track.progress_ms || 0,
             is_playing: track.is_playing || false
         };
@@ -91,32 +93,36 @@ exports.handler = async (event, context) => {
         }
     }
 
-    // Helper function to get fallback cached track from Google Sheets.
+    // Helper function to get fallback cached track from Google Sheets (with extra fields).
     async function getCachedTrack() {
-        try {
-            const fetch = await getFetch();
-            const lpResponse = await fetch(`${protocol}://${host}/.netlify/functions/lastPlayed`, {
-                method: "GET"
-            });
-            if (lpResponse.ok) {
-                const lpData = await lpResponse.json();
-                if (lpData.row) {
-                    const row = lpData.row;
-                    const track = {
-                        id: row[0],
-                        name: row[1],
-                        external_urls: { spotify: row[2] },
-                        artists: row[3] ? row[3].split(", ") : [],
-                        album: { name: row[4] }
-                    };
-                    return { item: track, progress_ms: Number(row[5]), is_playing: row[6] === "true" };
-                }
-            }
-        } catch (lpError) {
-            console.error("Error retrieving cached track:", lpError.toString());
-        }
-        return null;
-    }
+      try {
+          const fetch = await getFetch();
+          const lpResponse = await fetch(`${protocol}://${host}/.netlify/functions/lastPlayed`, {
+              method: "GET"
+          });
+          if (lpResponse.ok) {
+              const lpData = await lpResponse.json();
+              if (lpData.row) {
+                  const row = lpData.row;
+                  const track = {
+                      id: row[0],
+                      name: row[1],
+                      external_urls: { spotify: row[2] },
+                      artists: row[3] ? row[3].split(", ") : [],
+                      album: { 
+                          name: row[4],
+                          images: row[5] ? [{ url: row[5] }] : [] 
+                      },
+                      duration_ms: Number(row[6]) || 0
+                  };
+                  return { item: track, progress_ms: Number(row[7]) || 0, is_playing: row[8] === "true" };
+              }
+          }
+      } catch (lpError) {
+          console.error("Error retrieving cached track:", lpError.toString());
+      }
+      return null;
+  }
 
     try {
         // Try fetching currently playing track using the current token.

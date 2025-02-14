@@ -40,10 +40,10 @@ exports.handler = async (event, context) => {
 
   if (event.httpMethod === "GET") {
     try {
-      // Read row A2:G2 to retrieve the cached track.
+      // Read row A2:I2 to retrieve the cached track.
       const result = await sheets.spreadsheets.values.get({
         spreadsheetId: SHEET_ID,
-        range: "Sheet1!A2:G2",
+        range: "Sheet1!A2:I2",
       });
       const row = (result.data.values && result.data.values[0]) || null;
       return {
@@ -69,6 +69,8 @@ exports.handler = async (event, context) => {
         !data.url ||
         !data.artists ||
         !data.album ||
+        data.album_image === undefined ||
+        data.duration_ms === undefined ||
         data.progress_ms === undefined ||
         data.is_playing === undefined
       ) {
@@ -80,13 +82,15 @@ exports.handler = async (event, context) => {
         data.url,
         data.artists,
         data.album,
+        data.album_image,
+        data.duration_ms,
         data.progress_ms,
         data.is_playing
       ]];
       // Update the cache row.
       await sheets.spreadsheets.values.update({
         spreadsheetId: SHEET_ID,
-        range: "Sheet1!A2:G2",
+        range: "Sheet1!A2:I2",
         valueInputOption: "RAW",
         requestBody: { values },
       });
