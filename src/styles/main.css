@@ -9,6 +9,7 @@ main {
   box-sizing: border-box; /* Include padding and border in element's total width and height */
   overflow-x: hidden;
   position: relative;
+  z-index: 1; /* Lower z-index for main content */
 }
 
 /* Newspaper style lines */
@@ -20,7 +21,7 @@ main {
   bottom: 0;
   width: 1px;
   background-color: var(--text-color);
-  z-index: 1;
+  z-index: 1; /* Lower z-index for decorative lines */
 }
 
 .container::before {
@@ -38,7 +39,81 @@ main {
   box-sizing: border-box;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 1; /* Lower z-index for container */
+}
+
+/* Add FAB z-index fixes */
+.fab {
+  z-index: 1000; /* Ensure FAB stays on top */
+  position: fixed; /* Ensure position is fixed */
+}
+
+.fab-buttons {
+  z-index: 999; /* Ensure FAB child buttons stay on top */
+  position: fixed; /* Ensure position is fixed */
+}
+
+/* Ensure top button and FAB options always stay on top */
+#back-to-top,
+.fab-options {
+  position: fixed;
+  z-index: 10000;
+}
+
+/* FAB and options styling */
+.fab-options button {
+  padding: 0.3rem 0.6rem; /* Smaller padding */
+  font-size: 0.9rem;     /* Smaller font size */
+  min-width: 40px;       /* Minimum width */
+  height: 30px;          /* Fixed height */
+}
+
+/* Back to Top Button Styling */
+#back-to-top {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: fixed;
+  right: 80px;
+  bottom: 28px; /* Align with FAB */
+  z-index: 9999;
+  cursor: pointer;
+  border: none;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Larger size for emoji */
+  padding: 0;        /* Remove padding */
+  line-height: 40px; /* Center emoji vertically */
+}
+
+#back-to-top i {
+  font-size: 1.2rem; /* Adjust icon size */
+}
+
+/* Remove text layout rules; instead style the image inside */
+#back-to-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Remove any existing icon styles */
+#back-to-top i,
+#back-to-top img {
+  display: none;
+}
+
+/* Hover state */
+#back-to-top:hover {
+  background-color: var(--link-hover-color);
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Media queries for mobile responsiveness */
@@ -49,6 +124,8 @@ main {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
+    z-index: 1;
+    position: relative;
   }
   
   .container {
@@ -57,10 +134,46 @@ main {
     padding: 0 0.5rem;
     box-sizing: border-box;
     overflow-x: hidden;
+    z-index: 1; /* Lower z-index on mobile */
+    position: relative;
   }
   
   .container::before,
   .container::after {
     display: none; /* Remove lines on mobile */
+  }
+
+  .fab {
+    z-index: 9999; /* Even higher z-index for mobile */
+    right: 20px;   /* Maintain horizontal positioning */
+    bottom: 20px;  /* Explicitly position at bottom */
+  }
+
+  .fab-buttons,
+  .fab-options {
+    z-index: 9998; /* Maintain stacking order for mobile */
+    position: fixed;
+    bottom: 90px; /* Adjust position relative to FAB */
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Space between buttons */
+  }
+
+  /* Position the Top button explicitly */
+  #back-to-top {
+    width: 40px;
+    height: 40px;
+    right: 20px !important;
+    bottom: 40px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    transform: scale(0.95);
+    transform: none !important;
+    font-size: 1.5rem; /* Keep emoji size consistent on mobile */
+  }
+
+  #back-to-top:active {
+    transform: none !important;
   }
 }

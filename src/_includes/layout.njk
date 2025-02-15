@@ -69,7 +69,11 @@
       </div>
     </div>
   </footer>
-  <button id="back-to-top">Top</button>
+  {% if showBackToTop or title == "Resume" or title == "GitHub Repos" %}
+    <button id="back-to-top" aria-label="Back to top">
+      ☝🏻
+    </button>
+  {% endif %}
   <div id="theme-toast" class="theme-toast">Theme changed to: <span id="theme-name"></span></div>
   <script>
     // Set session start time if not already set
