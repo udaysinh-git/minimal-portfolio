@@ -16,7 +16,7 @@ main {
 .container::after {
   content: '';
   position: fixed;
-  top: 64px; /* Add space below header */
+  top: 59px; /* Add space below header */
   bottom: 0;
   width: 1px;
   background-color: var(--text-color);
