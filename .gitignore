@@ -128,7 +128,28 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-.env
 
-# our site code 
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build output
 _site/
+.netlify/
+dist/
+.cache/
+
+# System files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-*

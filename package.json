@@ -4,7 +4,10 @@
   "description": ":)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx eleventy",
+    "dev": "npx eleventy --serve",
+    "start": "netlify dev"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,10 @@
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "dotenv": "^16.4.7",
     "googleapis": "^144.0.0",
-    "node-fetch": "^3.3.2"
-  }
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.17.0"
+  },
+  "type": "commonjs"
 }
