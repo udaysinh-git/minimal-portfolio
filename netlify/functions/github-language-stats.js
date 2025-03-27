@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
   };
 
   try {
-    const username = 'udaysinh-git'; // Your GitHub username
+    const username = 'udaysinh-git';
     const token = process.env.GITHUB_TOKEN;
     
     if (!token) {
