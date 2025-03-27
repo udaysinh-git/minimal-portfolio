@@ -31,25 +31,28 @@ exports.handler = async function(event, context) {
     const repos = await reposResponse.json();
     const languageCounts = {};
     
-    // Fetch languages for each repository
-    for (const repo of repos) {
-      const languagesResponse = await fetch(repo.languages_url, {
-        headers: {
-          'Authorization': `token ${token}`
+    // Fetch languages for each repository concurrently
+    const languagePromises = repos.map(repo =>
+      fetch(repo.languages_url, {
+        headers: { 'Authorization': `token ${token}` }
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.error(`Error fetching languages for ${repo.name}: ${response.statusText}`);
+          return {};
         }
-      });
-      
-      if (!languagesResponse.ok) {
-        console.error(`Error fetching languages for ${repo.name}: ${languagesResponse.statusText}`);
-        continue;
-      }
-      
-      const languages = await languagesResponse.json();
-      
+        return response.json();
+      })
+    );
+    
+    const languagesArray = await Promise.all(languagePromises);
+    
+    // Merge languages from all repos
+    languagesArray.forEach(languages => {
       for (const [language, count] of Object.entries(languages)) {
         languageCounts[language] = (languageCounts[language] || 0) + count;
       }
-    }
+    });
     
     return {
       statusCode: 200,
