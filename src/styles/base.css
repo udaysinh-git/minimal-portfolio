@@ -91,31 +91,8 @@ pre {
     grid-template-columns: 1fr;
   }
 
-  .profile-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .profile-info {
-    width: 100%;
-    word-wrap: break-word;
-  }
-
-  .profile-info h2 {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-  }
-
-  .profile-picture {
-    width: 120px;
-    height: 120px;
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
+  /* Removing redundant profile styles that conflict with github.css */
+  /* These styles are better defined in github.css */
 }
 
 /* Fade-out animation */

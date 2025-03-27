@@ -42,6 +42,9 @@ styles:
 <!-- Add Loader -->
 <div class="loader" id="loader" style="display: none;">Loading more repositories...</div>
 
+<!-- Add space before footer -->
+<div class="footer-spacer"></div>
+
 <script>
   let repoData = [];
   let currentIndex = 0;
@@ -65,24 +68,25 @@ styles:
   // Render GitHub Profile
   function renderProfile(data) {
     const profile = data.profile;
-    const profileContainer = document.getElementById('profile-container');
+    // Target the existing .profile-card element directly instead of a separate container
+    const profileCard = document.querySelector('.profile-card');
     
-    profileContainer.innerHTML = `
-      <img src="${profile.avatar_url}" alt="${profile.name}'s avatar" class="profile-picture"/>
-      <div class="profile-info">
-        <h2>
-          ${profile.name}
-          <a href="https://github.com/${profile.login}" target="_blank" class="github-link" aria-label="Visit GitHub Profile">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="github-icon" viewBox="0 0 24 24">
-              <path d="M12,0.296C5.373,0.296,0,5.668,0,12.3c0,5.303,3.438,9.8,8.205,11.387c0.6,0.111,0.82-0.261,0.82-0.577c0-0.285-0.01-1.04-0.016-2.04c-3.338,0.725-4.042-1.61-4.042-1.61C4.422,18.07,3.633,17.7,3.633,17.7c-1.087-0.744,0.083-0.729,0.083-0.729c1.205,0.084,1.84,1.234,1.84,1.234c1.07,1.836,2.809,1.305,3.495,0.997c0.108-0.775,0.418-1.305,0.76-1.605c-2.665-0.3-5.466-1.334-5.466-5.93c0-1.31,0.469-2.38,1.235-3.22c-0.124-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.3,1.23c0.96-0.267,1.98-0.4,3-0.405c1.02,0.005,2.04,0.138,3,0.405c2.28-1.552,3.285-1.23,3.285-1.23c0.653,1.653,0.242,2.873,0.118,3.176c0.77,0.84,1.233,1.91,1.233,3.22c0,4.61-2.807,5.625-5.479,5.92c0.43,0.372,0.823,1.102,0.823,2.222c0,1.606-0.014,2.896-0.014,3.286c0,0.315,0.216,0.694,0.826,0.576C20.565,21.1,24,16.596,24,12.3C24,5.668,18.627,0.296,12,0.296z"/>
-            </svg>
-          </a>
-        </h2>
-        <p>${profile.bio}</p>
-        <p>Followers: ${profile.followers}</p>
-        <p>Following: ${profile.following}</p>
-        <p>Total Commits: ${data.totalCommits}</p>
-      </div>
+    profileCard.innerHTML = `
+        <img src="${profile.avatar_url}" alt="${profile.name}'s avatar" class="profile-picture"/>
+        <div class="profile-info">
+          <h2>
+            ${profile.name}
+            <a href="https://github.com/${profile.login}" target="_blank" class="github-link" aria-label="Visit GitHub Profile">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="github-icon" viewBox="0 0 24 24">
+                <path d="M12,0.296C5.373,0.296,0,5.668,0,12.3c0,5.303,3.438,9.8,8.205,11.387c0.6,0.111,0.82-0.261,0.82-0.577c0-0.285-0.01-1.04-0.016-2.04c-3.338,0.725-4.042-1.61-4.042-1.61C4.422,18.07,3.633,17.7,3.633,17.7c-1.087-0.744,0.083-0.729,0.083-0.729c1.205,0.084,1.84,1.234,1.84,1.234c1.07,1.836,2.809,1.305,3.495,0.997c0.108-0.775,0.418-1.305,0.76-1.605c-2.665-0.3-5.466-1.334-5.466-5.93c0-1.31,0.469-2.38,1.235-3.22c-0.124-0.303-0.535-1.523,0.117-3.176c0,0,1.008-0.322,3.3,1.23c0.96-0.267,1.98-0.4,3-0.405c1.02,0.005,2.04,0.138,3,0.405c2.28-1.552,3.285-1.23,3.285-1.23c0.653,1.653,0.242,2.873,0.118,3.176c0.77,0.84,1.233,1.91,1.233,3.22c0,4.61-2.807,5.625-5.479,5.92c0.43,0.372,0.823,1.102,0.823,2.222c0,1.606-0.014,2.896-0.014,3.286c0,0.315,0.216,0.694,0.826,0.576C20.565,21.1,24,16.596,24,12.3C24,5.668,18.627,0.296,12,0.296z"/>
+              </svg>
+            </a>
+          </h2>
+          <p>${profile.bio || ''}</p>
+          <p>Followers: ${profile.followers}</p>
+          <p>Following: ${profile.following}</p>
+          <p>Total Commits: ${data.totalCommits}</p>
+        </div>
     `;
   }
 
