@@ -62,13 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset(); // Reset the form
           localStorage.setItem('formSubmitted', 'true'); // Set form submitted flag
         } else {
-          // Change button text to error message
-          submitButton.textContent = result.message || 'Error';
+          // Removed displaying error message on button text
           console.error('Error:', result.message);
         }
       } catch (error) {
-        // Change button text to network error message
-        submitButton.textContent = 'Network Error';
+        // Removed displaying network error on button text
         console.error('Error:', error);
       } finally {
         // Re-enable the button after a delay
