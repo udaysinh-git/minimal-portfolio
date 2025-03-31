@@ -31,7 +31,10 @@ exports.handler = async (event, context) => {
     }
 
     // Get user's IP address
-    const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || event.headers['x-real-ip'] || 'Unknown';
+    let ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || event.headers['x-real-ip'] || 'Unknown';
+    if (ip !== 'Unknown') {
+      ip = ip.split(',')[0].trim();
+    }
 
     // Rate limiting
     const now = Date.now();
@@ -56,8 +59,8 @@ exports.handler = async (event, context) => {
 
     // Fetch user's location using a geolocation API
     const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
-    const geoData = await geoResponse.json();
-    const location = `${geoData.city || 'Unknown City'}, ${geoData.region || 'Unknown Region'}, ${geoData.country || 'Unknown Country'}`;
+    const geoData = await geoResponse.json();    
+    const location = `${geoData.city || 'Unknown City'}, ${geoData.region || 'Unknown Region'}, ${geoData.country_name || geoData.country || 'Unknown Country'}`;
 
     // Get current timestamp
     const timestamp = new Date().toISOString();

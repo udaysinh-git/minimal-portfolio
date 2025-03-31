@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('formSubmitted', 'true'); // Set form submitted flag
         } else {
           // Change button text to error message
-          submitButton.textContent = 'Error';
+          submitButton.textContent = result.message || 'Error';
+          console.error('Error:', result.message);
         }
       } catch (error) {
         // Change button text to network error message
