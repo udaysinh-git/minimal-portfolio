@@ -38,10 +38,10 @@ exports.handler = async (event, context) => {
 
     // Rate limiting
     const now = Date.now();
-    if (rateLimitCache.has(ip) && now - rateLimitCache.get(ip) < 5000) {
+    if (rateLimitCache.has(ip) && now - rateLimitCache.get(ip) < 2000) { // changed from 5000 to 2000
       return {
         statusCode: 429,
-        body: JSON.stringify({ message: 'Too many requests. Please wait a few seconds and try again.' }),
+        body: JSON.stringify({ message: 'Too many requests. Please wait a moment and try again.' }),
       };
     }
     rateLimitCache.set(ip, now);
