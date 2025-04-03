@@ -59,6 +59,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/styles/styles.css");
   eleventyConfig.addPassthroughCopy("src/styles");
   eleventyConfig.addPassthroughCopy("src/scripts");
+  eleventyConfig.addPassthroughCopy(".well-known/discord");
   
   return {
     dir: {
