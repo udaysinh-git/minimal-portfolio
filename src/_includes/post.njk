@@ -56,6 +56,11 @@
   <main class="container">
     <article class="post-content slide-in-right">
       <h1>{{ title }}</h1>
+      {% if time %}
+        <p>Published on: {{ date }} at {{ time }}</p>
+      {% else %}
+        <p>Published on: {{ date }}</p>
+      {% endif %}
       {{ content | safe }}
     </article>
   </main>

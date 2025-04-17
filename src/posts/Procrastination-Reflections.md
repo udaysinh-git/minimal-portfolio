@@ -1,7 +1,8 @@
 ---
 layout: post.njk
 title: "Why i took a break from coding some time ago...."
-date: 2025-04-17 20:23:02 GMT
+date: 2025-04-17
+time: "8:27 PM"
 tags:
     - personal
 ---
