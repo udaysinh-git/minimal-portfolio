@@ -5,8 +5,6 @@ date: 2025-04-17 20:23:02 GMT
 tags:
     - personal
 ---
-# Why i took a break from coding some time ago....
-
 Let’s start where this all began. I was at my cousin’s house, completely absorbed in a gaming session, when his father suddenly chimed in with that infamous Indian parental wisdom:
 
 > **"Why are you wasting time playing games? If you’re already so good at playing, why not learn how to make them?"**
