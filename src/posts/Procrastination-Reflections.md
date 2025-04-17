@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Why i took a break from coding some time ago...."
-date: 2025-04-17
+date: 2025-04-17 20:23:02 GMT
 tags:
     - personal
 ---
@@ -30,7 +30,6 @@ On the side, I've dabbled in social media creation. Check out my [Instagram @dra
 I’m also planning to dive into YouTube soon, exploring new avenues to share content and connect with a wider audience.
 
 So if you were expecting a tale of regret or an endless list of “should‑haves,” think again. Life’s been pretty good, and while my Indian parents may still nag about my “waste of time,” I’ve learned that sometimes procrastination is just the universe’s way of telling you to recharge. Cheers to taking breaks, laughing at life, and coding again—with a few extra friends to share the wins (and losses). After all, it’s all about a balanced life.
-
 
 **“You do it to yourself, you do  
 And that’s what really hurts.”**  
