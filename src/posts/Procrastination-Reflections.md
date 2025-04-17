@@ -1,11 +1,11 @@
 ---
 layout: post.njk
-title: "Why i took a break a while ago...."
+title: "Why i took a break from coding some time ago...."
 date: 2025-04-17
 tags:
     - personal
 ---
-# Why i took a break a while ago....
+# Why i took a break from coding some time ago....
 
 Let’s start where this all began. I was at my cousin’s house, completely absorbed in a gaming session, when his father suddenly chimed in with that infamous Indian parental wisdom:
 
