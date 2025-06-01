@@ -43,11 +43,18 @@ title: Creative
 <div id="activity-status" class="spotify-status" style="display:none;">
   <div class="spotify-card">
     <div class="album-art-container">
-      <img id="activity-icon" class="album-cover" src="" alt="App/Game Icon">
+      <!-- Generic App Icon (for games etc.) -->
+      <img id="activity-icon" class="album-cover" src="" alt="App/Game Icon" style="display:none;">
+      <!-- VS Code Specific Assets -->
+      <img id="activity-vscode-large-image" class="album-cover" src="" alt="VS Code Large Asset" style="display:none; position: relative; z-index: 1;">
+      <img id="activity-vscode-small-image" src="" alt="VS Code Small Asset" style="display:none; position: absolute; bottom: -5px; right: -5px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--card-background-color, #181818); z-index: 2; background-color: var(--card-background-color, #181818);">
     </div>
     <div class="track-info-container">
       <div class="track-name" id="activity-name"></div>
-      <div class="track-additional" id="activity-details"></div>
+      <div class="track-additional" id="activity-details" style="display:none;"></div>
+      <div class="track-additional" id="activity-state" style="display:none;"></div>
+      <div class="track-additional" id="activity-large-text" style="display:none;"></div>
+      <div class="track-additional" id="activity-small-text" style="display:none;"></div>
       <div class="spotify-time" id="activity-time"></div>
     </div>
   </div>
@@ -260,10 +267,34 @@ function updateProgressBar() {
 async function fetchActivityStatus() {
   const headingEl = document.getElementById('activity-status-heading');
   const card = document.getElementById('activity-status');
+  
+  // Image elements
   const iconEl = document.getElementById('activity-icon');
+  const vscodeLargeImgEl = document.getElementById('activity-vscode-large-image');
+  const vscodeSmallImgEl = document.getElementById('activity-vscode-small-image');
+
   const nameEl = document.getElementById('activity-name');
   const detailsEl = document.getElementById('activity-details');
+  const stateEl = document.getElementById('activity-state');
+  const largeTextEl = document.getElementById('activity-large-text');
+  const smallTextEl = document.getElementById('activity-small-text');
   const timeEl = document.getElementById('activity-time');
+
+  // Helper to set text and visibility for an element
+  function setTextContentAndVisibility(element, text) {
+    if (text) {
+      element.innerHTML = text; // Use innerHTML if text might contain formatting/icons
+      element.style.display = "";
+      element.classList.remove('hidden');
+      void element.offsetWidth; // Trigger reflow
+      element.classList.add('fade-in');
+    } else {
+      element.innerHTML = "";
+      element.style.display = "none";
+      element.classList.remove('fade-in');
+      element.classList.add('hidden');
+    }
+  }
 
   try {
     const res = await fetch('/.netlify/functions/activities');
@@ -272,42 +303,87 @@ async function fetchActivityStatus() {
       card.style.display = "none";
       return;
     }
-    const data = await res.json();
+    const data = await res.json(); 
     if (!data || !data.activity) {
       headingEl.style.display = "none";
       card.style.display = "none";
       return;
     }
     const act = data.activity;
-    // Heading logic
+    const fromCache = data.from_cache; 
+
+    nameEl.textContent = act.name || ""; 
+
+    const currentPrefix = fromCache ? "was" : "am currently";
+
+    // Hide all image elements initially
+    iconEl.style.display = "none";
+    vscodeLargeImgEl.style.display = "none";
+    vscodeSmallImgEl.style.display = "none";
+
     if (act.name === "Visual Studio Code") {
-      headingEl.textContent = "🧑‍💻 I'm currently working on:";
-    } else {
-      headingEl.textContent = "🎮 I'm currently playing:";
+      headingEl.textContent = `🧑‍💻 I ${currentPrefix} working on:`;
+      setTextContentAndVisibility(detailsEl, act.details);
+      setTextContentAndVisibility(stateEl, act.state);
+      setTextContentAndVisibility(largeTextEl, act.large_text ? `<i class="fa-solid fa-file-code"></i> ${act.large_text}` : "");
+      setTextContentAndVisibility(smallTextEl, act.small_text ? `<i class="fa-brands fa-vscode"></i> ${act.small_text}` : "");
+
+      // VS Code specific image handling (from Lanyard assets or cache)
+      if (act.application_id && act.large_text_asset_key && act.small_text_asset_key) { 
+        vscodeLargeImgEl.src = `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.large_text_asset_key}.png?size=128`;
+        vscodeLargeImgEl.style.display = "";
+        vscodeSmallImgEl.src = `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.small_text_asset_key}.png?size=64`;
+        vscodeSmallImgEl.style.display = "";
+      } else if (act.application_id) { // Fallback to generic app icon for VS Code if asset keys are missing
+        iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}.png?size=128`;
+        iconEl.style.display = "";
+      } else { // Absolute fallback
+         iconEl.src = "https://cdn.discordapp.com/app-icons/383226320970055681/1359299016025964687.png?size=128"; // Default VS Code icon
+         iconEl.style.display = "";
+      }
+
+    } else { // Game or other activity
+      headingEl.textContent = `🎮 I ${currentPrefix} playing:`;
+      setTextContentAndVisibility(detailsEl, null); 
+      setTextContentAndVisibility(stateEl, null);
+      setTextContentAndVisibility(largeTextEl, null);
+      setTextContentAndVisibility(smallTextEl, null);
+
+      // Generic icon handling for games/other apps
+      if (act.application_id) {
+        iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}.png?size=128`;
+      } else {
+        // Default/fallback icon if no application_id
+        iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp?size=128"; 
+      }
+      iconEl.style.display = "";
+      iconEl.onerror = function() {
+        iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp?size=128"; 
+      };
     }
+    
     headingEl.style.display = "";
-    // Name
-    nameEl.textContent = act.name || "";
-    // Details
-    detailsEl.innerHTML = act.details || "";
-    detailsEl.classList.remove('hidden');
-    // Time
+
+    // Time: "Started X ago" if timestamp exists, otherwise clear.
     if (act.start) {
-      timeEl.textContent = "Started " + timeAgo(new Date(act.start));
+      // Ensure act.start is a number. If it's a string from sheets, parse it.
+      const startTime = typeof act.start === 'string' ? parseInt(act.start, 10) : act.start;
+      
+      if (!isNaN(startTime) && startTime > 0) { // Check if it's a valid positive number
+        timeEl.textContent = (fromCache ? "Last active: " : "Started ") + timeAgo(new Date(startTime));
+        timeEl.style.display = "";
+      } else {
+        timeEl.textContent = "";
+        timeEl.style.display = "none";
+      }
     } else {
       timeEl.textContent = "";
+      timeEl.style.display = "none";
     }
-    // Icon
-    if (act.application_id) {
-      iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}`;
-      iconEl.onerror = function() {
-        iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp";
-      };
-    } else {
-      iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp";
-    }
-    card.style.display = "";
+
+    card.style.display = ""; // Display the card itself (it's a spotify-status styled card)
   } catch (err) {
+    console.error("Error fetching activity status:", err);
     headingEl.style.display = "none";
     card.style.display = "none";
   }
