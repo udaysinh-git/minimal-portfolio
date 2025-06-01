@@ -36,6 +36,23 @@ title: Creative
   </div>
 </div>
 
+<!-- Activity Status Heading -->
+<p id="activity-status-heading" class="listening-status" style="margin-top:2.5rem; display:none;"></p>
+
+<!-- Activity Card (uses same card as spotify-status for theme compatibility) -->
+<div id="activity-status" class="spotify-status" style="display:none;">
+  <div class="spotify-card">
+    <div class="album-art-container">
+      <img id="activity-icon" class="album-cover" src="" alt="App/Game Icon">
+    </div>
+    <div class="track-info-container">
+      <div class="track-name" id="activity-name"></div>
+      <div class="track-additional" id="activity-details"></div>
+      <div class="spotify-time" id="activity-time"></div>
+    </div>
+  </div>
+</div>
+
 <style>
 /* Hide blinking cursor on link inside track-name */
 .track-name a::after {
@@ -46,6 +63,31 @@ title: Creative
 .track-name a {
   text-decoration: none;
   color: inherit;
+}
+
+/* Remove old .activity-status/.activity-card styles as we now use spotify-status/spotify-card for both */
+.activity-status, .activity-card, .activity-art-container, .activity-icon, .activity-info-container, .activity-heading, .activity-name, .activity-details, .activity-state, .activity-time {
+  display: none !important;
+}
+
+/* Marquee animation for long text */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.marquee span {
+  display: inline-block;
+  padding-left: 0;
+  animation: marquee 7s linear infinite;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-60%); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 </style>
 
@@ -213,6 +255,94 @@ function updateProgressBar() {
       `${formatTime(updatedProgress)} / ${formatTime(trackDuration)}`;
   }
 }
+
+// --- Activity Card Logic ---
+async function fetchActivityStatus() {
+  const headingEl = document.getElementById('activity-status-heading');
+  const card = document.getElementById('activity-status');
+  const iconEl = document.getElementById('activity-icon');
+  const nameEl = document.getElementById('activity-name');
+  const detailsEl = document.getElementById('activity-details');
+  const timeEl = document.getElementById('activity-time');
+
+  try {
+    const res = await fetch('/.netlify/functions/activities');
+    if (!res.ok) {
+      headingEl.style.display = "none";
+      card.style.display = "none";
+      return;
+    }
+    const data = await res.json();
+    if (!data || !data.activity) {
+      headingEl.style.display = "none";
+      card.style.display = "none";
+      return;
+    }
+    const act = data.activity;
+    // Heading logic
+    if (act.name === "Visual Studio Code") {
+      headingEl.textContent = "🧑‍💻 I'm currently working on:";
+    } else {
+      headingEl.textContent = "🎮 I'm currently playing:";
+    }
+    headingEl.style.display = "";
+    // Name
+    nameEl.textContent = act.name || "";
+    // Details
+    detailsEl.innerHTML = act.details || "";
+    detailsEl.classList.remove('hidden');
+    // Time
+    if (act.start) {
+      timeEl.textContent = "Started " + timeAgo(new Date(act.start));
+    } else {
+      timeEl.textContent = "";
+    }
+    // Icon
+    if (act.application_id) {
+      iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}`;
+      iconEl.onerror = function() {
+        iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp";
+      };
+    } else {
+      iconEl.src = "https://cdn.discordapp.com/app-icons/1364888648839073802/16d6294a8486c2fcdede9703ee0e737a.webp";
+    }
+    card.style.display = "";
+  } catch (err) {
+    headingEl.style.display = "none";
+    card.style.display = "none";
+  }
+}
+
+// Helper: Marquee if text is long
+function setMarquee(el, text) {
+  if (!text) {
+    el.innerHTML = "";
+    el.style.display = "none";
+    return;
+  }
+  el.style.display = "";
+  if (text.length > 24) {
+    el.innerHTML = `<span>${text}</span>`;
+    el.classList.add("marquee");
+  } else {
+    el.textContent = text;
+    el.classList.remove("marquee");
+  }
+}
+
+// Helper: Time ago formatting
+function timeAgo(date) {
+  const now = new Date();
+  const diff = Math.floor((now - date) / 1000);
+  if (diff < 60) return `${diff} seconds ago`;
+  if (diff < 3600) return `${Math.floor(diff/60)} minutes ago`;
+  if (diff < 86400) return `${Math.floor(diff/3600)} hours ago`;
+  return date.toLocaleString();
+}
+
+// Initial fetch and periodic update
+fetchActivityStatus();
+setInterval(fetchActivityStatus, 10000);
 
 // Initial fetch and periodic update
 fetchSpotifyPlayback();
