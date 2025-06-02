@@ -9,6 +9,8 @@
   --card-background-color: #444;
   --link-color: #007acc;
   --link-hover-color: #005f99;
+  --skeleton-base-color: #4a4a4a; /* Original: #4a4a4a */
+  --skeleton-shine-color: #6b6b6b; /* Original: #5a5a5a, made lighter */
 }
 
 /* Light mode variables */
@@ -22,6 +24,8 @@
   --card-background-color: #fff;
   --link-color: #000;
   --link-hover-color: #333;
+  --skeleton-base-color: #e0e0e0; /* Original: #e0e0e0 */
+  --skeleton-shine-color: #f5f5f5; /* Original: #d0d0d0, made lighter */
 }
 
 /* Pastel mode variables */
@@ -35,6 +39,8 @@
   --card-background-color: #fff;
   --link-color: #333;
   --link-hover-color: #555;
+  --skeleton-base-color: #f0d4d4; /* Original: #f0d4d4 */
+  --skeleton-shine-color: #faeaea; /* Original: #e9c7c7, made lighter */
 }
 
 /* Eye-soothing mode variables */
@@ -48,6 +54,8 @@
   --card-background-color: #fff;
   --link-color: #004d40;
   --link-hover-color: #00332e;
+  --skeleton-base-color: #ccecf0; /* Original: #ccecf0 */
+  --skeleton-shine-color: #e6f7f9; /* Original: #b8e1e6, made lighter */
 }
 
 /* Solarized Dark mode variables */
@@ -61,6 +69,8 @@
   --card-background-color: #073642;
   --link-color: #268bd2;
   --link-hover-color: #2aa198;
+  --skeleton-base-color: #073642; /* Original: #073642 */
+  --skeleton-shine-color: #0e4f60; /* Original: #08404f, made lighter */
 }
 
 /* Solarized Light mode variables */
@@ -74,6 +84,8 @@
   --card-background-color: #eee8d5;
   --link-color: #268bd2;
   --link-hover-color: #2aa198;
+  --skeleton-base-color: #eee8d5; /* Original: #eee8d5 */
+  --skeleton-shine-color: #fbf3e0; /* Original: #e0d8c5, made lighter */
 }
 
 /* Monokai mode variables */
@@ -87,6 +99,8 @@
   --card-background-color: #383830;
   --link-color: #66d9ef;
   --link-hover-color: #a6e22e;
+  --skeleton-base-color: #3e3d32; /* Original: #3e3d32 */
+  --skeleton-shine-color: #5a584b; /* Original: #4c4b3f, made lighter */
 }
 
 /* Dracula mode variables */
@@ -100,6 +114,8 @@
   --card-background-color: #44475a;
   --link-color: #bd93f9;
   --link-hover-color: #ff79c6;
+  --skeleton-base-color: #3a3c4e; /* Original: #3a3c4e */
+  --skeleton-shine-color: #555870; /* Original: #4e5066, made lighter */
 }
 
 /* Gruvbox Dark mode variables */
@@ -113,6 +129,8 @@
   --card-background-color: #3c3836;
   --link-color: #fabd2f;
   --link-hover-color: #fe8019;
+  --skeleton-base-color: #3c3836; /* Original: #3c3836 */
+  --skeleton-shine-color: #5a524c; /* Original: #504945, made lighter */
 }
 
 /* Nord mode variables */
@@ -126,6 +144,8 @@
   --card-background-color: #3b4252;
   --link-color: #88c0d0;
   --link-hover-color: #81a1c1;
+  --skeleton-base-color: #3b4252; /* Original: #3b4252 */
+  --skeleton-shine-color: #4c566a; /* Original: #434c5e, made lighter */
 }
 
 /* One Dark mode variables */
@@ -139,6 +159,8 @@
   --card-background-color: #21252b;
   --link-color: #61afef;
   --link-hover-color: #528bff;
+  --skeleton-base-color: #2c313a; /* Original: #2c313a */
+  --skeleton-shine-color: #3e4451; /* Original: #353b45, made lighter */
 }
 
 /* Material Dark mode variables */
@@ -152,6 +174,8 @@
     --card-background-color: #37474f;
     --link-color: #80cbc4;
     --link-hover-color: #4db6ac;
+    --skeleton-base-color: #37474f; /* Original: #37474f */
+    --skeleton-shine-color: #546e7a; /* Original: #455a64, made lighter */
   }
   
   /* Material Light mode variables */
@@ -165,6 +189,8 @@
     --card-background-color: #ffffff;
     --link-color: #03a9f4;
     --link-hover-color: #0288d1;
+    --skeleton-base-color: #eeeeee; /* Original: #eeeeee */
+    --skeleton-shine-color: #f5f5f5; /* Original: #e0e0e0, made lighter */
   }
 
 /* Toast notification styles */
