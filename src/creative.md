@@ -9,12 +9,12 @@ title: Creative
 <div contenteditable="true">
     <h1 class="creative-title">Creative</h1>
 </div>
-<p id="listening-status" class="listening-status skeleton skeleton-text"><i class="fa-solid fa-music"></i>&nbsp;</p>
+<p id="listening-status" class="listening-status"><i class="fa-solid fa-music"></i>&nbsp;</p>
 
 <!-- Spotify Card -->
 <div id="spotify-status" class="spotify-status">
   <div class="spotify-card">
-    <div class="album-art-container skeleton skeleton-image">
+    <div class="album-art-container">
       <!-- Optional Spotify Canvas. Shown if available -->
       <img id="album-canvas" class="album-canvas" src="" alt="Spotify Canvas" style="display: none;">
       <!-- Album Cover -->
@@ -22,11 +22,11 @@ title: Creative
     </div>
     <div class="track-info-container">
       <!-- The track name will be typed out -->
-      <div class="track-name skeleton skeleton-text">&nbsp;</div>
+      <div class="track-name">&nbsp;</div>
       <!-- Additional details fade in -->
-      <div class="track-additional hidden skeleton skeleton-text">&nbsp;</div>
+      <div class="track-additional hidden">&nbsp;</div>
       <!-- Time and progress bar -->
-      <div id="spotify-time" class="spotify-time skeleton skeleton-text">&nbsp;</div>
+      <div id="spotify-time" class="spotify-time">&nbsp;</div>
       <div id="spotify-progress-container" class="spotify-progress-container">
         <div id="spotify-squares" class="spotify-squares">
           <!-- Cubes will be generated dynamically based on viewport width -->
@@ -37,13 +37,12 @@ title: Creative
 </div>
 
 <!-- Activity Status Heading -->
-<p id="activity-status-heading" class="listening-status skeleton skeleton-text" style="margin-top:2.5rem;">&nbsp;</p>
+<p id="activity-status-heading" class="listening-status" style="margin-top:2.5rem;">&nbsp;</p>
 
 <!-- Activity Card (uses same card as spotify-status for theme compatibility) -->
-<!-- Made visible by default, content will be skeleton initially -->
 <div id="activity-status" class="spotify-status">
   <div class="spotify-card">
-    <div class="album-art-container skeleton skeleton-image">
+    <div class="album-art-container">
       <!-- Generic App Icon (for games etc.) -->
       <img id="activity-icon" class="album-cover" src="" alt="App/Game Icon" style="display:none;">
       <!-- VS Code Specific Assets -->
@@ -51,12 +50,11 @@ title: Creative
       <img id="activity-vscode-small-image" src="" alt="VS Code Small Asset" style="display:none; position: absolute; bottom: -5px; right: -5px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--card-background-color, #181818); z-index: 2; background-color: var(--card-background-color, #181818);">
     </div>
     <div class="track-info-container">
-      <div class="track-name skeleton skeleton-text" id="activity-name">&nbsp;</div>
-      <div class="track-additional skeleton skeleton-text" id="activity-details" style="display:none;">&nbsp;</div>
-      <div class="track-additional skeleton skeleton-text" id="activity-state" style="display:none;">&nbsp;</div>
-      <div class="track-additional skeleton skeleton-text" id="activity-large-text" style="display:none;">&nbsp;</div>
-      <div class="track-additional skeleton skeleton-text" id="activity-small-text" style="display:none;">&nbsp;</div>
-      <div class="spotify-time skeleton skeleton-text" id="activity-time">&nbsp;</div>
+      <div class="track-name" id="activity-name">&nbsp;</div>
+      <div class="track-additional" id="activity-details" style="display:none;">&nbsp;</div>
+      <div class="track-additional" id="activity-state" style="display:none;">&nbsp;</div>
+      <div class="track-additional" id="activity-large-text" style="display:none;">&nbsp;</div>
+      <div class="spotify-time" id="activity-time">&nbsp;</div>
     </div>
   </div>
 </div>
@@ -97,84 +95,7 @@ title: Creative
   to { opacity: 1; transform: translateY(0);}
 }
 
-/* Skeleton Loader Styles */
-.skeleton {
-  animation: skeleton-loading 1.5s infinite linear;
-  background: linear-gradient(90deg, var(--skeleton-base-color, #2a2a2a) 25%, var(--skeleton-shine-color, #3a3a3a) 50%, var(--skeleton-base-color, #2a2a2a) 75%);
-  background-size: 200% 100%;
-  color: transparent !important; /* Hide text during skeleton loading */
-  border-radius: 4px; /* Optional: for text skeletons */
-}
-
-.skeleton-text {
-  height: 1em; /* Adjust based on typical text height */
-  margin-bottom: 0.5em; /* Spacing */
-}
-.skeleton-text:empty::before {
-  content: "\00a0"; /* Non-breaking space to ensure height */
-}
-
-.skeleton-image {
-  /* Ensure the container itself has the skeleton background */
-  /* width and height are already set by .album-art-container */
-}
-
-#listening-status.skeleton {
-  width: 40%; /* Example width */
-  height: 24px; /* Example height */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Spotify Skeleton Specifics */
-#spotify-status .album-art-container.skeleton-image {
- /* Uses .album-art-container dimensions */
-}
-#spotify-status .track-name.skeleton {
-  width: 60%;
-  height: 20px;
-}
-#spotify-status .track-additional.skeleton {
-  width: 80%;
-  height: 18px;
-}
-#spotify-status #spotify-time.skeleton {
-  width: 40%;
-  height: 16px;
-}
-
-/* Activity Skeleton Specifics */
-#activity-status-heading.skeleton {
-  width: 60%; /* Example width */
-  height: 24px; /* Example height */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#activity-name.skeleton {
-  width: 70%;
-  height: 20px;
-}
-#activity-details.skeleton,
-#activity-state.skeleton,
-#activity-large-text.skeleton,
-#activity-small-text.skeleton {
-  width: 90%;
-  height: 18px;
-}
-#activity-time.skeleton {
-  width: 50%;
-  height: 16px;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
+/* --- Removed all skeleton loader styles --- */
 </style>
 
 <script>
@@ -228,23 +149,6 @@ function formatTime(ms) {
 
 let lastTrackData = null;
 
-// Helper to add skeletons for Spotify card
-function addAllSpotifySkeletons() {
-  const listeningStatusEl = document.getElementById('listening-status');
-  const spotifyStatusCardEl = document.getElementById('spotify-status');
-  const spotifyAlbumArtContainerEl = spotifyStatusCardEl.querySelector('.album-art-container');
-  const spotifyTrackNameEl = spotifyStatusCardEl.querySelector('.track-name');
-  const spotifyTrackAdditionalEl = spotifyStatusCardEl.querySelector('.track-additional');
-  const spotifyTimeEl = document.getElementById('spotify-time');
-  // Add skeleton classes
-  listeningStatusEl.classList.add('skeleton', 'skeleton-text');
-  spotifyAlbumArtContainerEl.classList.add('skeleton', 'skeleton-image');
-  spotifyTrackNameEl.classList.add('skeleton', 'skeleton-text');
-  spotifyTrackAdditionalEl.classList.add('skeleton', 'skeleton-text');
-  spotifyTimeEl.classList.add('skeleton', 'skeleton-text');
-  spotifyStatusCardEl.style.display = '';
-}
-
 async function fetchSpotifyPlayback() {
   const listeningStatusEl = document.getElementById('listening-status');
   const spotifyStatusCardEl = document.getElementById('spotify-status');
@@ -255,23 +159,6 @@ async function fetchSpotifyPlayback() {
   const spotifyTimeEl = document.getElementById('spotify-time');
   const spotifyCanvasEl = document.getElementById('album-canvas');
 
-  const spotifySkeletonElements = [
-    listeningStatusEl, 
-    spotifyAlbumArtContainerEl, 
-    spotifyTrackNameEl, 
-    spotifyTrackAdditionalEl, 
-    spotifyTimeEl
-  ];
-
-  function removeAllSpotifySkeletons() {
-    spotifySkeletonElements.forEach(el => el.classList.remove('skeleton', 'skeleton-text', 'skeleton-image'));
-    // Ensure specific image skeletons are also cleared if they have specific classes
-    spotifyAlbumArtContainerEl.classList.remove('skeleton-image');
-    spotifyAlbumCoverEl.style.display = 'none'; // Hide actual image until src is set
-    spotifyCanvasEl.style.display = 'none';
-  }
-
-  addAllSpotifySkeletons(); // Show skeletons before fetch
   try {
     const response = await fetch('/.netlify/functions/spotify');
     let data = null;
@@ -282,8 +169,6 @@ async function fetchSpotifyPlayback() {
     } else {
       data = await response.json();
     }
-    
-    removeAllSpotifySkeletons(); // Remove skeletons as we are about to process data
 
     if (!data.item && lastTrackData) {
       data.item = lastTrackData.item;
@@ -292,13 +177,13 @@ async function fetchSpotifyPlayback() {
     } else if (data.item) {
       lastTrackData = { item: data.item, progress_ms: data.progress_ms };
     }
-    
+
     if (!data.item) {
       listeningStatusEl.innerHTML = `<i class="fa-solid fa-music"></i> Not currently listening`;
       spotifyStatusCardEl.style.display = 'none'; // Hide the card if no track info
       return;
     }
-    
+
     spotifyStatusCardEl.style.display = ''; // Ensure card is visible
 
     if (!data.is_playing) {
@@ -308,16 +193,16 @@ async function fetchSpotifyPlayback() {
       listeningStatusEl.innerHTML = `<i class="fa-solid fa-music"></i> I'm listening to:`;
       spotifyStatusCardEl.classList.remove('paused');
     }
-    
+
     if (data.item.id !== lastTrackId) {
       lastTrackId = data.item.id;
       spotifyAlbumCoverEl.classList.add('song-change');
       setTimeout(() => spotifyAlbumCoverEl.classList.remove('song-change'), 1000);
-      
+
       typeWriter(spotifyTrackNameEl, data.item.name, 60, (finalText) => {
         spotifyTrackNameEl.innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank">${finalText}</a>`;
       });
-      
+
       const artistHtml = data.item.artists
             .map(artist => `<a href="${artist.external_urls.spotify}" target="_blank"><i class="fa-solid fa-user"></i> ${artist.name}</a>`)
             .join(', ');
@@ -326,11 +211,11 @@ async function fetchSpotifyPlayback() {
       void spotifyTrackAdditionalEl.offsetWidth; 
       spotifyTrackAdditionalEl.classList.add('fade-in');
     }
-    
+
     currentProgress = data.progress_ms;
     trackDuration = data.item.duration_ms;
     lastFetchTime = Date.now();
-    
+
     const albumCoverUrl = (data.item.album.images && data.item.album.images.length) 
                           ? data.item.album.images[0].url : '';
     if (albumCoverUrl) {
@@ -339,7 +224,7 @@ async function fetchSpotifyPlayback() {
     } else {
       spotifyAlbumCoverEl.style.display = 'none';
     }
-    
+
     const canvasUrl = data.item.canvas_url || '';
     if (canvasUrl) {
       spotifyCanvasEl.src = canvasUrl;
@@ -347,10 +232,9 @@ async function fetchSpotifyPlayback() {
     } else {
       spotifyCanvasEl.style.display = 'none';
     }
-    
+
   } catch (error) {
     console.error("Error fetching Spotify playback:", error);
-    removeAllSpotifySkeletons();
     listeningStatusEl.textContent = "Error loading Spotify status.";
     spotifyStatusCardEl.style.display = 'none';
   }
@@ -369,7 +253,7 @@ function updateProgressBar() {
     const percent = (updatedProgress / trackDuration) * 100;
     const squaresToFill = Math.floor((percent / 100) * totalSquares);
     const squares = document.querySelectorAll('.spotify-square');
-    
+
     squares.forEach((sq, idx) => {
       if (idx < squaresToFill) {
         sq.classList.add('filled');
@@ -384,33 +268,11 @@ function updateProgressBar() {
 
 // --- Activity Card Logic ---
 
-// Helper to add skeletons for Activity card
-function addAllActivitySkeletons() {
-  const headingEl = document.getElementById('activity-status-heading');
-  const card = document.getElementById('activity-status');
-  const albumArtContainer = card.querySelector('.album-art-container');
-  const nameEl = document.getElementById('activity-name');
-  const detailsEl = document.getElementById('activity-details');
-  const stateEl = document.getElementById('activity-state');
-  const largeTextEl = document.getElementById('activity-large-text');
-  const smallTextEl = document.getElementById('activity-small-text');
-  const timeEl = document.getElementById('activity-time');
-  headingEl.classList.add('skeleton', 'skeleton-text');
-  albumArtContainer.classList.add('skeleton', 'skeleton-image');
-  nameEl.classList.add('skeleton', 'skeleton-text');
-  detailsEl.classList.add('skeleton', 'skeleton-text');
-  stateEl.classList.add('skeleton', 'skeleton-text');
-  largeTextEl.classList.add('skeleton', 'skeleton-text');
-  smallTextEl.classList.add('skeleton', 'skeleton-text');
-  timeEl.classList.add('skeleton', 'skeleton-text');
-  card.style.display = '';
-}
-
 async function fetchActivityStatus() {
   const headingEl = document.getElementById('activity-status-heading');
   const card = document.getElementById('activity-status');
   const albumArtContainer = card.querySelector('.album-art-container');
-  
+
   // Image elements
   const iconEl = document.getElementById('activity-icon');
   const vscodeLargeImgEl = document.getElementById('activity-vscode-large-image');
@@ -420,60 +282,61 @@ async function fetchActivityStatus() {
   const detailsEl = document.getElementById('activity-details');
   const stateEl = document.getElementById('activity-state');
   const largeTextEl = document.getElementById('activity-large-text');
-  const smallTextEl = document.getElementById('activity-small-text');
   const timeEl = document.getElementById('activity-time');
 
-  const skeletonElements = [headingEl, nameEl, detailsEl, stateEl, largeTextEl, smallTextEl, timeEl, albumArtContainer];
-
   // Helper to set text and visibility for an element
-  function setTextContentAndVisibility(element, text, isSkeletonTarget = true) {
+  function setTextContentAndVisibility(element, text, useTypewriter = false) {
+    if (!element) return;
     if (text) {
-      element.innerHTML = text; 
+      if (useTypewriter) {
+        // Only typewriter effect, no fade-in for activity-name
+        if (element.id === "activity-name") {
+          typeWriter(element, text, 60);
+          element.classList.remove('hidden');
+          element.style.display = "";
+        } else {
+          typeWriter(element, text, 60, () => {
+            element.classList.remove('hidden');
+            void element.offsetWidth;
+            element.classList.add('fade-in');
+          });
+        }
+      } else {
+        element.innerHTML = text;
+        element.classList.remove('hidden');
+        void element.offsetWidth;
+        element.classList.add('fade-in');
+      }
       element.style.display = "";
-      if (isSkeletonTarget) element.classList.remove('skeleton', 'skeleton-text');
-      element.classList.remove('hidden');
-      void element.offsetWidth; 
-      element.classList.add('fade-in');
     } else {
       element.innerHTML = "";
       element.style.display = "none";
-      if (isSkeletonTarget) element.classList.remove('skeleton', 'skeleton-text');
       element.classList.remove('fade-in');
       element.classList.add('hidden');
     }
   }
-  
-  function removeAllSkeletons() {
-      skeletonElements.forEach(el => el.classList.remove('skeleton', 'skeleton-text', 'skeleton-image'));
-      // Ensure specific image skeletons are also cleared if they have specific classes
-      albumArtContainer.classList.remove('skeleton-image');
-  }
 
-  addAllActivitySkeletons(); // Show skeletons before fetch
   try {
     const res = await fetch('/.netlify/functions/activities');
-    
+
     if (!res.ok) {
-      removeAllSkeletons();
       headingEl.style.display = "none";
       card.style.display = "none";
       return;
     }
     const data = await res.json(); 
     if (!data || !data.activity) {
-      removeAllSkeletons();
       headingEl.style.display = "none";
       card.style.display = "none";
       return;
     }
 
-    removeAllSkeletons(); // Remove skeletons once data is ready to be processed
     card.style.display = ""; // Ensure card is visible if it was hidden
 
     const act = data.activity;
     const fromCache = data.from_cache; 
 
-    setTextContentAndVisibility(nameEl, act.name || ""); 
+    setTextContentAndVisibility(nameEl, act.name || "", true); // <-- Typewriter effect here
 
     const currentPrefix = fromCache ? "was" : "am currently";
 
@@ -481,14 +344,13 @@ async function fetchActivityStatus() {
     iconEl.style.display = "none";
     vscodeLargeImgEl.style.display = "none";
     vscodeSmallImgEl.style.display = "none";
-    albumArtContainer.classList.remove('skeleton-image'); // Clear skeleton from image container
+    albumArtContainer.classList.remove('skeleton-image'); // No effect, but harmless
 
     if (act.name === "Visual Studio Code") {
       setTextContentAndVisibility(headingEl, `🧑‍💻 I ${currentPrefix} working on:`);
       setTextContentAndVisibility(detailsEl, act.details ? `<i class="fa-solid fa-file-lines"></i> ${act.details}` : "");
       setTextContentAndVisibility(stateEl, act.state ? `<i class="fa-solid fa-folder"></i> ${act.state}` : "");
       setTextContentAndVisibility(largeTextEl, act.large_text ? `<i class="fa-solid fa-file-code"></i> ${act.large_text}` : "");
-      setTextContentAndVisibility(smallTextEl, act.small_text ? `<i class="fa-brands fa-vscode"></i> ${act.small_text}` : "");
 
       if (act.application_id && act.large_text_asset_key && act.small_text_asset_key) { 
         vscodeLargeImgEl.src = `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.large_text_asset_key}.png?size=128`;
@@ -508,7 +370,6 @@ async function fetchActivityStatus() {
       setTextContentAndVisibility(detailsEl, null); 
       setTextContentAndVisibility(stateEl, null);
       setTextContentAndVisibility(largeTextEl, null);
-      setTextContentAndVisibility(smallTextEl, null);
 
       if (act.application_id) {
         iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}.png?size=128`;
@@ -521,7 +382,7 @@ async function fetchActivityStatus() {
         this.onerror=null; // prevent infinite loop if fallback also fails
       };
     }
-    
+
     headingEl.style.display = "";
 
     if (act.start) {
@@ -537,7 +398,6 @@ async function fetchActivityStatus() {
      // Ensure the main card is visible
   } catch (err) {
     console.error("Error fetching activity status:", err);
-    removeAllSkeletons();
     headingEl.style.display = "none";
     card.style.display = "none";
   }
@@ -571,11 +431,9 @@ function timeAgo(date) {
 }
 
 // Initial fetch and periodic update
-addAllActivitySkeletons();
 fetchActivityStatus();
 setInterval(fetchActivityStatus, 10000);
 
-addAllSpotifySkeletons();
 fetchSpotifyPlayback();
 setInterval(fetchSpotifyPlayback, 3000);
 setInterval(updateProgressBar, 1000);
