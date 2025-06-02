@@ -59,8 +59,8 @@ title: Creative
       <div class="spotify-time skeleton skeleton-text" id="activity-time">&nbsp;</div>
     </div>
   </div>
-</div>
-
+<div style="padding-top: 1rem; padding-right: 1rem; padding-left: 1rem;"></div>
+<div style="padding-top: 1rem; padding-right: 1rem; padding-left: 1rem;"></div>
 <style>
 /* Hide blinking cursor on link inside track-name */
 .track-name a::after {
@@ -444,8 +444,8 @@ async function fetchActivityStatus() {
 
     if (act.name === "Visual Studio Code") {
       setTextContentAndVisibility(headingEl, `🧑‍💻 I ${currentPrefix} working on:`);
-      setTextContentAndVisibility(detailsEl, act.details);
-      setTextContentAndVisibility(stateEl, act.state);
+      setTextContentAndVisibility(detailsEl, act.details ? `<i class="fa-solid fa-file-lines"></i> ${act.details}` : "");
+      setTextContentAndVisibility(stateEl, act.state ? `<i class="fa-solid fa-folder"></i> ${act.state}` : "");
       setTextContentAndVisibility(largeTextEl, act.large_text ? `<i class="fa-solid fa-file-code"></i> ${act.large_text}` : "");
       setTextContentAndVisibility(smallTextEl, act.small_text ? `<i class="fa-brands fa-vscode"></i> ${act.small_text}` : "");
 
