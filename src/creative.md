@@ -59,8 +59,7 @@ title: Creative
       <div class="spotify-time skeleton skeleton-text" id="activity-time">&nbsp;</div>
     </div>
   </div>
-<div style="padding-top: 1rem; padding-right: 1rem; padding-left: 1rem;"></div>
-<div style="padding-top: 1rem; padding-right: 1rem; padding-left: 1rem;"></div>
+</div>
 <style>
 /* Hide blinking cursor on link inside track-name */
 .track-name a::after {
@@ -229,6 +228,23 @@ function formatTime(ms) {
 
 let lastTrackData = null;
 
+// Helper to add skeletons for Spotify card
+function addAllSpotifySkeletons() {
+  const listeningStatusEl = document.getElementById('listening-status');
+  const spotifyStatusCardEl = document.getElementById('spotify-status');
+  const spotifyAlbumArtContainerEl = spotifyStatusCardEl.querySelector('.album-art-container');
+  const spotifyTrackNameEl = spotifyStatusCardEl.querySelector('.track-name');
+  const spotifyTrackAdditionalEl = spotifyStatusCardEl.querySelector('.track-additional');
+  const spotifyTimeEl = document.getElementById('spotify-time');
+  // Add skeleton classes
+  listeningStatusEl.classList.add('skeleton', 'skeleton-text');
+  spotifyAlbumArtContainerEl.classList.add('skeleton', 'skeleton-image');
+  spotifyTrackNameEl.classList.add('skeleton', 'skeleton-text');
+  spotifyTrackAdditionalEl.classList.add('skeleton', 'skeleton-text');
+  spotifyTimeEl.classList.add('skeleton', 'skeleton-text');
+  spotifyStatusCardEl.style.display = '';
+}
+
 async function fetchSpotifyPlayback() {
   const listeningStatusEl = document.getElementById('listening-status');
   const spotifyStatusCardEl = document.getElementById('spotify-status');
@@ -255,6 +271,7 @@ async function fetchSpotifyPlayback() {
     spotifyCanvasEl.style.display = 'none';
   }
 
+  addAllSpotifySkeletons(); // Show skeletons before fetch
   try {
     const response = await fetch('/.netlify/functions/spotify');
     let data = null;
@@ -366,6 +383,29 @@ function updateProgressBar() {
 }
 
 // --- Activity Card Logic ---
+
+// Helper to add skeletons for Activity card
+function addAllActivitySkeletons() {
+  const headingEl = document.getElementById('activity-status-heading');
+  const card = document.getElementById('activity-status');
+  const albumArtContainer = card.querySelector('.album-art-container');
+  const nameEl = document.getElementById('activity-name');
+  const detailsEl = document.getElementById('activity-details');
+  const stateEl = document.getElementById('activity-state');
+  const largeTextEl = document.getElementById('activity-large-text');
+  const smallTextEl = document.getElementById('activity-small-text');
+  const timeEl = document.getElementById('activity-time');
+  headingEl.classList.add('skeleton', 'skeleton-text');
+  albumArtContainer.classList.add('skeleton', 'skeleton-image');
+  nameEl.classList.add('skeleton', 'skeleton-text');
+  detailsEl.classList.add('skeleton', 'skeleton-text');
+  stateEl.classList.add('skeleton', 'skeleton-text');
+  largeTextEl.classList.add('skeleton', 'skeleton-text');
+  smallTextEl.classList.add('skeleton', 'skeleton-text');
+  timeEl.classList.add('skeleton', 'skeleton-text');
+  card.style.display = '';
+}
+
 async function fetchActivityStatus() {
   const headingEl = document.getElementById('activity-status-heading');
   const card = document.getElementById('activity-status');
@@ -409,6 +449,7 @@ async function fetchActivityStatus() {
       albumArtContainer.classList.remove('skeleton-image');
   }
 
+  addAllActivitySkeletons(); // Show skeletons before fetch
   try {
     const res = await fetch('/.netlify/functions/activities');
     
@@ -530,10 +571,11 @@ function timeAgo(date) {
 }
 
 // Initial fetch and periodic update
+addAllActivitySkeletons();
 fetchActivityStatus();
 setInterval(fetchActivityStatus, 10000);
 
-// Initial fetch and periodic update
+addAllSpotifySkeletons();
 fetchSpotifyPlayback();
 setInterval(fetchSpotifyPlayback, 3000);
 setInterval(updateProgressBar, 1000);
