@@ -39,7 +39,8 @@ async function getSheetClient() {
     );
     return google.sheets({ version: "v4", auth });
   } catch (err) {
-    throw new Error(`Authentication error: ${err.toString()}`);
+    // Do not leak sensitive error details
+    throw new Error(`Authentication error`);
   }
 }
 
@@ -51,8 +52,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 401,
       body: JSON.stringify({
-        message: "Authentication failed",
-        error: authError.toString(),
+        message: "Authentication failed"
       }),
     };
   }
@@ -78,8 +78,7 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         body: JSON.stringify({
-          message: "Error reading sheet",
-          error: error.toString(),
+          message: "Error reading sheet"
         }),
       };
     }
@@ -161,8 +160,7 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         body: JSON.stringify({
-          message: "Error updating sheet",
-          error: error.toString(),
+          message: "Error updating sheet"
         }),
       };
     }

@@ -148,8 +148,7 @@ exports.handler = async (event, context) => {
                 return {
                     statusCode: 500,
                     body: JSON.stringify({
-                        message: "Error refreshing token",
-                        error: refreshError.toString()
+                        message: "Error refreshing token"
                     }),
                 };
             }
@@ -221,7 +220,7 @@ exports.handler = async (event, context) => {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: "Error fetching data", error: error.toString() }),
+            body: JSON.stringify({ message: "Error fetching data" }),
         };
     }
 };

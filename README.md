@@ -21,16 +21,15 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
    git clone https://github.com/udaysinh-git/minimal-portfolio.git
    cd minimal-portfolio  # Enter the void
    ```
-
 2. **Install dependencies** (Prepare for your computer to download half the internet):
 
    ```bash
    npm install  # Go make coffee, this might take a while
    ```
-
 3. **Configure environment variables** (The secrets that make your app work, but you'll forget in 3 days):
 
    Create a `.env` file in the root directory:
+
    ```
    GITHUB_TOKEN=your_github_personal_access_token  # Don't share this, or do, I'm a README not a cop
    ```
@@ -38,16 +37,17 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
 ## 🖥️ Usage
 
 - **Development Mode** (For when you want to break things locally first):
+
   ```bash
   npx eleventy --serve  # Magic happens at http://localhost:8080
   ```
-
 - **Build for Production** (For when you're finally ready to show the world):
+
   ```bash
   npx eleventy  # Crosses fingers automatically
   ```
-
 - **Content Management for the Technically Challenged**:
+
   - Add new pages by creating markdown files in `src` (it's basically like using Word, if Word were actually good)
   - Write blog posts in `src/posts` (perfect for those 3 AM thoughts that absolutely need to be published)
   - Update your GitHub flexes by... well, actually doing things on GitHub
@@ -92,11 +92,12 @@ minimal-portfolio/
 ### GitHub Pages (The Classic Option)
 
 1. Build the site:
+
    ```bash
    npx eleventy  # Transforms your markdown ramblings into HTML
    ```
-
 2. Push to gh-pages:
+
    ```bash
    git subtree push --prefix _site origin gh-pages  # Voodoo command that somehow works
    ```
@@ -106,33 +107,64 @@ minimal-portfolio/
 This portfolio uses Netlify functions to fetch your GitHub data, because hardcoding your repository information would be so 2010.
 
 Available functions:
+
 - `github-profile.js` - Shows off your follower count
 - `github-pinned-repos.js` - Displays the projects you're least embarrassed about
 - `github-latest-repos.js` - Reveals how recently you've actually coded
 - `github-contributions.js` - Proves you occasionally commit (to code, at least)
 - `github-language-stats.js` - Exposes how much JavaScript you actually write vs. pretend not to
+- `spotify.js` - Shows your current or last played Spotify track, with Google Sheets caching for fallback
+- `activities.js` - Shows your current Discord activity (e.g., VS Code, games) using Lanyard API, with Google Sheets caching for fallback
+- `lastPlayed.js` - Handles Google Sheets caching for both Spotify and Activity/Discord status
 
-For local development:
+### Google Sheets Caching
+
+Spotify and Discord activity data are cached in a Google Sheet for fallback when APIs are unavailable.
+
+- Sheet1: Spotify track cache
+- Sheet2: Discord activity cache
+
+You must set up a Google Service Account and add these environment variables:
+
+- `GOOGLE_SHEET_ID`
+- `GOOGLE_SHEETS_CLIENT_EMAIL`
+- `GOOGLE_SHEETS_PRIVATE_KEY`
+
+### Discord Activity
+
+To show your Discord/VS Code/game status, set:
+
+- `ACTIVITIES_USER_ID` (your Discord user ID, used by the Lanyard API)
+
+### Securing Secrets for Git
+
+**Never commit your `.env` file or any secrets to git!**
+
+- Add `.env` and any secret config files to `.gitignore`
+- Double-check that your Google credentials and tokens are not staged for commit
+
+### 🏠 For local development:
 
 1. Create a `.env` file (yes, we mentioned this earlier, but if you're reading documentation sequentially, you're doing it wrong):
+
    ```bash
    GITHUB_TOKEN=your_github_personal_access_token
    ```
-
 2. Start the local dev server:
+
    ```bash
    npm run start  # Opens localhost and your pathway to fame
    ```
-
+or if you use netlify use `netlify dev`
 ## 🤔 FAQs
 
-**Q: Will this portfolio get me hired?**  
+**Q: Will this portfolio get me hired?**
 A: Depends on if you have actual skills to back it up. No amount of fancy CSS can hide an empty commit history.
 
-**Q: Is this actually minimal?**  
+**Q: Is this actually minimal?**
 A: By the standards of developers who think adding a seventh JavaScript framework is "optimization," yes.
 
-**Q: Can I remove the sarcastic comments?**  
+**Q: Can I remove the sarcastic comments?**
 A: You could, but then how would people know you're a developer?
 
 ---
