@@ -268,6 +268,8 @@ function updateProgressBar() {
 
 // --- Activity Card Logic ---
 
+let lastActivityName = null; // Track last activity name
+
 async function fetchActivityStatus() {
   const headingEl = document.getElementById('activity-status-heading');
   const card = document.getElementById('activity-status');
@@ -285,13 +287,18 @@ async function fetchActivityStatus() {
   const timeEl = document.getElementById('activity-time');
 
   // Helper to set text and visibility for an element
-  function setTextContentAndVisibility(element, text, useTypewriter = false) {
+  function setTextContentAndVisibility(element, text, useTypewriter = false, forceTypewriter = false) {
     if (!element) return;
     if (text) {
       if (useTypewriter) {
         // Only typewriter effect, no fade-in for activity-name
         if (element.id === "activity-name") {
-          typeWriter(element, text, 60);
+          // Only run typewriter if name changed or forced
+          if (forceTypewriter || element.textContent !== text) {
+            typeWriter(element, text, 60);
+          } else {
+            element.textContent = text;
+          }
           element.classList.remove('hidden');
           element.style.display = "";
         } else {
@@ -336,7 +343,10 @@ async function fetchActivityStatus() {
     const act = data.activity;
     const fromCache = data.from_cache; 
 
-    setTextContentAndVisibility(nameEl, act.name || "", true); // <-- Typewriter effect here
+    // Only typewriter if activity name changed
+    const activityNameChanged = lastActivityName !== act.name;
+    setTextContentAndVisibility(nameEl, act.name || "", true, activityNameChanged);
+    lastActivityName = act.name;
 
     const currentPrefix = fromCache ? "was" : "am currently";
 
