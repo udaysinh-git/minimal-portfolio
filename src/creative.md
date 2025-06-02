@@ -375,6 +375,31 @@ async function fetchActivityStatus() {
          iconEl.style.display = "";
       }
 
+    } else if (act.name === "Obsidian") {
+      setTextContentAndVisibility(headingEl, `📝 I ${currentPrefix} working in:`);
+      setTextContentAndVisibility(detailsEl, act.details ? `<i class="fa-solid fa-file-alt"></i> ${act.details}` : ""); // Using fa-file-alt for generic file
+      setTextContentAndVisibility(stateEl, null); // Obsidian might not have a 'state' in the same way
+      setTextContentAndVisibility(largeTextEl, act.large_text ? `<i class="fa-solid fa-book-open"></i> ${act.large_text}` : ""); // Using book-open for large_text if it's like "Obsidian"
+
+      // Hide VS Code specific images
+      vscodeLargeImgEl.style.display = "none";
+      vscodeSmallImgEl.style.display = "none";
+
+      if (act.application_id && act.assets && act.assets.large_image) {
+        iconEl.src = `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.assets.large_image}.png?size=128`;
+      } else if (act.application_id) {
+        iconEl.src = `https://dcdn.dstn.to/app-icons/${act.application_id}.png?size=128`;
+      } else {
+        // Fallback icon for Obsidian if specific assets are not found
+        iconEl.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Obsidian_icon.svg/120px-Obsidian_icon.svg.png"; // Example generic Obsidian icon
+      }
+      iconEl.style.display = "";
+      iconEl.onerror = function() {
+        // Fallback if the primary icon fails
+        iconEl.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Obsidian_icon.svg/120px-Obsidian_icon.svg.png";
+        this.onerror=null;
+      };
+
     } else { // Game or other activity
       setTextContentAndVisibility(headingEl, `🎮 I ${currentPrefix} playing:`);
       setTextContentAndVisibility(detailsEl, null); 
