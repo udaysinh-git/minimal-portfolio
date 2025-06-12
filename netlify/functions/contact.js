@@ -12,21 +12,23 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Dynamically import node-fetch
+    const { name, email, message, turnstileToken, sessionDuration } = JSON.parse(event.body);
+
+    // Verify Cloudflare Turnstile
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
+    const verificationURL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
     const fetch = (await import('node-fetch')).default;
-    const { name, email, message, recaptchaToken, sessionDuration } = JSON.parse(event.body);
+    const verifyRes = await fetch(verificationURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`
+    });
+    const verifyData = await verifyRes.json();
 
-    // Verify reCAPTCHA v3
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
-
-    const recaptchaResponse = await fetch(verificationURL, { method: 'POST' });
-    const recaptchaData = await recaptchaResponse.json();
-
-    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+    if (!verifyData.success) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: 'reCAPTCHA verification failed. Please try again.' }),
+        body: JSON.stringify({ message: 'Captcha verification failed. Please try again.' }),
       };
     }
 

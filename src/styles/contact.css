@@ -96,4 +96,26 @@ button:hover {
 /* reCAPTCHA Styling */
 .g-recaptcha {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  min-height: 78px; /* Standard reCAPTCHA height */
+  align-items: center;
+  background: var(--background-color);
+  border: 1px dashed var(--link-color);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Cloudflare Turnstile Styling */
+.cf-turnstile {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  min-height: 65px; /* Approximate Turnstile height */
+  align-items: center;
+  background: var(--background-color);
+  border: 1px dashed var(--link-color);
+  border-radius: 8px;
+  padding: 10px;
 }
