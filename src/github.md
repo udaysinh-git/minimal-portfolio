@@ -4,6 +4,7 @@ title: GitHub | Udaysinh Sapate
 styles:
   - /styles/github.css
 ---
+
 # GitHub Repos
 
 ## GitHub Profile
@@ -51,6 +52,27 @@ styles:
   let repoData = [];
   let currentIndex = 0;
   const reposPerLoad = 6;
+  let chartJSLoaded = false;
+
+  // Load Chart.js dynamically only when needed
+  function loadChartJS() {
+    return new Promise((resolve, reject) => {
+      if (chartJSLoaded || typeof Chart !== 'undefined') {
+        chartJSLoaded = true;
+        resolve();
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+      script.onload = () => {
+        chartJSLoaded = true;
+        resolve();
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
 
   // Fetch GitHub Profile
   async function fetchGithubProfile() {
@@ -192,6 +214,8 @@ styles:
       
       const contributionsData = await response.json();
       document.querySelector('.graph-container .loading-spinner').style.display = 'none';
+      // Load Chart.js before rendering
+      await loadChartJS();
       renderContributionsChart(contributionsData);
     } catch (error) {
       console.error('Error fetching contributions:', error);

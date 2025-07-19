@@ -44,7 +44,7 @@ main {
 
 /* Add FAB z-index fixes */
 .fab {
-  z-index: 1000; /* Ensure FAB stays on top */
+  z-index: 1002; /* Higher than footer z-index (1001) */
   position: fixed; /* Ensure position is fixed */
 }
 
@@ -67,7 +67,7 @@ main {
 /* } */
 
 .fab-buttons {
-  z-index: 999; /* Ensure FAB child buttons stay on top */
+  z-index: 1001; /* Same level as footer but above other content */
   position: fixed; /* Ensure position is fixed */
 }
 

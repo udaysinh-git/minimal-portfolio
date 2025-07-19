@@ -3,9 +3,6 @@ layout: layout.njk
 title: Creative
 ---
 
-<!-- Add Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <div contenteditable="true">
     <h1 class="creative-title">Creative</h1>
 </div>
@@ -64,38 +61,38 @@ title: Creative
   content: none;
 }
 
-/* Remove default hyperlink outline */
+/_ Remove default hyperlink outline _/
 .track-name a {
-  text-decoration: none;
-  color: inherit;
+text-decoration: none;
+color: inherit;
 }
 
-/* Remove old .activity-status/.activity-card styles as we now use spotify-status/spotify-card for both */
+/_ Remove old .activity-status/.activity-card styles as we now use spotify-status/spotify-card for both _/
 .activity-status, .activity-card, .activity-art-container, .activity-icon, .activity-info-container, .activity-heading, .activity-name, .activity-details, .activity-state, .activity-time {
-  display: none !important;
+display: none !important;
 }
 
-/* Marquee animation for long text */
+/_ Marquee animation for long text _/
 .marquee {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
+overflow: hidden;
+white-space: nowrap;
+position: relative;
 }
 .marquee span {
-  display: inline-block;
-  padding-left: 0;
-  animation: marquee 7s linear infinite;
+display: inline-block;
+padding-left: 0;
+animation: marquee 7s linear infinite;
 }
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-60%); }
+0% { transform: translateX(0); }
+100% { transform: translateX(-60%); }
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
+from { opacity: 0; transform: translateY(20px);}
+to { opacity: 1; transform: translateY(0);}
 }
 
-/* --- Removed all skeleton loader styles --- */
+/_ --- Removed all skeleton loader styles --- _/
 </style>
 
 <script>
@@ -465,11 +462,15 @@ function timeAgo(date) {
   return date.toLocaleString();
 }
 
-// Initial fetch and periodic update
-fetchActivityStatus();
-setInterval(fetchActivityStatus, 10000);
-
-fetchSpotifyPlayback();
-setInterval(fetchSpotifyPlayback, 3000);
-setInterval(updateProgressBar, 1000);
+// Initial fetch and periodic update - defer until page loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial fetch after DOM is ready
+  fetchActivityStatus();
+  fetchSpotifyPlayback();
+  
+  // Set up intervals
+  setInterval(fetchActivityStatus, 10000);
+  setInterval(fetchSpotifyPlayback, 3000);
+  setInterval(updateProgressBar, 1000);
+});
 </script>

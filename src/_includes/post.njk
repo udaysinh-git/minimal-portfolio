@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/styles/footer.css">
   <link rel="stylesheet" href="/styles/themes.css">
   <link rel="stylesheet" href="/styles/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/styles/icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -83,10 +83,53 @@
     <button id="decrease-font">A-</button>
     <button id="font-switcher">Switch Font</button>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js" defer></script>
+  <script>
+    // Native clipboard functionality to replace clipboard.js
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        return new Promise((res, rej) => {
+          document.execCommand('copy') ? res() : rej();
+          textArea.remove();
+        });
+      }
+    }
+    
+    // Add copy functionality to code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add copy buttons to code blocks
+      document.querySelectorAll('pre[class*="language-"]').forEach(function(pre) {
+        const button = document.createElement('button');
+        button.textContent = 'Copy';
+        button.style.cssText = 'position: absolute; top: 5px; right: 5px; padding: 4px 8px; font-size: 12px; background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;';
+        pre.style.position = 'relative';
+        pre.appendChild(button);
+        
+        button.addEventListener('click', function() {
+          const code = pre.querySelector('code').textContent;
+          copyToClipboard(code).then(function() {
+            button.textContent = 'Copied!';
+            setTimeout(function() { button.textContent = 'Copy'; }, 2000);
+          }).catch(function() {
+            button.textContent = 'Failed';
+            setTimeout(function() { button.textContent = 'Copy'; }, 2000);
+          });
+        });
+      });
+    });
+  </script>
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     const fab = document.getElementById('fab');

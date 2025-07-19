@@ -422,7 +422,7 @@ img {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 1002; /* Higher than footer z-index (1001) */
 }
 
 .fab:hover {
@@ -438,6 +438,7 @@ img {
   flex-direction: column;
   gap: 0.5rem;
   display: none;
+  z-index: 1001; /* Same level as footer but above other content */
 }
 
 .fab-options button {
