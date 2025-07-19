@@ -48,6 +48,24 @@ main {
   position: fixed; /* Ensure position is fixed */
 }
 
+/* Profile image optimization */
+.profile-image-container {
+  position: relative;
+}
+
+.profile-image-container picture {
+  display: block;
+}
+
+.profile-image-container img {
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* .profile-image-container img:hover { */
+  /* transform: scale(1.05); */
+/* } */
+
 .fab-buttons {
   z-index: 999; /* Ensure FAB child buttons stay on top */
   position: fixed; /* Ensure position is fixed */
@@ -141,6 +159,14 @@ main {
   .container::before,
   .container::after {
     display: none; /* Remove lines on mobile */
+  }
+
+  /* Mobile profile image optimization */
+  .profile-image-container img {
+    width: 250px !important;
+    height: 250px !important;
+    max-width: 80vw;
+    max-height: 80vw;
   }
 
   .fab {

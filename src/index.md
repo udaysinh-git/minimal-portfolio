@@ -4,10 +4,28 @@ title: Home
 ---
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; margin-top: 2rem;">
-  <div style="flex: 1; text-align: center; min-width: 300px;">
+  <div style="flex: 1; text-align: center; min-width: 300px;" class="profile-image-container">
     <picture>
-      <source srcset="https://res.cloudinary.com/dvyfstsp3/image/upload/v1738454664/rjcylpktsw7tzqaetqhw.jpg" type="image/jpg">
-      <img src="https://res.cloudinary.com/dvyfstsp3/image/upload/v1738454664/rjcylpktsw7tzqaetqhw.jpg" alt="Udaysinh Sapate" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" loading="lazy">
+      <!-- Desktop: 300x300 -->
+      <source media="(min-width: 768px)" 
+              srcset="https://res.cloudinary.com/dvyfstsp3/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1738454664/rjcylpktsw7tzqaetqhw.jpg" 
+              type="image/webp">
+      <source media="(min-width: 768px)" 
+              srcset="https://res.cloudinary.com/dvyfstsp3/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1738454664/rjcylpktsw7tzqaetqhw.jpg" 
+              type="image/jpeg">
+      <!-- Mobile: 250x250 -->
+      <source media="(max-width: 767px)" 
+              srcset="https://res.cloudinary.com/dvyfstsp3/image/upload/w_250,h_250,c_fill,f_auto,q_auto/v1738454664/rjcylpktsw7tzqaetqhw.jpg" 
+              type="image/webp">
+      <source media="(max-width: 767px)" 
+              srcset="https://res.cloudinary.com/dvyfstsp3/image/upload/w_250,h_250,c_fill,f_auto,q_auto/v1738454664/rjcylpktsw7tzqaetqhw.jpg" 
+              type="image/jpeg">
+      <!-- Fallback image -->
+      <img src="https://res.cloudinary.com/dvyfstsp3/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1738454664/rjcylpktsw7tzqaetqhw.jpg" 
+           alt="Udaysinh Sapate" 
+           style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" 
+           fetchpriority="high"
+           decoding="async">
     </picture>
   </div>
   <div style="flex: 2; padding-left: 2rem; min-width: 300px;">
