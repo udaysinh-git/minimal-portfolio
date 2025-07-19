@@ -183,19 +183,21 @@
           currentThemeIndex = themes.indexOf("light-mode")
         }
 
-        themeToggle.addEventListener("click", () => {
-          currentThemeIndex = (currentThemeIndex + 1) % themes.length
-          const newTheme = themes[currentThemeIndex]
-          document.body.className = newTheme
-          localStorage.setItem("theme", newTheme)
+        if (themeToggle) {
+          themeToggle.addEventListener("click", () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length
+            const newTheme = themes[currentThemeIndex]
+            document.body.className = newTheme
+            localStorage.setItem("theme", newTheme)
 
-          // Show toast notification
-          themeName.textContent = newTheme.replace(/-/g, " ")
-          themeToast.classList.add("show")
-          setTimeout(() => {
-            themeToast.classList.remove("show")
-          }, 3000)
-        })
+            // Show toast notification
+            themeName.textContent = newTheme.replace(/-/g, " ")
+            themeToast.classList.add("show")
+            setTimeout(() => {
+              themeToast.classList.remove("show")
+            }, 3000)
+          })
+        }
 
         if (fab && fabOptions) {
           fab.addEventListener("click", () => {
@@ -204,17 +206,19 @@
         }
 
         // Show back-to-top
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 300) {
-            backToTopButton.classList.add("show")
-          } else {
-            backToTopButton.classList.remove("show")
-          }
-        })
+        if (backToTopButton) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+              backToTopButton.classList.add("show")
+            } else {
+              backToTopButton.classList.remove("show")
+            }
+          })
 
-        backToTopButton.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" })
-        })
+          backToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+          })
+        }
 
         if (increaseFontButton && postContent) {
           increaseFontButton.addEventListener("click", () => {

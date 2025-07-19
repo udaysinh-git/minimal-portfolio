@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   localStorage.removeItem('formSubmitted');
 
   const form = document.getElementById('contact-form');
+  
+  // Only proceed if the form exists (we're on the contact page)
+  if (!form) {
+    return;
+  }
+  
   const submitButton = form.querySelector('button[type="submit"]');
 
   form.addEventListener('submit', async (e) => {

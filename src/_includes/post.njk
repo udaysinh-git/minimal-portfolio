@@ -1,262 +1,330 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>{{ title }}</title>
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/header.css">
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="stylesheet" href="/styles/footer.css">
-  <link rel="stylesheet" href="/styles/themes.css">
-  <link rel="stylesheet" href="/styles/styles.css">
-  <link rel="stylesheet" href="/styles/icons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body class="{{ theme }}">
-  <header>
-    <div class="container">
-      <nav id="nav-menu" class="nav-menu">
-        <ul>
-          <li>
-            <a href="/" class="{% if title == 'Home' %}active{% endif %}">~/home</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="/achievements" class="{% if title == 'Achievements' %}active{% endif %}">Achievements</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="/github" class="{% if title == 'GitHub Repos' %}active{% endif %}">GitHub Repos</a>
-          </li>
-          <li>/</li>
-          <li>
-          <a href="/creative" class="{% if title == 'Creative' %}active{% endif %}">Creative</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="/blog" class="{% if title == 'Blog' %}active{% endif %}">Blog</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="/resume" class="{% if title == 'Resume' %}active{% endif %}">Resume</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="/contact" class="{% if title == 'Contact' %}active{% endif %}">Contact</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a href="#" id="theme-toggle">themes</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main class="container">
-    <article class="post-content slide-in-right">
-      <h1>{{ title }}</h1>
-      <p>Published on: {{ date }}{% if time %} at {{ time }}{% endif %}</p>
-      {{ content | safe }}
-    </article>
-  </main>
-  <footer>
-    <div class="footer-container">
-      <div class="footer-left">
-        <p>&copy; {{ currentYear }} Udaysinh's Portfolio</p>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/footer.css" />
+    <link rel="stylesheet" href="/styles/themes.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/icons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="{{ theme }}">
+    <header>
+      <div class="container">
+        <nav id="nav-menu" class="nav-menu">
+          <ul>
+            <li>
+              <a href="/" class="{% if title == 'Home' %}active{% endif %}"
+                >~/home</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a
+                href="/achievements"
+                class="{% if title == 'Achievements' %}active{% endif %}"
+                >Achievements</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a
+                href="/github"
+                class="{% if title == 'GitHub Repos' %}active{% endif %}"
+                >GitHub Repos</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a
+                href="/creative"
+                class="{% if title == 'Creative' %}active{% endif %}"
+                >Creative</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a href="/blog" class="{% if title == 'Blog' %}active{% endif %}"
+                >Blog</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a
+                href="/resume"
+                class="{% if title == 'Resume' %}active{% endif %}"
+                >Resume</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a
+                href="/contact"
+                class="{% if title == 'Contact' %}active{% endif %}"
+                >Contact</a
+              >
+            </li>
+            <li>/</li>
+            <li>
+              <a href="#" id="theme-toggle">themes</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <div class="footer-right">
-      <a href="https://github.com/udaysinh-git/minimal-portfolio" target="_blank" rel="noopener noreferrer" class="github-link">
-      View Source on GitHub
-      </a>
+    </header>
+    <main class="container">
+      <article class="post-content slide-in-right">
+        <h1>{{ title }}</h1>
+        <p>Published on: {{ date }}{% if time %} at {{ time }}{% endif %}</p>
+        {{ content | safe }}
+      </article>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>&copy; {{ currentYear }} Udaysinh's Portfolio</p>
+        </div>
+        <div class="footer-right">
+          <a
+            href="https://github.com/udaysinh-git/minimal-portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="github-link"
+          >
+            View Source on GitHub
+          </a>
+        </div>
       </div>
+    </footer>
+    <button id="back-to-top" aria-label="Back to top">☝🏻</button>
+    <div id="theme-toast" class="theme-toast">
+      Theme changed to: <span id="theme-name"></span>
     </div>
-  </footer>
-  <button id="back-to-top" aria-label="Back to top">
-    ☝🏻
-  </button>
-  <div id="theme-toast" class="theme-toast">Theme changed to: <span id="theme-name"></span></div>
-  <div id="font-toast" class="theme-toast">Font changed to: <span id="font-name"></span></div>
-  <button class="fab" id="fab"><i class="fas fa-cog"></i></button>
-  <div class="fab-options">
-    <button id="increase-font">A+</button>
-    <button id="decrease-font">A-</button>
-    <button id="font-switcher">Switch Font</button>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js" defer></script>
-  <script>
-    // Native clipboard functionality to replace clipboard.js
-    function copyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        return navigator.clipboard.writeText(text);
-      } else {
-        // Fallback for older browsers
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        textArea.style.top = "-999999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        return new Promise((res, rej) => {
-          document.execCommand('copy') ? res() : rej();
-          textArea.remove();
-        });
+    <div id="font-toast" class="theme-toast">
+      Font changed to: <span id="font-name"></span>
+    </div>
+    <button class="fab" id="fab"><i class="fas fa-cog"></i></button>
+    <div class="fab-options">
+      <button id="increase-font">A+</button>
+      <button id="decrease-font">A-</button>
+      <button id="font-switcher">Switch Font</button>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"
+      defer
+    ></script>
+    <script>
+      // Native clipboard functionality to replace clipboard.js
+      function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(text)
+        } else {
+          // Fallback for older browsers
+          const textArea = document.createElement("textarea")
+          textArea.value = text
+          textArea.style.position = "fixed"
+          textArea.style.left = "-999999px"
+          textArea.style.top = "-999999px"
+          document.body.appendChild(textArea)
+          textArea.focus()
+          textArea.select()
+          return new Promise((res, rej) => {
+            document.execCommand("copy") ? res() : rej()
+            textArea.remove()
+          })
+        }
       }
-    }
-    
-    // Add copy functionality to code blocks
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add copy buttons to code blocks
-      document.querySelectorAll('pre[class*="language-"]').forEach(function(pre) {
-        const button = document.createElement('button');
-        button.textContent = 'Copy';
-        button.style.cssText = 'position: absolute; top: 5px; right: 5px; padding: 4px 8px; font-size: 12px; background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;';
-        pre.style.position = 'relative';
-        pre.appendChild(button);
-        
-        button.addEventListener('click', function() {
-          const code = pre.querySelector('code').textContent;
-          copyToClipboard(code).then(function() {
-            button.textContent = 'Copied!';
-            setTimeout(function() { button.textContent = 'Copy'; }, 2000);
-          }).catch(function() {
-            button.textContent = 'Failed';
-            setTimeout(function() { button.textContent = 'Copy'; }, 2000);
-          });
-        });
-      });
-    });
-  </script>
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const fab = document.getElementById('fab');
-    const fabOptions = document.querySelector('.fab-options');
-    const backToTopButton = document.getElementById('back-to-top');
-    const themeToast = document.getElementById('theme-toast');
-    const themeName = document.getElementById('theme-name');
-    const fontToast = document.getElementById('font-toast');
-    const fontName = document.getElementById('font-name');
-    const fontSwitcherButton = document.getElementById('font-switcher');
 
-    const themes = [
-      'dark-mode', 
-      'light-mode', 
-      'pastel-mode', 
-      'eye-soothing-mode', 
-      'solarized-dark-mode', 
-      'solarized-light-mode', 
-      'monokai-mode',
-      'dracula-mode',
-      'gruvbox-dark-mode',
-      'nord-mode',
-      'one-dark-mode',
-      'material-dark-mode',
-      'material-light-mode'
-    ];
-    let currentThemeIndex = 0;
+      // Add copy functionality to code blocks
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add copy buttons to code blocks
+        document
+          .querySelectorAll('pre[class*="language-"]')
+          .forEach(function (pre) {
+            const button = document.createElement("button")
+            button.textContent = "Copy"
+            button.style.cssText =
+              "position: absolute; top: 5px; right: 5px; padding: 4px 8px; font-size: 12px; background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;"
+            pre.style.position = "relative"
+            pre.appendChild(button)
 
-    const fonts = [
-      { name: 'Inter', family: "'Inter', sans-serif" },
-      { name: 'Montserrat', family: "'Montserrat', sans-serif" },
-      { name: 'Open Sans', family: "'Open Sans', sans-serif" },
-      { name: 'Roboto', family: "'Roboto', sans-serif" },
-      { name: 'Lato', family: "'Lato', sans-serif" },
-      { name: 'Courier Prime', family: "'Courier Prime', monospace" }
-    ];
-    let currentFontIndex = 0;
+            button.addEventListener("click", function () {
+              const code = pre.querySelector("code").textContent
+              copyToClipboard(code)
+                .then(function () {
+                  button.textContent = "Copied!"
+                  setTimeout(function () {
+                    button.textContent = "Copy"
+                  }, 2000)
+                })
+                .catch(function () {
+                  button.textContent = "Failed"
+                  setTimeout(function () {
+                    button.textContent = "Copy"
+                  }, 2000)
+                })
+            })
+          })
+      })
+    </script>
+    <script>
+      const themeToggle = document.getElementById("theme-toggle")
+      const fab = document.getElementById("fab")
+      const fabOptions = document.querySelector(".fab-options")
+      const backToTopButton = document.getElementById("back-to-top")
+      const themeToast = document.getElementById("theme-toast")
+      const themeName = document.getElementById("theme-name")
+      const fontToast = document.getElementById("font-toast")
+      const fontName = document.getElementById("font-name")
+      const fontSwitcherButton = document.getElementById("font-switcher")
 
-    // Detect user's preferred color scheme
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+      const themes = [
+        "dark-mode",
+        "light-mode",
+        "pastel-mode",
+        "eye-soothing-mode",
+        "solarized-dark-mode",
+        "solarized-light-mode",
+        "monokai-mode",
+        "dracula-mode",
+        "gruvbox-dark-mode",
+        "nord-mode",
+        "one-dark-mode",
+        "material-dark-mode",
+        "material-light-mode",
+      ]
+      let currentThemeIndex = 0
 
-    // Load saved theme or set based on user's preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.body.className = savedTheme;
-      currentThemeIndex = themes.indexOf(savedTheme);
-    } else if (prefersDarkScheme) {
-      document.body.className = 'dark-mode';
-      currentThemeIndex = themes.indexOf('dark-mode');
-    } else if (prefersLightScheme) {
-      document.body.className = 'light-mode';
-      currentThemeIndex = themes.indexOf('light-mode');
-    } else {
-      document.body.className = 'light-mode'; // Default to light mode if no preference
-      currentThemeIndex = themes.indexOf('light-mode');
-    }
+      const fonts = [
+        { name: "Inter", family: "'Inter', sans-serif" },
+        { name: "Montserrat", family: "'Montserrat', sans-serif" },
+        { name: "Open Sans", family: "'Open Sans', sans-serif" },
+        { name: "Roboto", family: "'Roboto', sans-serif" },
+        { name: "Lato", family: "'Lato', sans-serif" },
+        { name: "Courier Prime", family: "'Courier Prime', monospace" },
+      ]
+      let currentFontIndex = 0
 
-    themeToggle.addEventListener('click', () => {
-      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-      const newTheme = themes[currentThemeIndex];
-      document.body.className = newTheme;
-      localStorage.setItem('theme', newTheme);
+      // Detect user's preferred color scheme
+      const prefersDarkScheme = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches
+      const prefersLightScheme = window.matchMedia(
+        "(prefers-color-scheme: light)"
+      ).matches
 
-      // Show toast notification
-      themeName.textContent = newTheme.replace(/-/g, ' ');
-      themeToast.classList.add('show');
-      setTimeout(() => {
-        themeToast.classList.remove('show');
-      }, 3000);
-    });
-
-    fab.addEventListener('click', () => {
-      fab.classList.toggle('show-options');
-    });
-
-    // Show back-to-top
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.add('show');
+      // Load saved theme or set based on user's preference
+      const savedTheme = localStorage.getItem("theme")
+      if (savedTheme) {
+        document.body.className = savedTheme
+        currentThemeIndex = themes.indexOf(savedTheme)
+      } else if (prefersDarkScheme) {
+        document.body.className = "dark-mode"
+        currentThemeIndex = themes.indexOf("dark-mode")
+      } else if (prefersLightScheme) {
+        document.body.className = "light-mode"
+        currentThemeIndex = themes.indexOf("light-mode")
       } else {
-        backToTopButton.classList.remove('show');
+        document.body.className = "light-mode" // Default to light mode if no preference
+        currentThemeIndex = themes.indexOf("light-mode")
       }
-    });
 
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          currentThemeIndex = (currentThemeIndex + 1) % themes.length
+          const newTheme = themes[currentThemeIndex]
+          document.body.className = newTheme
+          localStorage.setItem("theme", newTheme)
 
-    const increaseFontButton = document.getElementById('increase-font');
-    const decreaseFontButton = document.getElementById('decrease-font');
-    const blogContent = document.querySelector('main article');
+          // Show toast notification
+          themeName.textContent = newTheme.replace(/-/g, " ")
+          themeToast.classList.add("show")
+          setTimeout(() => {
+            themeToast.classList.remove("show")
+          }, 3000)
+        })
+      }
 
-    increaseFontButton.addEventListener('click', () => {
-      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
-      const newFontSize = parseFloat(currentFontSize) + 2;
-      blogContent.style.fontSize = `${newFontSize}px`;
-    });
+      if (fab) {
+        fab.addEventListener("click", () => {
+          fab.classList.toggle("show-options")
+        })
+      }
 
-    decreaseFontButton.addEventListener('click', () => {
-      const currentFontSize = window.getComputedStyle(blogContent).fontSize;
-      const newFontSize = parseFloat(currentFontSize) - 2;
-      blogContent.style.fontSize = `${newFontSize}px`;
-    });
+      // Show back-to-top
+      if (backToTopButton) {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            backToTopButton.classList.add("show")
+          } else {
+            backToTopButton.classList.remove("show")
+          }
+        })
 
-    const postContent = document.querySelector('.post-content');
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        })
+      }
 
-    fontSwitcherButton.addEventListener('click', () => {
-      currentFontIndex = (currentFontIndex + 1) % fonts.length;
-      const newFont = fonts[currentFontIndex];
-      postContent.style.setProperty('--font-family', newFont.family); /* Update CSS variable for post */
-      localStorage.setItem('font', newFont.family);
+      const increaseFontButton = document.getElementById("increase-font")
+      const decreaseFontButton = document.getElementById("decrease-font")
+      const blogContent = document.querySelector("main article")
 
-      // Show toast notification
-      fontName.textContent = newFont.name;
-      fontToast.classList.add('show');
-      setTimeout(() => {
-        fontToast.classList.remove('show');
-      }, 3000);
-    });
+      if (increaseFontButton && blogContent) {
+        increaseFontButton.addEventListener("click", () => {
+          const currentFontSize = window.getComputedStyle(blogContent).fontSize
+          const newFontSize = parseFloat(currentFontSize) + 2
+          blogContent.style.fontSize = `${newFontSize}px`
+        })
+      }
 
-    // Load saved font for post
-    const savedFont = localStorage.getItem('font');
-    if (savedFont) {
-      postContent.style.setProperty('--font-family', savedFont);
-      currentFontIndex = fonts.findIndex(font => font.family === savedFont);
-    }
-  </script>
-</body>
+      if (decreaseFontButton && blogContent) {
+        decreaseFontButton.addEventListener("click", () => {
+          const currentFontSize = window.getComputedStyle(blogContent).fontSize
+          const newFontSize = parseFloat(currentFontSize) - 2
+          blogContent.style.fontSize = `${newFontSize}px`
+        })
+      }
+
+      const postContent = document.querySelector(".post-content")
+
+      if (fontSwitcherButton && postContent) {
+        fontSwitcherButton.addEventListener("click", () => {
+          currentFontIndex = (currentFontIndex + 1) % fonts.length
+          const newFont = fonts[currentFontIndex]
+          postContent.style.setProperty(
+            "--font-family",
+            newFont.family
+          ) /* Update CSS variable for post */
+          localStorage.setItem("font", newFont.family)
+
+          // Show toast notification
+          fontName.textContent = newFont.name
+          fontToast.classList.add("show")
+          setTimeout(() => {
+            fontToast.classList.remove("show")
+          }, 3000)
+        })
+      }
+
+      // Load saved font for post
+      const savedFont = localStorage.getItem("font")
+      if (savedFont) {
+        postContent.style.setProperty("--font-family", savedFont)
+        currentFontIndex = fonts.findIndex((font) => font.family === savedFont)
+      }
+    </script>
+  </body>
 </html>
