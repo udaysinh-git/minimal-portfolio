@@ -38,6 +38,39 @@
 	font-size: 0.85rem;
 }
 
+/* Pinterest-style circular images for all post images */
+/* Pinterest-style squarish rounded images for all post images */
+
+.post-content img, .post-body img, .posts img,
+.post-images-grid img {
+	border-radius: 12px; /* Subtle, rectangular rounded corners */
+	box-shadow: 0 2px 12px rgba(0,0,0,0.10); /* Slightly stronger shadow for depth */
+	overflow: hidden;
+	background: #fff;
+	transition: box-shadow 0.2s;
+}
+
+.post-content img:hover, .post-body img:hover, .posts img:hover {
+	box-shadow: 0 4px 20px rgba(0,0,0,0.16);
+}
+
+/* Grid layout for multiple images in posts */
+.post-images-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1.2rem;
+	margin: 1.5rem 0;
+}
+
+.post-images-grid img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border-radius: 18px;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+	background: #fff;
+}
+
 /* Tag list styles */
 .tag-list {
 	list-style: none;

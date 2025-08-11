@@ -84,7 +84,7 @@
       <article class="post-content slide-in-right">
         <h1>{{ title }}</h1>
         <p>Published on: {{ date }}{% if time %} at {{ time }}{% endif %}</p>
-        {{ content | safe }}
+        {{ content | safe | replace('<img', '<img loading="lazy"') }}
       </article>
     </main>
     <footer>
