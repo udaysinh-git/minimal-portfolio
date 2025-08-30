@@ -82,12 +82,15 @@ header .container {
 
 .nav-menu ul li a.active {
   background-color: var(--link-hover-color);
-  color: var(--background-color);
+  color: #ffffff; /* Use white text for better contrast on dark backgrounds */
+  font-weight: bold; /* Make active items more prominent */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Add subtle shadow for better readability */
 }
 
 .nav-menu ul li a:hover {
   background-color: var(--link-hover-color);
-  color: var(--background-color);
+  color: #ffffff; /* Use white text for better contrast on dark backgrounds */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Add subtle shadow for better readability */
 }
 
 /* Ensure navbar links maintain proper styling and don't inherit unwanted container properties */
@@ -101,6 +104,16 @@ header .container {
   line-height: 1.2;
   position: relative;
   z-index: 1003; /* Ensure links stay above container */
+}
+
+/* Override for active state to ensure it takes precedence */
+.nav-menu ul li a.active,
+.nav-menu ul li a.active:visited,
+.nav-menu ul li a.active:active {
+  background-color: var(--link-hover-color);
+  color: #ffffff !important; /* Force white text for active state */
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Media queries for mobile responsiveness */

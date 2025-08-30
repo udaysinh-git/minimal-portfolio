@@ -1,6 +1,6 @@
 ---
 layout: layout.njk
-title: GitHub | Udaysinh Sapate
+title: GitHub Repos
 styles:
   - /styles/github.css
 ---
