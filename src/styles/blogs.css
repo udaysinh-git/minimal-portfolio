@@ -126,12 +126,27 @@ h1 {
 	display: inline-block;
 	margin: 0;
 	cursor: pointer;
-	font-size: 24px;
 	color: var(--link-color);
+	transition: color 0.3s ease;
 }
+
 .rss-button:hover {
 	color: var(--link-hover-color);
-  }
+}
+
+.rss-icon {
+	width: 24px;
+	height: 24px;
+	transition: color 0.3s ease;
+}
+
+.eye-icon {
+	transition: color 0.3s ease;
+}
+
+.cog-icon {
+	transition: color 0.3s ease;
+}
 
   .blog-item {
     transition: transform 0.3s ease-in-out;
