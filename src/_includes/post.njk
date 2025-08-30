@@ -83,7 +83,15 @@
     <main class="container">
       <article class="post-content slide-in-right">
         <h1>{{ title }}</h1>
-        <p>Published on: {{ date }}{% if time %} at {{ time }}{% endif %}</p>
+        <div class="post-meta">
+          <p>Published on: {{ date }}{% if time %} at {{ time }}{% endif %}</p>
+          <div
+            class="post-views-display"
+            data-slug="{{ page.url | replace('/posts/', '') | replace('/', '') | replace('.html', '') }}"
+          >
+            <i class="fas fa-eye"></i> <span class="view-count">-</span> views
+          </div>
+        </div>
         {{ content | safe | replace('<img', '<img loading="lazy"') }}
       </article>
     </main>
@@ -147,8 +155,63 @@
         }
       }
 
+      // Blog view tracking
+      async function trackBlogView() {
+        try {
+          // Get the current page URL to extract slug
+          const path = window.location.pathname
+          // Extract slug from path like /posts/my-first-post/ or /posts/my-first-post.html
+          let slug = path.split("/").pop().replace(".html", "")
+          // If it's empty (trailing slash), get the second to last part
+          if (!slug) {
+            const pathParts = path.split("/").filter((part) => part)
+            slug = pathParts[pathParts.length - 1]
+          }
+
+          // Get the blog title
+          const title = document.querySelector("h1").textContent
+
+          // Check if we've already tracked this view recently (within 30 minutes)
+          const viewKey = `blog_view_${slug}`
+          const lastViewTime = localStorage.getItem(viewKey)
+          const now = Date.now()
+          const thirtyMinutes = 30 * 60 * 1000 // 30 minutes in milliseconds
+
+          if (lastViewTime && now - parseInt(lastViewTime) < thirtyMinutes) {
+            console.log("View already tracked recently, skipping...")
+            return // Already tracked within 30 minutes
+          }
+
+          // Track the view
+          const response = await fetch("/.netlify/functions/blog-views", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              slug: slug,
+              title: title,
+            }),
+          })
+
+          if (response.ok) {
+            // Mark as tracked with timestamp
+            localStorage.setItem(viewKey, now.toString())
+            console.log("Blog view tracked successfully")
+          }
+        } catch (error) {
+          console.error("Error tracking blog view:", error)
+        }
+      }
+
       // Add copy functionality to code blocks
       document.addEventListener("DOMContentLoaded", function () {
+        // Track blog view when page loads
+        trackBlogView()
+
+        // Load and display view count for this post
+        loadPostViewCount()
+
         // Add copy buttons to code blocks
         document
           .querySelectorAll('pre[class*="language-"]')
@@ -177,6 +240,33 @@
                 })
             })
           })
+
+        // Function to load and display view count for the current post
+        async function loadPostViewCount() {
+          try {
+            const viewDisplay = document.querySelector(".post-views-display")
+            if (!viewDisplay) return
+
+            const slug = viewDisplay.getAttribute("data-slug")
+            const viewCountElement = viewDisplay.querySelector(".view-count")
+
+            const response = await fetch("/.netlify/functions/blog-views")
+            if (response.ok) {
+              const data = await response.json()
+              const blogViews = data.blogViews || []
+
+              // Find matching blog view data
+              const blogView = blogViews.find((view) => view.slug === slug)
+              if (blogView) {
+                viewCountElement.textContent = blogView.views
+              } else {
+                viewCountElement.textContent = "0"
+              }
+            }
+          } catch (error) {
+            console.error("Error loading post view count:", error)
+          }
+        }
       })
     </script>
     <script>

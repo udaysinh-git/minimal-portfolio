@@ -21,11 +21,13 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
    git clone https://github.com/udaysinh-git/minimal-portfolio.git
    cd minimal-portfolio  # Enter the void
    ```
+
 2. **Install dependencies** (Prepare for your computer to download half the internet):
 
    ```bash
    npm install  # Go make coffee, this might take a while
    ```
+
 3. **Configure environment variables** (The secrets that make your app work, but you'll forget in 3 days):
 
    Create a `.env` file in the root directory:
@@ -41,11 +43,13 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
   ```bash
   npx eleventy --serve  # Magic happens at http://localhost:8080
   ```
+
 - **Build for Production** (For when you're finally ready to show the world):
 
   ```bash
   npx eleventy  # Crosses fingers automatically
   ```
+
 - **Content Management for the Technically Challenged**:
 
   - Add new pages by creating markdown files in `src` (it's basically like using Word, if Word were actually good)
@@ -96,6 +100,7 @@ minimal-portfolio/
    ```bash
    npx eleventy  # Transforms your markdown ramblings into HTML
    ```
+
 2. Push to gh-pages:
 
    ```bash
@@ -116,6 +121,7 @@ Available functions:
 - `spotify.js` - Shows your current or last played Spotify track, with Google Sheets caching for fallback
 - `activities.js` - Shows your current Discord activity (e.g., VS Code, games) using Lanyard API, with Google Sheets caching for fallback
 - `lastPlayed.js` - Handles Google Sheets caching for both Spotify and Activity/Discord status
+- `blog-views.js` - Tracks and displays blog post view counts using Google Sheets
 
 ### Google Sheets Caching
 
@@ -123,6 +129,7 @@ Spotify and Discord activity data are cached in a Google Sheet for fallback when
 
 - Sheet1: Spotify track cache
 - Sheet2: Discord activity cache
+- Sheet3: Blog view counts (Slug, Title, Views, Last Viewed)
 
 You must set up a Google Service Account and add these environment variables:
 
@@ -135,6 +142,54 @@ You must set up a Google Service Account and add these environment variables:
 To show your Discord/VS Code/game status, set:
 
 - `ACTIVITIES_USER_ID` (your Discord user ID, used by the Lanyard API)
+
+### Blog View Tracking
+
+The portfolio automatically tracks blog post views and displays view counts on the blog listing page. Views are stored in Google Sheets (Sheet3) and include:
+
+- **Slug**: The URL slug of the blog post
+- **Title**: The blog post title
+- **Views**: Total view count
+- **Last Viewed**: Timestamp of the last view
+
+**Features:**
+
+- Session-based tracking (prevents duplicate counts from the same user session)
+- Real-time view count display on the blog listing page
+- Automatic tracking when users visit blog posts
+- Fallback to Google Sheets for reliable data storage
+
+**Setup:**
+
+### Manual Setup (Recommended)
+
+1. **Open your Google Sheets document** that you're using for this portfolio (the one with Sheet1 for Spotify and Sheet2 for Discord activity)
+
+2. **Create a new sheet**:
+
+   - Click the "+" button at the bottom left of your Google Sheets
+   - Rename the new sheet to "Sheet3" (exactly as shown)
+
+3. **Add headers in row 1**:
+
+   - Column A1: `Slug`
+   - Column B1: `Title`
+   - Column C1: `Views`
+   - Column D1: `Last Viewed`
+
+4. **Verify your setup**:
+   - Your Google Sheets should now have 3 sheets: Sheet1, Sheet2, and Sheet3
+   - Sheet3 should have the 4 headers in the first row
+   - The system will automatically populate data when people visit your blog posts
+
+### Automatic Setup (Fallback)
+
+If you don't set up Sheet3 manually, the system will automatically create it with the correct structure when the first blog view is tracked.
+
+### View Display
+
+- The blog listing page
+- Individual blog post pages
 
 ### Securing Secrets for Git
 
@@ -150,12 +205,15 @@ To show your Discord/VS Code/game status, set:
    ```bash
    GITHUB_TOKEN=your_github_personal_access_token
    ```
+
 2. Start the local dev server:
 
    ```bash
    npm run start  # Opens localhost and your pathway to fame
    ```
-or if you use netlify use `netlify dev`
+
+   or if you use netlify use `netlify dev`
+
 ## 🤔 FAQs
 
 **Q: Will this portfolio get me hired?**
@@ -171,4 +229,4 @@ A: You could, but then how would people know you're a developer?
 
 Built with ☕ and existential dread by [Udaysinh Sapate](https://udaysinh.me)
 
-*Remember: The best portfolio is one that's actually deployed. The second best is one that's actually updated.*
+_Remember: The best portfolio is one that's actually deployed. The second best is one that's actually updated._

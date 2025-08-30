@@ -8,65 +8,113 @@ title: Blog
   <i class="fas fa-rss"></i>
 </a>
 
-<p>Welcome to my blog! Here you will find my latest posts on various topics related to software development, AI, and more.</p>
+<p>
+  Welcome to my blog! Here you will find my latest posts on various topics
+  related to software development, AI, and more.
+</p>
 
 <ul class="blog-list">
   {% for post in collections.blog %}
-    <li class="blog-item" style="animation-delay: {{ forloop.index0 * 0.1 }}s;" onclick="handleBlogClick('{{ post.url }}')">
-      <span class="blog-number"></span>
-      <a href="{{ post.url }}">{{ post.data.title }}</a> - 
-      <span class="post-date" data-date="{{ post.data.date }}">
-        {{ post.data.date }}{% if post.data.time %} at {{ post.data.time }}{% endif %}
-      </span>
-      <ul class="tag-list">
-        {% for tag in post.data.tags %}
-          <li class="tag-item"><a href="/tag/{{ tag | slug }}/">{{ tag }}</a></li>
-        {% endfor %}
-      </ul>
-    </li>
+  <li
+    class="blog-item"
+    style="animation-delay: {{ forloop.index0 * 0.1 }}s;"
+    onclick="handleBlogClick('{{ post.url }}')"
+  >
+    <span class="blog-number"></span>
+    <a href="{{ post.url }}">{{ post.data.title }}</a> -
+    <span class="post-date" data-date="{{ post.data.date }}">
+      {{ post.data.date }}{% if post.data.time %} at {{ post.data.time }}{%
+      endif %}
+    </span>
+    <span
+      class="post-views"
+      data-slug="{{ post.url | replace('/posts/', '') | replace('/', '') | replace('.html', '') }}"
+    >
+      <i class="fas fa-eye"></i> <span class="view-count">-</span> views
+    </span>
+    <ul class="tag-list">
+      {% for tag in post.data.tags %}
+      <li class="tag-item"><a href="/tag/{{ tag | slug }}/">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
   {% endfor %}
 </ul>
 <script>
   function handleBlogClick(url) {
-    const article = document.querySelector('.post-content');
+    const article = document.querySelector(".post-content")
     if (article) {
-      article.classList.add('slide-out-left');
+      article.classList.add("slide-out-left")
       setTimeout(() => {
-        article.classList.remove('slide-out-left');
-        article.classList.add('slide-in-right');
-        window.location.href = url;
-      }, 500);
+        article.classList.remove("slide-out-left")
+        article.classList.add("slide-in-right")
+        window.location.href = url
+      }, 500)
     } else {
-      window.location.href = url;
+      window.location.href = url
     }
   }
 
   function handleRSSClick(event) {
-    event.preventDefault();
-    const rssLink = window.location.origin + '/rss.xml';
-    navigator.clipboard.writeText(rssLink).then(() => {
-      showToast('RSS link copied to clipboard!');
-      window.open(rssLink, '_blank');
-    }).catch(() => {
-      showToast('Failed to copy RSS link.');
-    });
+    event.preventDefault()
+    const rssLink = window.location.origin + "/rss.xml"
+    navigator.clipboard
+      .writeText(rssLink)
+      .then(() => {
+        showToast("RSS link copied to clipboard!")
+        window.open(rssLink, "_blank")
+      })
+      .catch(() => {
+        showToast("Failed to copy RSS link.")
+      })
   }
 
   function showToast(message) {
-    const toast = document.querySelector('.theme-toast');
-    toast.textContent = message;
-    toast.classList.add('show');
+    const toast = document.querySelector(".theme-toast")
+    toast.textContent = message
+    toast.classList.add("show")
     setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
+      toast.classList.remove("show")
+    }, 3000)
   }
 
   // Assign numbering from bottom to top
-  document.addEventListener('DOMContentLoaded', () => {
-    const blogNumbers = document.querySelectorAll('.blog-number');
-    const total = blogNumbers.length;
+  document.addEventListener("DOMContentLoaded", () => {
+    const blogNumbers = document.querySelectorAll(".blog-number")
+    const total = blogNumbers.length
     blogNumbers.forEach((elem, index) => {
-      elem.textContent = `${total - index}.`;
-    });
-  });
+      elem.textContent = `${total - index}.`
+    })
+
+    // Load and display blog view counts
+    loadBlogViews()
+  })
+
+  // Function to load and display blog view counts
+  async function loadBlogViews() {
+    try {
+      const response = await fetch("/.netlify/functions/blog-views")
+      if (response.ok) {
+        const data = await response.json()
+        const blogViews = data.blogViews || []
+
+        // Update view counts for each blog post
+        const viewElements = document.querySelectorAll(".post-views")
+        viewElements.forEach((element) => {
+          const slug = element.getAttribute("data-slug")
+          const viewCountElement = element.querySelector(".view-count")
+
+          // Find matching blog view data
+          const blogView = blogViews.find((view) => view.slug === slug)
+          if (blogView) {
+            viewCountElement.textContent = blogView.views
+          } else {
+            viewCountElement.textContent = "0"
+          }
+        })
+      }
+    } catch (error) {
+      console.error("Error loading blog views:", error)
+    }
+  }
 </script>
