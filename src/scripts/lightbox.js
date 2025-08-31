@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     lightboxOverlay.className = 'lightbox-overlay';
     lightboxOverlay.innerHTML = `
         <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
             <img class="lightbox-image" src="" alt="">
+            <button class="lightbox-close" aria-label="Close lightbox">
+                <span class="close-icon">×</span>
+            </button>
         </div>
     `;
     document.body.appendChild(lightboxOverlay);

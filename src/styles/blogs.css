@@ -465,6 +465,7 @@ h1 {
 	max-height: 90vh;
 	position: relative;
 	cursor: default;
+	display: inline-block;
 }
 
 .lightbox-image {
@@ -482,32 +483,34 @@ h1 {
 }
 
 .lightbox-close {
-	position: absolute;
-	top: -40px;
-	right: 0;
-	background: rgba(255, 255, 255, 0.2);
+	position: fixed;
+	bottom: 30px;
+	left: calc(50% - 22px);
+	background: rgba(0, 0, 0, 0.6);
 	color: white;
 	border: none;
 	border-radius: 50%;
-	width: 32px;
-	height: 32px;
-	font-size: 18px;
+	width: 44px;
+	height: 44px;
 	cursor: pointer;
-	display: none; /* Hidden by default on desktop */
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: background 0.3s ease;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	z-index: 10001;
 }
 
 .lightbox-close:hover {
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(0, 0, 0, 0.8);
+	border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Show close button only on mobile */
-@media (max-width: 768px) {
-	.lightbox-close {
-		display: flex;
-	}
+.lightbox-close .close-icon {
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 1;
+	display: block;
 }
 
 /* Add staggered animation for masonry images */
@@ -536,6 +539,17 @@ h1 {
 
 /* Responsive adjustments for mobile */
 @media (max-width: 768px) {
+	.lightbox-close {
+		bottom: 20px;
+		left: calc(50% - 20px);
+		width: 40px;
+		height: 40px;
+	}
+	
+	.lightbox-close .close-icon {
+		font-size: 20px;
+	}
+	
 	.post-content img, .post-body img, .posts img {
 		max-width: 100% !important;
 		margin: 1rem auto !important;
