@@ -41,10 +41,10 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
 
    ```
    GITHUB_TOKEN=your_github_personal_access_token
-   GISCUS_REPO=your-github-username/your-repo
-   GISCUS_REPOSITORY_ID=your_repository_id
-   GISCUS_CATEGORY_ID=your_category_id
-   # ... and other values
+   GOOGLE_SHEET_ID=your_google_sheet_id
+   GOOGLE_SHEETS_CLIENT_EMAIL=your_service_account_email
+   GOOGLE_SHEETS_PRIVATE_KEY=your_private_key
+   ACTIVITIES_USER_ID=your_discord_user_id
    ```
 
 ## 🖥️ Usage
@@ -253,39 +253,28 @@ This portfolio includes a **Giscus-powered comments system** that's completely f
 3. Select **Announcements** as the Discussion Category
 4. Copy the configuration values (especially `repoId` and `categoryId`)
 
-#### 4. Configure Environment Variables
+#### 4. Update Giscus Configuration (Optional)
 
-Create a `.env` file in your project root and add your Giscus configuration:
+The Giscus configuration is already set up in the code with your repository details. If you need to change the configuration, edit these files:
 
-```env
-# Giscus Comments System Configuration
-GISCUS_REPO=your-github-username/your-repo
-GISCUS_REPOSITORY_ID=your_repository_id
-GISCUS_CATEGORY=Announcements
-GISCUS_CATEGORY_ID=your_category_id
-GISCUS_MAPPING=pathname
-GISCUS_STRICT=0
-GISCUS_REACTIONS_ENABLED=1
-GISCUS_EMIT_METADATA=0
-GISCUS_INPUT_POSITION=bottom
-GISCUS_THEME=preferred_color_scheme
-GISCUS_LANG=en
-GISCUS_LOADING=lazy
-```
+- `src/_includes/comments.njk` - Main comments template
+- `netlify/functions/giscus-config.js` - Configuration API
 
-**For Netlify deployment**, add these same environment variables in your Netlify dashboard under **Site settings > Environment variables**.
-
-**For local development**, copy `env.example` to `.env` and update the values.
+The Giscus configuration values are **not sensitive** and are meant to be public, so they're safely hardcoded in the templates.
 
 ### 🎨 Customization
 
 #### Disable Comments
 
-Set `GISCUS_REPO=""` in your `.env` file or remove the Giscus environment variables.
+Comment out or remove the comments include from `src/_includes/post.njk`:
+
+```njk
+<!-- {% include "comments.njk" %} -->
+```
 
 #### Change Theme
 
-Modify the `GISCUS_THEME` value in your `.env` file:
+Modify the `data-theme` attribute in `src/_includes/comments.njk`:
 
 - `preferred_color_scheme` - Auto-switch based on site theme
 - `light` - Always light theme
@@ -293,7 +282,7 @@ Modify the `GISCUS_THEME` value in your `.env` file:
 
 #### Change Language
 
-Modify the `GISCUS_LANG` value in your `.env` file (e.g., `en`, `es`, `fr`, etc.)
+Modify the `data-lang` attribute in `src/_includes/comments.njk` (e.g., `en`, `es`, `fr`, etc.)
 
 ### 🔧 How It Works
 
@@ -316,6 +305,9 @@ A: You could, but then how would people know you're a developer?
 
 **Q: Do I need to pay for the comments system?**
 A: Nope! Giscus is completely free and open source. It's like getting a premium feature without the premium price tag.
+
+**Q: Are the Giscus configuration values sensitive?**
+A: No! The Giscus config values (repo ID, category ID, etc.) are meant to be public and are safely hardcoded in the templates. Only API keys and private tokens need to be in environment variables.
 
 ---
 
