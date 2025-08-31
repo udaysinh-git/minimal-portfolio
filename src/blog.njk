@@ -80,7 +80,7 @@ title: Blog
           stroke-linejoin="round"
         />
       </svg>
-      <span class="view-count">-</span> views
+      <span class="view-count animated-counter">0</span> views
     </span>
     <ul class="tag-list">
       {% for tag in post.data.tags %}
@@ -128,6 +128,45 @@ title: Blog
     }, 3000)
   }
 
+  // Animated counter function
+  function animateCounter(element, targetValue, duration = 2000) {
+    const startTime = performance.now()
+    const startValue = 0
+    
+    // Add animation classes
+    element.classList.add('animating')
+    const postViews = element.closest('.post-views')
+    if (postViews) {
+      postViews.classList.add('animating')
+    }
+    
+    function updateCounter(currentTime) {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOutQuart)
+      
+      element.textContent = currentValue.toLocaleString()
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter)
+      } else {
+        element.textContent = targetValue.toLocaleString()
+        // Remove animation classes after completion
+        setTimeout(() => {
+          element.classList.remove('animating')
+          if (postViews) {
+            postViews.classList.remove('animating')
+          }
+        }, 500)
+      }
+    }
+    
+    requestAnimationFrame(updateCounter)
+  }
+
   // Assign numbering from bottom to top
   document.addEventListener("DOMContentLoaded", () => {
     const blogNumbers = document.querySelectorAll(".blog-number")
@@ -136,11 +175,11 @@ title: Blog
       elem.textContent = `${total - index}.`
     })
 
-    // Load and display blog view counts
+    // Load and display blog view counts with animation
     loadBlogViews()
   })
 
-  // Function to load and display blog view counts
+  // Function to load and display blog view counts with animation
   async function loadBlogViews() {
     try {
       const response = await fetch("/.netlify/functions/blog-views")
@@ -148,19 +187,20 @@ title: Blog
         const data = await response.json()
         const blogViews = data.blogViews || []
 
-        // Update view counts for each blog post
+        // Update view counts for each blog post with animation
         const viewElements = document.querySelectorAll(".post-views")
-        viewElements.forEach((element) => {
+        viewElements.forEach((element, index) => {
           const slug = element.getAttribute("data-slug")
           const viewCountElement = element.querySelector(".view-count")
 
           // Find matching blog view data
           const blogView = blogViews.find((view) => view.slug === slug)
-          if (blogView) {
-            viewCountElement.textContent = blogView.views
-          } else {
-            viewCountElement.textContent = "0"
-          }
+          const targetViews = blogView ? blogView.views : 0
+          
+          // Start animation after a small delay for each item
+          setTimeout(() => {
+            animateCounter(viewCountElement, targetViews, 1500)
+          }, index * 200) // Stagger the animations
         })
       }
     } catch (error) {
