@@ -55,6 +55,125 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
   position: relative;
+  background: var(--code-background-color, #2d2d2d);
+  color: var(--code-text-color, #f8f8f2);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color, #555);
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  display: block;
+  width: 100%;
+}
+
+/* Ensure highlight.js styles are not overridden */
+pre code.hljs {
+  background: var(--code-background-color, #2d2d2d) !important;
+  color: var(--code-text-color, #f8f8f2) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Custom highlight.js theme overrides for better visibility */
+.hljs {
+  background: var(--code-background-color, #2d2d2d) !important;
+  color: var(--code-text-color, #f8f8f2) !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #8292a2 !important;
+  font-style: italic !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #66d9ef !important;
+  font-weight: bold !important;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #ae81ff !important;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #a6e22e !important;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #e6db74 !important;
+  font-weight: bold !important;
+}
+
+.hljs-subst {
+  font-weight: normal !important;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #e6db74 !important;
+  font-weight: bold !important;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #f92672 !important;
+  font-weight: normal !important;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #fd971f !important;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #ae81ff !important;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #e6db74 !important;
+}
+
+.hljs-meta {
+  color: #8292a2 !important;
+  font-weight: bold !important;
+}
+
+.hljs-deletion {
+  background: #f92672 !important;
+}
+
+.hljs-addition {
+  background: #a6e22e !important;
+}
+
+.hljs-emphasis {
+  font-style: italic !important;
+}
+
+.hljs-strong {
+  font-weight: bold !important;
 }
 
 .copy-button {

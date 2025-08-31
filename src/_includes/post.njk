@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="/styles/comments.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+      id="highlight-theme"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
@@ -181,11 +182,35 @@
       <button id="font-switcher">Switch Font</button>
     </div>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
       defer
     ></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"
       defer
     ></script>
     <script src="/scripts/comments.js" defer></script>
@@ -268,34 +293,90 @@
         // Load and display view count for this post
         loadPostViewCount()
 
-        // Add copy buttons to code blocks
-        document
-          .querySelectorAll('pre[class*="language-"]')
-          .forEach(function (pre) {
-            const button = document.createElement("button")
-            button.textContent = "Copy"
-            button.style.cssText =
-              "position: absolute; top: 5px; right: 5px; padding: 4px 8px; font-size: 12px; background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;"
-            pre.style.position = "relative"
-            pre.appendChild(button)
+        // Ensure highlight.js syntax highlighting is applied
+        function highlightCode() {
+          if (window.hljs) {
+            hljs.highlightAll()
+            console.log("highlight.js highlighting applied")
+          } else {
+            console.log("highlight.js not loaded yet, retrying...")
+            setTimeout(highlightCode, 100)
+          }
+        }
 
-            button.addEventListener("click", function () {
-              const code = pre.querySelector("code").textContent
-              copyToClipboard(code)
-                .then(function () {
-                  button.textContent = "Copied!"
-                  setTimeout(function () {
-                    button.textContent = "Copy"
-                  }, 2000)
-                })
-                .catch(function () {
-                  button.textContent = "Failed"
-                  setTimeout(function () {
-                    button.textContent = "Copy"
-                  }, 2000)
-                })
-            })
+        // Start highlighting process
+        highlightCode()
+
+        // Function to update highlight.js theme based on current theme
+        function updateHighlightTheme() {
+          const currentTheme = document.body.className || "dark-mode"
+          const themeLink = document.getElementById("highlight-theme")
+
+          if (
+            currentTheme.includes("light") ||
+            currentTheme.includes("pastel") ||
+            currentTheme.includes("eye-soothing")
+          ) {
+            themeLink.href =
+              "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+          } else {
+            themeLink.href =
+              "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+          }
+
+          // Re-highlight after theme change
+          if (window.hljs) {
+            hljs.highlightAll()
+          }
+        }
+
+        // Update theme on page load
+        updateHighlightTheme()
+
+        // Listen for theme changes
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "class"
+            ) {
+              updateHighlightTheme()
+            }
           })
+        })
+
+        observer.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["class"],
+        })
+
+        // Add copy buttons to code blocks
+        document.querySelectorAll("pre code").forEach(function (codeBlock) {
+          const pre = codeBlock.parentElement
+          const button = document.createElement("button")
+          button.textContent = "Copy"
+          button.style.cssText =
+            "position: absolute; top: 5px; right: 5px; padding: 4px 8px; font-size: 12px; background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;"
+          pre.style.position = "relative"
+          pre.appendChild(button)
+
+          button.addEventListener("click", function () {
+            const code = codeBlock.textContent
+            copyToClipboard(code)
+              .then(function () {
+                button.textContent = "Copied!"
+                setTimeout(function () {
+                  button.textContent = "Copy"
+                }, 2000)
+              })
+              .catch(function () {
+                button.textContent = "Failed"
+                setTimeout(function () {
+                  button.textContent = "Copy"
+                }, 2000)
+              })
+          })
+        })
 
         // Function to load and display view count for the current post
         async function loadPostViewCount() {
