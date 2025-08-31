@@ -28,7 +28,7 @@ exports.handler = async function(event, context) {
       reactionsEnabled: true,
       emitMetadata: false,
       inputPosition: 'bottom',
-      theme: 'preferred_color_scheme',
+                   theme: 'dark',
       lang: 'en',
       loading: 'lazy'
     };

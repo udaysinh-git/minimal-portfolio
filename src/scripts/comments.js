@@ -12,14 +12,14 @@ class CommentsSystem {
       // Load configuration
       await this.loadConfig();
       
-      // Initialize comments
+      // Set initial theme first
+      this.setInitialTheme();
+      
+      // Initialize comments with correct theme
       this.initComments();
       
       // Handle theme changes
       this.handleThemeChanges();
-      
-      // Set initial theme
-      this.setInitialTheme();
     } catch (error) {
       console.error('Failed to initialize comments system:', error);
       this.showFallbackMessage();
@@ -37,7 +37,7 @@ class CommentsSystem {
         throw new Error('Failed to load configuration');
       }
     } catch (error) {
-      // Fallback to default config (these will be overridden by environment variables in production)
+      // Fallback to default config
       this.config = {
         repo: 'udaysinh-git/minimal-portfolio',
         repoId: 'R_kgDONhEmgA',
@@ -48,7 +48,7 @@ class CommentsSystem {
         reactionsEnabled: true,
         emitMetadata: false,
         inputPosition: 'bottom',
-        theme: 'preferred_color_scheme',
+        theme: 'light',
         lang: 'en'
       };
     }
@@ -63,7 +63,11 @@ class CommentsSystem {
       return;
     }
 
-    // Load Giscus script with dynamic theme
+    // Get current theme before loading script
+    const currentTheme = this.getCurrentTheme();
+    console.log('Loading Giscus with theme:', currentTheme);
+
+    // Load Giscus script with correct theme
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', this.config.repo);
@@ -75,7 +79,7 @@ class CommentsSystem {
     script.setAttribute('data-reactions-enabled', this.config.reactionsEnabled);
     script.setAttribute('data-emit-metadata', this.config.emitMetadata);
     script.setAttribute('data-input-position', this.config.inputPosition);
-    script.setAttribute('data-theme', this.getCurrentTheme()); // Set initial theme
+    script.setAttribute('data-theme', currentTheme); // Set correct theme
     script.setAttribute('data-lang', this.config.lang);
     script.crossOrigin = 'anonymous';
     script.async = true;
@@ -90,7 +94,7 @@ class CommentsSystem {
       this.showFallbackMessage();
     };
 
-    const container = document.querySelector('.giscus-container');
+    const container = document.querySelector('.comments-wrapper');
     if (container) {
       container.appendChild(script);
     }
@@ -101,10 +105,13 @@ class CommentsSystem {
 
     try {
       window.giscus.render();
-      // Set initial theme after render
+      
+      // Double-check theme after render
       setTimeout(() => {
-        this.updateGiscusTheme();
-      }, 100);
+        const expectedTheme = this.getCurrentTheme();
+        console.log('Ensuring Giscus theme is:', expectedTheme);
+        window.giscus.setTheme(expectedTheme);
+      }, 200);
     } catch (error) {
       console.error('Failed to render Giscus:', error);
       this.showFallbackMessage();
@@ -114,12 +121,8 @@ class CommentsSystem {
   setInitialTheme() {
     // Set initial theme when page loads
     this.currentTheme = this.getCurrentTheme();
-    this.updateGiscusTheme();
-    
-    // Fix text visibility after initial load
-    setTimeout(() => {
-      this.fixGiscusTextVisibility();
-    }, 500);
+    this.updateContainerTheme();
+    console.log('Initial theme set to:', this.currentTheme);
   }
 
   handleThemeChanges() {
@@ -129,8 +132,10 @@ class CommentsSystem {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const newTheme = this.getCurrentTheme();
           if (newTheme !== this.currentTheme) {
+            console.log('Theme changed from', this.currentTheme, 'to', newTheme);
             this.currentTheme = newTheme;
             this.updateGiscusTheme();
+            this.updateContainerTheme();
           }
         }
       });
@@ -149,10 +154,12 @@ class CommentsSystem {
         setTimeout(() => {
           const newTheme = this.getCurrentTheme();
           if (newTheme !== this.currentTheme) {
+            console.log('Theme toggle: changing from', this.currentTheme, 'to', newTheme);
             this.currentTheme = newTheme;
             this.updateGiscusTheme();
+            this.updateContainerTheme();
           }
-        }, 50);
+        }, 100);
       });
     }
   }
@@ -163,61 +170,27 @@ class CommentsSystem {
     try {
       const theme = this.getCurrentTheme();
       console.log('Updating Giscus theme to:', theme);
-      
-      // Add visual feedback during theme change
-      const container = document.querySelector('.giscus-container');
-      if (container) {
-        container.classList.add('theme-changing');
-      }
-      
-      // Update Giscus theme
       window.giscus.setTheme(theme);
-      
-      // Fix giscus text visibility after theme change
-      setTimeout(() => {
-        this.fixGiscusTextVisibility();
-        if (container) {
-          container.classList.remove('theme-changing');
-        }
-      }, 300);
     } catch (error) {
       console.error('Failed to update Giscus theme:', error);
     }
   }
 
-  fixGiscusTextVisibility() {
-    // Ensure giscus iframe has proper color scheme
-    const giscusFrame = document.querySelector('.giscus-container iframe');
-    if (giscusFrame) {
-      // Set color scheme based on current theme
-      const isDark = this.getCurrentTheme() === 'dark';
-      giscusFrame.style.colorScheme = isDark ? 'dark' : 'light';
+  updateContainerTheme() {
+    const container = document.querySelector('.comments-wrapper');
+    if (container) {
+      const theme = this.getCurrentTheme();
+      container.setAttribute('data-theme', theme);
     }
   }
 
   getCurrentTheme() {
-    const bodyClass = document.body.className;
-    
-    // Dark themes
-    const darkThemes = [
-      'dark-mode',
-      'solarized-dark-mode',
-      'monokai-mode',
-      'dracula-mode',
-      'gruvbox-dark-mode',
-      'nord-mode',
-      'one-dark-mode',
-      'material-dark-mode'
-    ];
-    
-    // Check if current theme is dark
-    const isDarkTheme = darkThemes.some(theme => bodyClass.includes(theme));
-    
-    return isDarkTheme ? 'dark' : 'light';
+    // Always return dark theme for comments
+    return 'dark';
   }
 
   showFallbackMessage() {
-    const container = document.querySelector('.giscus-container');
+    const container = document.querySelector('.comments-wrapper');
     if (container) {
       container.innerHTML = `
         <div class="comments-fallback">

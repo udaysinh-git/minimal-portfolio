@@ -41,47 +41,18 @@
   margin: 0 auto;
 }
 
-.giscus-container {
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+.comments-wrapper {
+  background: transparent;
+  border-radius: 6px;
+  padding: 0.5rem;
   border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.giscus-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-}
-
-.giscus-container:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-}
-
-/* Dark mode adjustments */
-.dark-mode .giscus-container {
-  background: var(--bg-secondary);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-  border-color: var(--border-color);
-}
-
-.dark-mode .giscus-container:hover {
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
-}
-
-/* Light mode adjustments */
-.light-mode .giscus-container {
-  background: #ffffff;
-  border: 1px solid #e1e5e9;
+.comments-wrapper:hover {
+  border-color: var(--accent-color);
 }
 
 /* Responsive design */
@@ -99,21 +70,21 @@
     font-size: 0.95rem;
   }
   
-  .giscus-container {
-    padding: 1rem;
-    border-radius: 8px;
+  .comments-wrapper {
+    padding: 0.25rem;
+    border-radius: 4px;
   }
 }
 
 /* Loading state */
-.giscus-container:empty::before {
+.comments-wrapper:empty::before {
   content: "Loading comments...";
   display: block;
   text-align: center;
   color: var(--text-secondary);
   font-style: italic;
-  padding: 3rem 1rem;
-  font-size: 0.95rem;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
 }
 
 /* Animation for comments section */
@@ -184,62 +155,136 @@
   background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
 }
 
-/* Dark mode adjustments for fallback */
-.dark-mode .fallback-btn {
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
-  color: white;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode .fallback-btn:hover {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
-
 /* Giscus iframe styling */
 .giscus-frame {
   border: none !important;
   border-radius: 8px !important;
   box-shadow: none !important;
+  background: transparent !important;
 }
 
-/* Ensure Giscus adapts to theme changes */
 .giscus-container iframe {
   border-radius: 8px;
   transition: all 0.3s ease;
+  background: transparent !important;
 }
 
-/* Smooth theme transitions for comments */
-.giscus-container {
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/* Enhanced Theme System */
+/* Light Theme Base */
+.giscus-container[data-theme="light"] {
+  background: #ffffff;
+  border-color: #e1e5e9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Theme-specific styling for better integration */
-.dark-mode .giscus-container {
-  background: var(--bg-secondary);
-  border-color: var(--border-color);
+.giscus-container[data-theme="light"]:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
+/* Dark Theme Base */
+.giscus-container[data-theme="dark"] {
+  background: #1a1a1a;
+  border-color: #333333;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+.giscus-container[data-theme="dark"]:hover {
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
+}
+
+/* Theme-specific container styling */
+/* Light Mode */
 .light-mode .giscus-container {
   background: #ffffff;
   border-color: #e1e5e9;
+  color: #1f2937;
 }
 
-/* Ensure Giscus iframe matches theme transitions */
-.giscus-container iframe {
-  transition: opacity 0.3s ease;
+/* Dark Mode */
+.dark-mode .giscus-container {
+  background: #1a1a1a;
+  border-color: #333333;
+  color: #f9fafb;
 }
 
-/* Loading state during theme changes */
-.giscus-container.theme-changing iframe {
-  opacity: 0.7;
+/* Solarized Dark */
+.solarized-dark-mode .giscus-container {
+  background: #002b36;
+  border-color: #073642;
+  color: #839496;
 }
 
-/* Fix Giscus "powered by" text visibility */
-.giscus-container .giscus-frame {
-  color-scheme: auto;
+/* Monokai */
+.monokai-mode .giscus-container {
+  background: #272822;
+  border-color: #3e3d32;
+  color: #f8f8f2;
 }
 
-/* Style the "powered by giscus" text */
+/* Dracula */
+.dracula-mode .giscus-container {
+  background: #282a36;
+  border-color: #44475a;
+  color: #f8f8f2;
+}
+
+/* Gruvbox Dark */
+.gruvbox-dark-mode .giscus-container {
+  background: #282828;
+  border-color: #504945;
+  color: #ebdbb2;
+}
+
+/* Nord */
+.nord-mode .giscus-container {
+  background: #2e3440;
+  border-color: #434c5e;
+  color: #eceff4;
+}
+
+/* One Dark */
+.one-dark-mode .giscus-container {
+  background: #282c34;
+  border-color: #3e4451;
+  color: #abb2bf;
+}
+
+/* Material Dark */
+.material-dark-mode .giscus-container {
+  background: #121212;
+  border-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Pastel Mode */
+.pastel-mode .giscus-container {
+  background: #fefefe;
+  border-color: #e8e8e8;
+  color: #5a5a5a;
+}
+
+/* Eye Soothing */
+.eye-soothing-mode .giscus-container {
+  background: #f5f5dc;
+  border-color: #d4d4b4;
+  color: #4a4a4a;
+}
+
+/* Solarized Light */
+.solarized-light-mode .giscus-container {
+  background: #fdf6e3;
+  border-color: #eee8d5;
+  color: #586e75;
+}
+
+/* Material Light */
+.material-light-mode .giscus-container {
+  background: #fafafa;
+  border-color: #e0e0e0;
+  color: #212121;
+}
+
+/* Giscus Footer Styling - Universal */
 .giscus-container .giscus-frame footer {
   color: var(--text-secondary) !important;
   font-size: 0.8rem !important;
@@ -250,77 +295,50 @@
   margin-top: 1rem !important;
 }
 
-/* Dark theme adjustments for giscus footer */
-.dark-mode .giscus-container .giscus-frame footer {
-  color: var(--text-secondary) !important;
-  border-top-color: var(--border-color) !important;
-}
-
-/* Light theme adjustments for giscus footer */
-.light-mode .giscus-container .giscus-frame footer {
-  color: #6b7280 !important;
-  border-top-color: #e1e5e9 !important;
-}
-
-/* Ensure giscus text is visible in all themes */
-.giscus-container .giscus-frame * {
-  color: inherit !important;
-}
-
-/* Fix giscus link styling */
-.giscus-container .giscus-frame footer a {
-  color: var(--accent-color) !important;
-  text-decoration: none !important;
-  transition: color 0.3s ease !important;
-}
-
-.giscus-container .giscus-frame footer a:hover {
-  color: var(--accent-hover) !important;
-  text-decoration: underline !important;
-}
-
-/* Ensure proper contrast for giscus elements */
-.giscus-container .giscus-frame {
+/* Giscus iframe styling */
+.comments-wrapper iframe {
+  color-scheme: dark !important;
+  border: none !important;
+  border-radius: 6px !important;
   background: transparent !important;
+  /* Hide the "powered by giscus" text by clipping the bottom */
+  clip-path: inset(0 0 30px 0) !important;
+  filter: brightness(0.8) contrast(1.2) saturate(0.9) !important;
 }
 
-/* Fix any hidden or low-contrast text in giscus */
-.giscus-container .giscus-frame .giscus-comment {
-  color: var(--text-color) !important;
+/* Force dark mode for all Giscus elements */
+.comments-wrapper {
+  color-scheme: dark !important;
+  background: #1a1a1a !important;
 }
 
-.giscus-container .giscus-frame .giscus-comment-meta {
-  color: var(--text-secondary) !important;
+/* Ensure Giscus iframe content is dark */
+.comments-wrapper iframe {
+  color-scheme: dark !important;
+  filter: brightness(0.8) contrast(1.2) saturate(0.9) !important;
+  background: #1a1a1a !important;
 }
 
-/* Additional fixes for giscus text visibility */
+/* Additional dark mode enforcement */
+.comments-wrapper * {
+  color-scheme: dark !important;
+}
+
+/* Hide just the powered by giscus text at the very bottom */
+.comments-wrapper iframe {
+  clip-path: inset(0 0 0 0) !important;
+}
+
+
+
+
+
+/* Ensure giscus text is always readable */
 .giscus-container iframe {
   color-scheme: auto !important;
 }
 
-/* Ensure giscus text has proper contrast */
-.giscus-container .giscus-frame {
-  color: var(--text-color) !important;
-}
-
-/* Fix giscus attribution text */
-.giscus-container .giscus-frame .giscus-attribution {
-  color: var(--text-secondary) !important;
-  font-size: 0.75rem !important;
-  opacity: 0.9 !important;
-}
-
-/* Ensure all giscus text elements are visible */
-.giscus-container .giscus-frame .giscus-comment-content,
-.giscus-container .giscus-frame .giscus-comment-header,
-.giscus-container .giscus-frame .giscus-comment-footer {
-  color: var(--text-color) !important;
-}
-
-/* Fix giscus input fields */
-.giscus-container .giscus-frame input,
-.giscus-container .giscus-frame textarea {
-  color: var(--text-color) !important;
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--border-color) !important;
+/* Theme transition animations */
+.giscus-container {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
