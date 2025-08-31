@@ -11,6 +11,74 @@ h1 {
 	margin: 0;
 }
 
+/* Blur effect for images */
+.blur-image-container {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.blur-image-container img {
+	transition: filter 0.3s ease;
+	display: block;
+}
+
+.blur-image-container.blurred img {
+	filter: blur(8px);
+}
+
+.blur-image-container:hover {
+	transform: scale(1.02);
+}
+
+.blur-image-container.revealed img {
+	filter: blur(0);
+}
+
+/* Click indicator */
+.blur-image-container::after {
+	content: "👁️ Click to reveal";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.7);
+	color: white;
+	padding: 8px 12px;
+	border-radius: 6px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.blur-image-container.blurred::after {
+	opacity: 1;
+}
+
+.blur-image-container.revealed::after {
+	opacity: 0;
+}
+
+/* Blur image wrapper for better positioning */
+.blur-image-wrapper {
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
+}
+
+/* Responsive adjustments for blur images */
+@media (max-width: 768px) {
+	.blur-image-container::after {
+		font-size: 0.8rem;
+		padding: 6px 10px;
+	}
+}
 
 
 /* Blog list styles */
