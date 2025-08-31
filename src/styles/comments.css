@@ -297,31 +297,29 @@
 
 /* Giscus iframe styling */
 .comments-wrapper iframe {
-  color-scheme: dark !important;
   border: none !important;
   border-radius: 6px !important;
   background: transparent !important;
   /* Hide the "powered by giscus" text by clipping the bottom */
-  clip-path: inset(0 0 30px 0) !important;
-  filter: brightness(0.8) contrast(1.2) saturate(0.9) !important;
+  clip-path: inset(0 0 20px 0) !important;
 }
 
-/* Force dark mode for all Giscus elements */
+/* Adaptive theme styling */
 .comments-wrapper {
-  color-scheme: dark !important;
-  background: #1a1a1a !important;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
-/* Ensure Giscus iframe content is dark */
-.comments-wrapper iframe {
-  color-scheme: dark !important;
-  filter: brightness(0.8) contrast(1.2) saturate(0.9) !important;
-  background: #1a1a1a !important;
+/* Light theme styling */
+.comments-wrapper[data-theme="light"] {
+  background: #f8f9fa;
+  border-color: #e9ecef;
 }
 
-/* Additional dark mode enforcement */
-.comments-wrapper * {
-  color-scheme: dark !important;
+/* Dark theme styling */
+.comments-wrapper[data-theme="dark"] {
+  background: #1a1a1a;
+  border-color: #2d2d2d;
 }
 
 /* Hide just the powered by giscus text at the very bottom */

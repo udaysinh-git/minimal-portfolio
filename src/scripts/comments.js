@@ -185,8 +185,39 @@ class CommentsSystem {
   }
 
   getCurrentTheme() {
-    // Always return dark theme for comments
-    return 'dark';
+    const bodyClass = document.body.className;
+    
+    // Map website themes to optimal Giscus themes
+    const themeMap = {
+      // Light themes - use light Giscus for consistency
+      'light-mode': 'light',
+      'pastel-mode': 'light',
+      'eye-soothing-mode': 'light',
+      'solarized-light-mode': 'light',
+      'material-light-mode': 'light',
+      
+      // Dark themes - use dark Giscus for consistency
+      'dark-mode': 'dark',
+      'solarized-dark-mode': 'dark',
+      'monokai-mode': 'dark',
+      'dracula-mode': 'dark',
+      'gruvbox-dark-mode': 'dark',
+      'nord-mode': 'dark',
+      'one-dark-mode': 'dark',
+      'material-dark-mode': 'dark'
+    };
+    
+    // Check for specific theme matches
+    for (const [themeClass, giscusTheme] of Object.entries(themeMap)) {
+      if (bodyClass.includes(themeClass)) {
+        console.log(`Website theme: ${themeClass} → Giscus theme: ${giscusTheme}`);
+        return giscusTheme;
+      }
+    }
+    
+    // Default to light theme if no match found
+    console.log('No specific theme detected, using light Giscus theme');
+    return 'light';
   }
 
   showFallbackMessage() {
