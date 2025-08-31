@@ -207,3 +207,120 @@
   border-radius: 8px;
   transition: all 0.3s ease;
 }
+
+/* Smooth theme transitions for comments */
+.giscus-container {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme-specific styling for better integration */
+.dark-mode .giscus-container {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.light-mode .giscus-container {
+  background: #ffffff;
+  border-color: #e1e5e9;
+}
+
+/* Ensure Giscus iframe matches theme transitions */
+.giscus-container iframe {
+  transition: opacity 0.3s ease;
+}
+
+/* Loading state during theme changes */
+.giscus-container.theme-changing iframe {
+  opacity: 0.7;
+}
+
+/* Fix Giscus "powered by" text visibility */
+.giscus-container .giscus-frame {
+  color-scheme: auto;
+}
+
+/* Style the "powered by giscus" text */
+.giscus-container .giscus-frame footer {
+  color: var(--text-secondary) !important;
+  font-size: 0.8rem !important;
+  opacity: 0.8 !important;
+  text-align: center !important;
+  padding: 0.5rem 0 !important;
+  border-top: 1px solid var(--border-color) !important;
+  margin-top: 1rem !important;
+}
+
+/* Dark theme adjustments for giscus footer */
+.dark-mode .giscus-container .giscus-frame footer {
+  color: var(--text-secondary) !important;
+  border-top-color: var(--border-color) !important;
+}
+
+/* Light theme adjustments for giscus footer */
+.light-mode .giscus-container .giscus-frame footer {
+  color: #6b7280 !important;
+  border-top-color: #e1e5e9 !important;
+}
+
+/* Ensure giscus text is visible in all themes */
+.giscus-container .giscus-frame * {
+  color: inherit !important;
+}
+
+/* Fix giscus link styling */
+.giscus-container .giscus-frame footer a {
+  color: var(--accent-color) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.giscus-container .giscus-frame footer a:hover {
+  color: var(--accent-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Ensure proper contrast for giscus elements */
+.giscus-container .giscus-frame {
+  background: transparent !important;
+}
+
+/* Fix any hidden or low-contrast text in giscus */
+.giscus-container .giscus-frame .giscus-comment {
+  color: var(--text-color) !important;
+}
+
+.giscus-container .giscus-frame .giscus-comment-meta {
+  color: var(--text-secondary) !important;
+}
+
+/* Additional fixes for giscus text visibility */
+.giscus-container iframe {
+  color-scheme: auto !important;
+}
+
+/* Ensure giscus text has proper contrast */
+.giscus-container .giscus-frame {
+  color: var(--text-color) !important;
+}
+
+/* Fix giscus attribution text */
+.giscus-container .giscus-frame .giscus-attribution {
+  color: var(--text-secondary) !important;
+  font-size: 0.75rem !important;
+  opacity: 0.9 !important;
+}
+
+/* Ensure all giscus text elements are visible */
+.giscus-container .giscus-frame .giscus-comment-content,
+.giscus-container .giscus-frame .giscus-comment-header,
+.giscus-container .giscus-frame .giscus-comment-footer {
+  color: var(--text-color) !important;
+}
+
+/* Fix giscus input fields */
+.giscus-container .giscus-frame input,
+.giscus-container .giscus-frame textarea {
+  color: var(--text-color) !important;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
