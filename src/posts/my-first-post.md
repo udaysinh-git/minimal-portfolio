@@ -3,19 +3,11 @@ layout: post.njk
 title: My First Post
 date: 2024-12-25
 tags:
-    - Software Development
-    - Projects
-    - Personal Experiences
-    - AI
-    - Cybersecurity
-    - Web Development
-    - tutorial
-    - Industry Insights
-    - Freelancing
-    - Startup
-    - Innovation
-    - Technology Trends
+  - Personal Experiences
+  - Software Development
+  - Projects
 ---
+
 # My First Blog Post: Excitement and Vision
 
 Hello everyone!
