@@ -237,17 +237,70 @@
         }
       }
 
+      // Function to load and display view count for the current post
+      async function loadPostViewCount() {
+        try {
+          const viewDisplay = document.querySelector(".post-views-display")
+          if (!viewDisplay) {
+            console.log("View display element not found for loading count")
+            return
+          }
+
+          const slug = viewDisplay.getAttribute("data-slug")
+          const viewCountElement = viewDisplay.querySelector(".view-count")
+
+          if (!slug) {
+            console.log("No slug found for loading view count")
+            return
+          }
+
+          console.log("Loading view count for slug:", slug)
+
+          const response = await fetch("/.netlify/functions/blog-views")
+          if (response.ok) {
+            const data = await response.json()
+            const blogViews = data.blogViews || []
+
+            // Find matching blog view data
+            const blogView = blogViews.find((view) => view.slug === slug)
+            if (blogView) {
+              viewCountElement.textContent = blogView.views
+              console.log("View count loaded:", blogView.views)
+            } else {
+              viewCountElement.textContent = "0"
+              console.log("No view data found for slug:", slug)
+            }
+          } else {
+            console.error(
+              "Failed to load view count:",
+              response.status,
+              response.statusText
+            )
+            viewCountElement.textContent = "?"
+          }
+        } catch (error) {
+          console.error("Error loading post view count:", error)
+          const viewCountElement = document.querySelector(".view-count")
+          if (viewCountElement) {
+            viewCountElement.textContent = "?"
+          }
+        }
+      }
+
       // Blog view tracking
       async function trackBlogView() {
         try {
-          // Get the current page URL to extract slug
-          const path = window.location.pathname
-          // Extract slug from path like /posts/my-first-post/ or /posts/my-first-post.html
-          let slug = path.split("/").pop().replace(".html", "")
-          // If it's empty (trailing slash), get the second to last part
+          // Get the slug from the data-slug attribute instead of parsing URL
+          const viewDisplay = document.querySelector(".post-views-display")
+          if (!viewDisplay) {
+            console.log("View display element not found")
+            return
+          }
+
+          const slug = viewDisplay.getAttribute("data-slug")
           if (!slug) {
-            const pathParts = path.split("/").filter((part) => part)
-            slug = pathParts[pathParts.length - 1]
+            console.log("No slug found in data-slug attribute")
+            return
           }
 
           // Get the blog title
@@ -263,6 +316,8 @@
             console.log("View already tracked recently, skipping...")
             return // Already tracked within 30 minutes
           }
+
+          console.log("Tracking view for slug:", slug, "title:", title)
 
           // Track the view
           const response = await fetch("/.netlify/functions/blog-views", {
@@ -280,6 +335,15 @@
             // Mark as tracked with timestamp
             localStorage.setItem(viewKey, now.toString())
             console.log("Blog view tracked successfully")
+
+            // Reload the view count to show the updated number
+            loadPostViewCount()
+          } else {
+            console.error(
+              "Failed to track blog view:",
+              response.status,
+              response.statusText
+            )
           }
         } catch (error) {
           console.error("Error tracking blog view:", error)
@@ -378,33 +442,6 @@
               })
           })
         })
-
-        // Function to load and display view count for the current post
-        async function loadPostViewCount() {
-          try {
-            const viewDisplay = document.querySelector(".post-views-display")
-            if (!viewDisplay) return
-
-            const slug = viewDisplay.getAttribute("data-slug")
-            const viewCountElement = viewDisplay.querySelector(".view-count")
-
-            const response = await fetch("/.netlify/functions/blog-views")
-            if (response.ok) {
-              const data = await response.json()
-              const blogViews = data.blogViews || []
-
-              // Find matching blog view data
-              const blogView = blogViews.find((view) => view.slug === slug)
-              if (blogView) {
-                viewCountElement.textContent = blogView.views
-              } else {
-                viewCountElement.textContent = "0"
-              }
-            }
-          } catch (error) {
-            console.error("Error loading post view count:", error)
-          }
-        }
       })
     </script>
     <script>

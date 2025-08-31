@@ -119,7 +119,10 @@ exports.handler = async (event, context) => {
     try {
       const { slug, title } = JSON.parse(event.body);
       
+      console.log("Received POST request with slug:", slug, "title:", title);
+      
       if (!slug || !title) {
+        console.error("Missing required parameters:", { slug, title });
         return {
           statusCode: 400,
           body: JSON.stringify({
@@ -193,6 +196,7 @@ exports.handler = async (event, context) => {
           },
         });
         
+        console.log("Successfully updated view count for slug:", slug, "new count:", newViews);
         return {
           statusCode: 200,
           headers: {
@@ -219,6 +223,7 @@ exports.handler = async (event, context) => {
           },
         });
         
+        console.log("Successfully created new blog view entry for slug:", slug);
         return {
           statusCode: 200,
           headers: {

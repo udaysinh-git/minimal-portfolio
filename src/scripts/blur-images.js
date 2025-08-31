@@ -125,3 +125,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Blur images functionality loaded');
 });
+
