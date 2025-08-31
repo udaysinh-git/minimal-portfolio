@@ -153,3 +153,11 @@ Thumbs.db
 .idea/
 .vscode/
 *.sublime-*
+
+# Comments system related files
+# Giscus configuration cache (if any)
+.giscus-cache/
+# Comments backup files
+comments-backup/
+# Temporary comment files
+*.comment-temp

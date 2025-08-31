@@ -1,0 +1,209 @@
+/* Comments Section Styles */
+.comments-section {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--border-color);
+  position: relative;
+}
+
+.comments-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  border-radius: 2px;
+}
+
+.comments-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.comments-header h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.comments-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.giscus-container {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.giscus-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+}
+
+.giscus-container:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Dark mode adjustments */
+.dark-mode .giscus-container {
+  background: var(--bg-secondary);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color);
+}
+
+.dark-mode .giscus-container:hover {
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
+}
+
+/* Light mode adjustments */
+.light-mode .giscus-container {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .comments-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+  
+  .comments-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .comments-header p {
+    font-size: 0.95rem;
+  }
+  
+  .giscus-container {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}
+
+/* Loading state */
+.giscus-container:empty::before {
+  content: "Loading comments...";
+  display: block;
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 3rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* Animation for comments section */
+.comments-section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fallback message styles */
+.comments-fallback {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.fallback-content h4 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.fallback-content p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fallback-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fallback-btn {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fallback-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
+}
+
+/* Dark mode adjustments for fallback */
+.dark-mode .fallback-btn {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .fallback-btn:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+/* Giscus iframe styling */
+.giscus-frame {
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+/* Ensure Giscus adapts to theme changes */
+.giscus-container iframe {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}

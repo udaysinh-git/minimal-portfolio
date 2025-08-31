@@ -12,6 +12,7 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
 - [Customization](#customization) - Make it yours (but probably don't make it worse)
 - [Deployment](#deployment) - How to share your brilliance with the world
 - [Netlify Functions](#netlify-functions) - Magic serverless stuff for the modern developer who's too cool for servers
+- [Comments System](#comments-system) - Because every blog needs a place for people to share their hot takes
 
 ## 🚀 Setup
 
@@ -30,10 +31,20 @@ Welcome to the most gloriously minimal portfolio website known to mankind (or at
 
 3. **Configure environment variables** (The secrets that make your app work, but you'll forget in 3 days):
 
-   Create a `.env` file in the root directory:
+   Copy `env.example` to `.env` and update the values:
+
+   ```bash
+   cp env.example .env
+   ```
+
+   Then edit `.env` with your actual values:
 
    ```
-   GITHUB_TOKEN=your_github_personal_access_token  # Don't share this, or do, I'm a README not a cop
+   GITHUB_TOKEN=your_github_personal_access_token
+   GISCUS_REPO=your-github-username/your-repo
+   GISCUS_REPOSITORY_ID=your_repository_id
+   GISCUS_CATEGORY_ID=your_category_id
+   # ... and other values
    ```
 
 ## 🖥️ Usage
@@ -214,6 +225,84 @@ If you don't set up Sheet3 manually, the system will automatically create it wit
 
    or if you use netlify use `netlify dev`
 
+## 💬 Comments System
+
+This portfolio includes a **Giscus-powered comments system** that's completely free, privacy-focused, and integrates seamlessly with your blog posts. It uses GitHub Discussions as a backend, so you get all the benefits of GitHub's moderation tools without any tracking or ads.
+
+### Quick Setup
+
+#### 1. Enable GitHub Discussions
+
+1. Go to your GitHub repository: `https://github.com/your-username/your-repo`
+2. Click on **Settings** tab
+3. Scroll down to **Features** section
+4. Enable **Discussions** checkbox
+5. Click **Save**
+
+#### 2. Install Giscus App
+
+1. Go to [Giscus App](https://github.com/apps/giscus)
+2. Click **Install**
+3. Select your repository
+4. Click **Install**
+
+#### 3. Get Configuration Values
+
+1. Go to [Giscus Configuration](https://giscus.app/)
+2. Enter your repository details
+3. Select **Announcements** as the Discussion Category
+4. Copy the configuration values (especially `repoId` and `categoryId`)
+
+#### 4. Configure Environment Variables
+
+Create a `.env` file in your project root and add your Giscus configuration:
+
+```env
+# Giscus Comments System Configuration
+GISCUS_REPO=your-github-username/your-repo
+GISCUS_REPOSITORY_ID=your_repository_id
+GISCUS_CATEGORY=Announcements
+GISCUS_CATEGORY_ID=your_category_id
+GISCUS_MAPPING=pathname
+GISCUS_STRICT=0
+GISCUS_REACTIONS_ENABLED=1
+GISCUS_EMIT_METADATA=0
+GISCUS_INPUT_POSITION=bottom
+GISCUS_THEME=preferred_color_scheme
+GISCUS_LANG=en
+GISCUS_LOADING=lazy
+```
+
+**For Netlify deployment**, add these same environment variables in your Netlify dashboard under **Site settings > Environment variables**.
+
+**For local development**, copy `env.example` to `.env` and update the values.
+
+### 🎨 Customization
+
+#### Disable Comments
+
+Set `GISCUS_REPO=""` in your `.env` file or remove the Giscus environment variables.
+
+#### Change Theme
+
+Modify the `GISCUS_THEME` value in your `.env` file:
+
+- `preferred_color_scheme` - Auto-switch based on site theme
+- `light` - Always light theme
+- `dark` - Always dark theme
+
+#### Change Language
+
+Modify the `GISCUS_LANG` value in your `.env` file (e.g., `en`, `es`, `fr`, etc.)
+
+### 🔧 How It Works
+
+1. **Comments are stored** in GitHub Discussions
+2. **Each blog post** gets its own discussion thread
+3. **Users can comment** using their GitHub account
+4. **Reactions and replies** are fully supported
+5. **Moderation** is handled through GitHub's built-in tools
+
 ## 🤔 FAQs
 
 **Q: Will this portfolio get me hired?**
@@ -224,6 +313,9 @@ A: By the standards of developers who think adding a seventh JavaScript framewor
 
 **Q: Can I remove the sarcastic comments?**
 A: You could, but then how would people know you're a developer?
+
+**Q: Do I need to pay for the comments system?**
+A: Nope! Giscus is completely free and open source. It's like getting a premium feature without the premium price tag.
 
 ---
 

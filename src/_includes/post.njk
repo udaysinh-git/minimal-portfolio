@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/styles/themes.css" />
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel="stylesheet" href="/styles/icons.css" />
+    <link rel="stylesheet" href="/styles/comments.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
@@ -119,6 +120,9 @@
         </div>
         {{ content | safe | replace('<img', '<img loading="lazy"') }}
       </article>
+
+      <!-- Comments Section -->
+      {% include "comments.njk" %}
     </main>
     <footer>
       <div class="footer-container">
@@ -184,6 +188,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/line-numbers/prism-line-numbers.min.js"
       defer
     ></script>
+    <script src="/scripts/comments.js" defer></script>
     <script>
       // Native clipboard functionality to replace clipboard.js
       function copyToClipboard(text) {
