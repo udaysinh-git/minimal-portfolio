@@ -512,7 +512,8 @@
       }
 
       if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
+        themeToggle.addEventListener("click", (event) => {
+          event.preventDefault() // Prevent default anchor behavior
           currentThemeIndex = (currentThemeIndex + 1) % themes.length
           const newTheme = themes[currentThemeIndex]
           document.body.className = newTheme
