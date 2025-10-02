@@ -54,7 +54,7 @@ styles:
   const reposPerLoad = 6;
   let chartJSLoaded = false;
 
-  // Load Chart.js dynamically only when needed
+  // Load Chart.js from local file
   function loadChartJS() {
     return new Promise((resolve, reject) => {
       if (chartJSLoaded || typeof Chart !== 'undefined') {
@@ -64,12 +64,34 @@ styles:
       }
       
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+      script.src = '/scripts/chart.min.js';
+      script.async = true;
+      
+      // Set a timeout for loading
+      const timeout = setTimeout(() => {
+        script.remove();
+        reject(new Error('Chart.js loading timeout'));
+      }, 5000); // 5 second timeout
+      
       script.onload = () => {
-        chartJSLoaded = true;
-        resolve();
+        clearTimeout(timeout);
+        // Double-check that Chart is actually available after script loads
+        if (typeof Chart !== 'undefined') {
+          chartJSLoaded = true;
+          console.log('Chart.js loaded successfully from local file');
+          resolve();
+        } else {
+          reject(new Error('Chart.js loaded but Chart object not available'));
+        }
       };
-      script.onerror = reject;
+      
+      script.onerror = (error) => {
+        clearTimeout(timeout);
+        script.remove();
+        console.error('Failed to load local Chart.js:', error);
+        reject(error);
+      };
+      
       document.head.appendChild(script);
     });
   }
@@ -214,9 +236,16 @@ styles:
       
       const contributionsData = await response.json();
       document.querySelector('.graph-container .loading-spinner').style.display = 'none';
+      
       // Load Chart.js before rendering
-      await loadChartJS();
-      renderContributionsChart(contributionsData);
+      try {
+        await loadChartJS();
+        renderContributionsChart(contributionsData);
+      } catch (chartError) {
+        console.error('Error loading Chart.js for contributions:', chartError);
+        // Show data in text format if charts fail
+        showContributionsAsText(contributionsData);
+      }
     } catch (error) {
       console.error('Error fetching contributions:', error);
       document.querySelector('.graph-container').innerHTML += 
@@ -275,7 +304,16 @@ styles:
       
       const languageData = await response.json();
       document.querySelectorAll('.language-container .loading-spinner')[0].style.display = 'none';
-      renderLanguagePieChart(languageData);
+      
+      // Load Chart.js before rendering
+      try {
+        await loadChartJS();
+        renderLanguagePieChart(languageData);
+      } catch (chartError) {
+        console.error('Error loading Chart.js for language stats:', chartError);
+        // Show data in text format if charts fail
+        showLanguageStatsAsText(languageData);
+      }
     } catch (error) {
       console.error('Error fetching language stats:', error);
       document.querySelector('.language-container').innerHTML += 
@@ -336,6 +374,56 @@ styles:
         }
       }
     });
+  }
+
+  // Fallback function to show contributions as text when charts fail
+  function showContributionsAsText(contributionsData) {
+    const container = document.querySelector('.graph-container');
+    const fallbackHtml = `
+      <div class="text-fallback">
+        <p style="color: #666; font-style: italic; margin-bottom: 15px;">
+          📊 Chart visualization unavailable. Here's the data:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+          ${contributionsData.labels.map((year, index) => `
+            <div style="background: var(--card-bg, #f5f5f5); padding: 10px; border-radius: 5px; text-align: center;">
+              <strong>${year}</strong><br>
+              <span style="color: var(--accent-color, #0066cc);">${contributionsData.data[index]} commits</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    container.innerHTML = '<h3>Contributions Over Last 5 Years</h3>' + fallbackHtml;
+  }
+
+  // Fallback function to show language stats as text when charts fail
+  function showLanguageStatsAsText(languageData) {
+    const container = document.querySelector('.language-container');
+    const totalBytes = Object.values(languageData).reduce((a, b) => a + b, 0);
+    
+    const fallbackHtml = `
+      <div class="text-fallback">
+        <p style="color: #666; font-style: italic; margin-bottom: 15px;">
+          📊 Chart visualization unavailable. Here's your language usage:
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          ${Object.entries(languageData)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8)
+            .map(([language, bytes]) => {
+              const percentage = ((bytes / totalBytes) * 100).toFixed(1);
+              return `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: var(--card-bg, #f5f5f5); border-radius: 4px;">
+                  <span><strong>${language}</strong></span>
+                  <span style="color: var(--accent-color, #0066cc);">${percentage}%</span>
+                </div>
+              `;
+            }).join('')}
+        </div>
+      </div>
+    `;
+    container.innerHTML = '<h3>Language Usage</h3>' + fallbackHtml;
   }
 
   // Initialize
