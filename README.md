@@ -269,7 +269,7 @@ The Giscus configuration values are **not sensitive** and are meant to be public
 Comment out or remove the comments include from `src/_includes/post.njk`:
 
 ```njk
-<!-- {% include "comments.njk" %} -->
+<!-- {% raw %}{% include "comments.njk" %}{% endraw %} -->
 ```
 
 #### Change Theme
