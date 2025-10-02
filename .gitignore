@@ -161,3 +161,7 @@ Thumbs.db
 comments-backup/
 # Temporary comment files
 *.comment-temp
+
+# AI USED
+QWEN.md
+    
