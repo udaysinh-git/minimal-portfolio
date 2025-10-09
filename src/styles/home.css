@@ -35,3 +35,32 @@
   color: var(--background-color) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Explore section animated buttons (creative and blog.posts) */
+.explore-link {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.explore-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--link-color);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.explore-link:hover::before {
+  width: 100%;
+}
+
+.explore-link:hover {
+  color: var(--background-color) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

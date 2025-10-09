@@ -494,20 +494,15 @@
         "(prefers-color-scheme: light)"
       ).matches
 
-      // Load saved theme or set based on user's system preference
+      // Load saved theme or default to light mode
       const savedTheme = localStorage.getItem("theme")
       if (savedTheme) {
         document.body.className = savedTheme
         currentThemeIndex = themes.indexOf(savedTheme)
       } else {
-        // Default to system preference (dark or light)
-        if (prefersDarkScheme) {
-          document.body.className = "dark-mode"
-          currentThemeIndex = themes.indexOf("dark-mode")
-        } else {
-          // Default to light mode (system default or fallback)
-          document.body.className = "light-mode"
-          currentThemeIndex = themes.indexOf("light-mode")
+        // Default to light mode
+        document.body.className = "light-mode"
+        currentThemeIndex = themes.indexOf("light-mode")
         }
       }
 

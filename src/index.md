@@ -40,10 +40,11 @@ title: Home
 <div style="margin: 2rem 0;">
   <h3 style="color: var(--text-color); margin-bottom: 1rem;">What I Do</h3>
   <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
-    <li style="margin: 0.5rem 0;">• Develop full-stack applications using React, Node.js, and Python</li>
-    <li style="margin: 0.5rem 0;">• Build and deploy machine learning models with TensorFlow and PyTorch</li>
-    <li style="margin: 0.5rem 0;">• Write efficient backend systems in Golang and Python</li>
-    <li style="margin: 0.5rem 0;">• Implement security best practices and conduct penetration testing</li>
+    <li style="margin: 0.5rem 0;">• Develop <u>full-stack applications</u> using <u>React</u>, <u>Node.js</u>, and <u>Python</u></li>
+    <li style="margin: 0.5rem 0;">• Build <u>Android applications</u> with <u>Flutter</u> for cross-platform development</li>
+    <li style="margin: 0.5rem 0;">• Build and deploy <u>machine learning models</u> with <u>TensorFlow</u> and <u>PyTorch</u></li>
+    <li style="margin: 0.5rem 0;">• Write <u>efficient backend systems</u> in <u>Golang</u>, <u>NestJS</u>, and <u>Python</u></li>
+    <li style="margin: 0.5rem 0;">• Implement <u>security best practices</u> and conduct <u>penetration testing</u></li>
   </ul>
 </div>
 
@@ -184,5 +185,46 @@ title: Home
         <a href="https://welabs.in" target="_blank" rel="noopener noreferrer" class="welabs-link" style="color: var(--link-color); text-decoration: none; font-weight: 600; padding: 0.4rem 1rem; border: 2px solid var(--link-color); border-radius: 6px; transition: all 0.3s ease; position: relative; overflow: hidden; display: inline-block;">welabs.in</a>
       </div>
     </div>
+  </div>
+</div>
+
+<div style="margin: 3rem 0 2rem 0;">
+  <h3 style="color: var(--text-color); margin-bottom: 1.5rem;">Explore More</h3>
+  
+  <!-- Creative Text Grid Design -->
+  <div style="position: relative; margin: 2rem 0; padding: 1.5rem;">
+    <!-- Background Pattern -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.08; font-family: monospace; font-size: 0.7rem; line-height: 1.2; color: var(--text-muted-color); overflow: hidden; pointer-events: none;">
+      <span>CREATIVE PROJECTS BLOGS ARTICLES CREATIVE PROJECTS BLOGS ARTICLES<br/>
+      PROJECTS BLOGS ARTICLES CREATIVE PROJECTS BLOGS ARTICLES CREATIVE<br/>
+      BLOGS ARTICLES CREATIVE PROJECTS BLOGS ARTICLES CREATIVE PROJECTS<br/>
+      ARTICLES CREATIVE PROJECTS BLOGS ARTICLES CREATIVE PROJECTS BLOGS<br/>
+      CREATIVE PROJECTS BLOGS ARTICLES CREATIVE PROJECTS BLOGS ARTICLES<br/>
+      PROJECTS BLOGS ARTICLES CREATIVE PROJECTS BLOGS ARTICLES CREATIVE</span>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="position: relative; z-index: 2; background: var(--background-color); padding: 0.5rem;">
+      <!-- Navigation Flow -->
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: var(--text-muted-color); font-family: monospace;">┌─</span>
+          <span style="color: var(--text-color);">Dive into my</span>
+          <span style="color: var(--text-muted-color); font-family: monospace;">→</span>
+          <a href="/creative" class="explore-link" style="color: var(--link-color); text-decoration: none; font-weight: 600; padding: 0.3rem 0.8rem; border: 1px solid var(--link-color); border-radius: 4px; font-family: monospace;">creative()</a>
+        </div>
+      </div>
+      
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: var(--text-muted-color); font-family: monospace;">└─</span>
+          <span style="color: var(--text-color);">Read my latest</span>
+          <span style="color: var(--text-muted-color); font-family: monospace;">→</span>
+          <a href="/blog" class="explore-link" style="color: var(--link-color); text-decoration: none; font-weight: 600; padding: 0.3rem 0.8rem; border: 1px solid var(--link-color); border-radius: 4px; font-family: monospace;">blog.posts</a>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
