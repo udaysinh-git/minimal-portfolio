@@ -4,17 +4,37 @@ title: Achievements
 ---
 # Achievements
 
-## Professional Achievements
-- Created Custom Tailored Software solutions for various clients.
-- Founded a startup providing Bot Hosting services.
-- Developed a Scam Protection Service safeguarding 30,000 users.
-- Designed and implemented AI models with a focus on healthcare analytics at LiSYS Technocraft.
-- Contributed to optimizing data pipelines and enhancing model accuracy at LiSYS Technocraft.
+## Professional Experience
 
-## Academic Achievements
-- Currently pursuing B-TECH in Computer Science Engineering at D Y Patil International University.
-- Completed various programming courses from Zero To Mastery.
+**Neev Technologies - Full Stack Developer** (May 2025 - Present)
+- Contributing to scalable web applications using modern front-end and back-end technologies
+- Successfully managing remote development workflow and cross-functional team collaboration
 
-## Personal Achievements
-- Independently created a passive income through freelancing.
-- Managed a team of 4 in my startup.
+**Currently Building:** [welabs.in](https://welabs.in) - Web platform development with modern architecture
+
+**LiSYS Technocraft - AI/ML Intern** (Mar 2024 - Sep 2024)
+- Developed predictive models for patient readmissions in healthcare analytics
+- Optimized data pipelines and improved model accuracy for production systems
+- Offered position extension due to strong performance
+
+**Citta Hub - CEO & Founder** (Dec 2020 - Apr 2022)
+- Founded and led technology startup for 1.5 years
+- Managed team of 4, developed gaming applications with AI integration
+- Established sustainable business model and client relationships
+
+## Key Achievements
+
+**Impact & Scale**
+- Protected 30,000+ users through custom scam protection service
+- Delivered tailored software solutions for multiple clients
+- Created sustainable freelancing income stream
+
+**Technical Leadership**
+- Built and deployed AI models for real-world healthcare applications
+- Developed secure hosting infrastructure for automated services
+- Mastered full-stack development across multiple technologies
+
+**Education & Growth**
+- B-TECH Computer Science Engineering at D Y Patil International University
+- Completed comprehensive programming courses from Zero To Mastery
+- Continuous learning in AI/ML, cybersecurity, and modern development practices
