@@ -37,43 +37,6 @@ title: Home
   </div>
 </div>
 
-<style>
-@media (min-width: 768px) {
-  .hero-text-content {
-    text-align: left !important;
-    padding-left: 2rem !important;
-    padding-right: 0 !important;
-  }
-}
-
-.welabs-link {
-  position: relative;
-  z-index: 1;
-}
-
-.welabs-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: var(--link-color);
-  transition: width 0.3s ease;
-  z-index: -1;
-}
-
-.welabs-link:hover::before {
-  width: 100%;
-}
-
-.welabs-link:hover {
-  color: var(--background-color) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-</style>
-
 <div style="margin: 2rem 0;">
   <h3 style="color: var(--text-color); margin-bottom: 1rem;">What I Do</h3>
   <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
