@@ -45,6 +45,33 @@ title: Home
     padding-right: 0 !important;
   }
 }
+
+.welabs-link {
+  position: relative;
+  z-index: 1;
+}
+
+.welabs-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--link-color);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.welabs-link:hover::before {
+  width: 100%;
+}
+
+.welabs-link:hover {
+  color: var(--background-color) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 </style>
 
 <div style="margin: 2rem 0;">
@@ -191,7 +218,7 @@ title: Home
         <span style="color: var(--text-muted-color); font-family: monospace; font-size: 1.1rem;">└─</span>
         <span style="color: var(--text-color);">Currently building</span>
         <span style="color: var(--text-muted-color); font-family: monospace;">→</span>
-        <a href="https://welabs.in" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); text-decoration: none; font-weight: 600; padding: 0.2rem 0.8rem; border: 1px solid var(--link-color); border-radius: 4px; transition: all 0.2s ease;">welabs.in</a>
+        <a href="https://welabs.in" target="_blank" rel="noopener noreferrer" class="welabs-link" style="color: var(--link-color); text-decoration: none; font-weight: 600; padding: 0.4rem 1rem; border: 2px solid var(--link-color); border-radius: 6px; transition: all 0.3s ease; position: relative; overflow: hidden; display: inline-block;">welabs.in</a>
       </div>
     </div>
   </div>
