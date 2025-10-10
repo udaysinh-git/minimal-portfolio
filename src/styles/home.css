@@ -64,3 +64,79 @@
   color: var(--background-color) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Hero subtitle responsive styling */
+.hero-text-content h2 {
+  font-size: clamp(0.9rem, 2.2vw, 1.4rem) !important;
+  line-height: 1.4 !important;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Location text styling */
+.hero-text-content p:first-of-type {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Location hover animation */
+.location-hover {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.location-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--link-color, #007acc);
+  transition: width 0.4s ease;
+}
+
+.location-hover:hover::after {
+  width: 100%;
+}
+
+.location-hover:hover {
+  color: var(--text-color);
+}
+
+/* Mobile adjustments for subtitle and location */
+@media (max-width: 480px) {
+  .hero-text-content h2 {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin: 0.8rem 0 !important;
+  }
+  
+  .hero-text-content p:first-of-type {
+    font-size: 0.85rem !important;
+    margin: 0.2rem 0 0.8rem 0 !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-text-content h2 {
+    font-size: 1.1rem !important;
+  }
+  
+  .hero-text-content p:first-of-type {
+    font-size: 1rem !important;
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 769px) {
+  .hero-text-content h2 {
+    font-size: 1.3rem !important;
+  }
+  
+  .hero-text-content p:first-of-type {
+    font-size: 1.1rem !important;
+  }
+}
