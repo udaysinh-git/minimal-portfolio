@@ -2,14 +2,17 @@
 layout: layout.njk
 title: Resume
 ---
+
 # Udaysinh Sapate
-**Software Developer & AI Specialist**
+
+**Software Developer & AI Engineer**
 
 contact@udaysinh.me | [udaysinh.me](https://udaysinh.me) | Pune, India
 
 ---
 
 ## SUMMARY
+
 Experienced Software Developer with expertise in Python programming, AI, cybersecurity, and web development. Proficient in identifying and resolving security vulnerabilities and bugs in web applications, as well as creating custom software solutions tailored to client needs. Skilled in AI technologies, including working with AI models and understanding their application in various domains.
 
 ---
@@ -17,8 +20,9 @@ Experienced Software Developer with expertise in Python programming, AI, cyberse
 ## EXPERIENCE
 
 ### AI Engineer
+
 **LiSYS Technocraft**  
-*March 2024 - September 2024*  
+_March 2024 - September 2024_  
 India
 
 - Designed and implemented AI models with a focus on healthcare analytics.
@@ -29,16 +33,18 @@ India
 Although I was offered an opportunity to continue my role, personal reasons led me to step away. I'm grateful for the enriching experience and the chance to work alongside inspiring colleagues.
 
 ### Software Developer
+
 **Freelancer**  
-*2020 - Present*  
+_2020 - Present_  
 India (and foreign)
 
 - Created Custom Tailored Softwares
 - Independently created a passive income.
 
 ### Startup Founder
+
 **Citta Hub**  
-*2020 - 2022* (remote)  
+_2020 - 2022_ (remote)  
 India, Netherlands
 
 - Founded a startup providing Bot Hosting.
@@ -46,8 +52,9 @@ India, Netherlands
 - Collaborated with the team providing hosting, automations, and SASS-based services.
 
 ### Major Projects
+
 **Collaborated & Solo**  
-*2019 - Present*  
+_2019 - Present_  
 Latur, India
 
 - **Myra Discord Bot**: Base of 150k Users across servers.
@@ -59,13 +66,15 @@ Latur, India
 ## EDUCATION
 
 ### B-TECH Computer Science Engineering
+
 **D Y Patil International University**  
-*2023 - Present*  
+_2023 - Present_  
 Pune, Maharashtra
 
 ### Programming Aspects
+
 **Zero To Mastery**  
-*2018 - Present*  
+_2018 - Present_  
 Remote
 
 ---

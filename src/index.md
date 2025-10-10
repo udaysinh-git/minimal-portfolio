@@ -32,7 +32,7 @@ title: Home
     <div style="text-align: center;">
       <h1 style="margin: 0; color: var(--text-color);">Udaysinh Sapate</h1>
       <h2 style="margin: 0.5rem 0; color: var(--text-muted-color); font-weight: 400; font-size: clamp(1rem, 2.5vw, 1.4rem); line-height: 1.3;">
-        <span style="white-space: nowrap;">Software Developer</span> & <span style="white-space: nowrap;">AI Specialist</span>
+        <span style="white-space: nowrap;">Software Developer</span> & <span style="white-space: nowrap;">AI Engineer</span>
       </h2>
       <p style="margin: 0.3rem 0 1rem 0; color: var(--text-muted-color); font-size: clamp(0.9rem, 2vw, 1.1rem); opacity: 0.8;">
         <span style="font-weight: 500; margin-right: 0.5rem;">Based in:</span><span class="location-hover">Pune, India</span>

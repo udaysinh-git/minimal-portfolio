@@ -12,7 +12,7 @@ tags:
 
 Hello everyone!
 
-I am thrilled to share my first blog post on this website. As a passionate Software Developer and AI Specialist, I have always been fascinated by the endless possibilities that technology offers. This website is a culmination of my experiences, skills, and aspirations, and I am excited to embark on this new journey of sharing my knowledge and ideas with you all.
+I am thrilled to share my first blog post on this website. As a passionate Software Developer and AI Engineer, I have always been fascinated by the endless possibilities that technology offers. This website is a culmination of my experiences, skills, and aspirations, and I am excited to embark on this new journey of sharing my knowledge and ideas with you all.
 
 ## Why I Created This Website
 
