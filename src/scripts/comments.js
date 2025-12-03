@@ -11,13 +11,13 @@ class CommentsSystem {
     try {
       // Load configuration
       await this.loadConfig();
-      
+
       // Set initial theme first
       this.setInitialTheme();
-      
+
       // Initialize comments with correct theme
       this.initComments();
-      
+
       // Handle theme changes
       this.handleThemeChanges();
     } catch (error) {
@@ -30,7 +30,7 @@ class CommentsSystem {
     try {
       const response = await fetch('/.netlify/functions/giscus-config');
       const data = await response.json();
-      
+
       if (data.success) {
         this.config = data.config;
       } else {
@@ -65,7 +65,7 @@ class CommentsSystem {
 
     // Get current theme before loading script
     const currentTheme = this.getCurrentTheme();
-    console.log('Loading Giscus with theme:', currentTheme);
+    // console.log('Loading Giscus with theme:', currentTheme);
 
     // Load Giscus script with correct theme
     const script = document.createElement('script');
@@ -105,11 +105,11 @@ class CommentsSystem {
 
     try {
       window.giscus.render();
-      
+
       // Double-check theme after render
       setTimeout(() => {
         const expectedTheme = this.getCurrentTheme();
-        console.log('Ensuring Giscus theme is:', expectedTheme);
+        // console.log('Ensuring Giscus theme is:', expectedTheme);
         window.giscus.setTheme(expectedTheme);
       }, 200);
     } catch (error) {
@@ -122,7 +122,7 @@ class CommentsSystem {
     // Set initial theme when page loads
     this.currentTheme = this.getCurrentTheme();
     this.updateContainerTheme();
-    console.log('Initial theme set to:', this.currentTheme);
+    // console.log('Initial theme set to:', this.currentTheme);
   }
 
   handleThemeChanges() {
@@ -132,7 +132,7 @@ class CommentsSystem {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const newTheme = this.getCurrentTheme();
           if (newTheme !== this.currentTheme) {
-            console.log('Theme changed from', this.currentTheme, 'to', newTheme);
+            // console.log('Theme changed from', this.currentTheme, 'to', newTheme);
             this.currentTheme = newTheme;
             this.updateGiscusTheme();
             this.updateContainerTheme();
@@ -154,7 +154,7 @@ class CommentsSystem {
         setTimeout(() => {
           const newTheme = this.getCurrentTheme();
           if (newTheme !== this.currentTheme) {
-            console.log('Theme toggle: changing from', this.currentTheme, 'to', newTheme);
+            // console.log('Theme toggle: changing from', this.currentTheme, 'to', newTheme);
             this.currentTheme = newTheme;
             this.updateGiscusTheme();
             this.updateContainerTheme();
@@ -169,7 +169,7 @@ class CommentsSystem {
 
     try {
       const theme = this.getCurrentTheme();
-      console.log('Updating Giscus theme to:', theme);
+      // console.log('Updating Giscus theme to:', theme);
       window.giscus.setTheme(theme);
     } catch (error) {
       console.error('Failed to update Giscus theme:', error);
@@ -186,7 +186,7 @@ class CommentsSystem {
 
   getCurrentTheme() {
     const bodyClass = document.body.className;
-    
+
     // Map website themes to optimal Giscus themes
     const themeMap = {
       // Light themes - use light Giscus for consistency
@@ -195,7 +195,7 @@ class CommentsSystem {
       'eye-soothing-mode': 'light',
       'solarized-light-mode': 'light',
       'material-light-mode': 'light',
-      
+
       // Dark themes - use dark Giscus for consistency
       'dark-mode': 'dark',
       'solarized-dark-mode': 'dark',
@@ -206,17 +206,17 @@ class CommentsSystem {
       'one-dark-mode': 'dark',
       'material-dark-mode': 'dark'
     };
-    
+
     // Check for specific theme matches
     for (const [themeClass, giscusTheme] of Object.entries(themeMap)) {
       if (bodyClass.includes(themeClass)) {
-        console.log(`Website theme: ${themeClass} → Giscus theme: ${giscusTheme}`);
+        // console.log(`Website theme: ${themeClass} → Giscus theme: ${giscusTheme}`);
         return giscusTheme;
       }
     }
-    
+
     // Default to light theme if no match found
-    console.log('No specific theme detected, using light Giscus theme');
+    // console.log('No specific theme detected, using light Giscus theme');
     return 'light';
   }
 

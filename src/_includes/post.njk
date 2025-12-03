@@ -246,7 +246,7 @@
         try {
           const viewDisplay = document.querySelector(".post-views-display")
           if (!viewDisplay) {
-            console.log("View display element not found for loading count")
+            // console.log("View display element not found for loading count")
             return
           }
 
@@ -254,11 +254,11 @@
           const viewCountElement = viewDisplay.querySelector(".view-count")
 
           if (!slug) {
-            console.log("No slug found for loading view count")
+            // console.log("No slug found for loading view count")
             return
           }
 
-          console.log("Loading view count for slug:", slug)
+          // console.log("Loading view count for slug:", slug)
 
           const response = await fetch("/.netlify/functions/blog-views")
           if (response.ok) {
@@ -269,10 +269,10 @@
             const blogView = blogViews.find((view) => view.slug === slug)
             if (blogView) {
               viewCountElement.textContent = blogView.views
-              console.log("View count loaded:", blogView.views)
+              // console.log("View count loaded:", blogView.views)
             } else {
               viewCountElement.textContent = "0"
-              console.log("No view data found for slug:", slug)
+              // console.log("No view data found for slug:", slug)
             }
           } else {
             console.error(
@@ -297,13 +297,13 @@
           // Get the slug from the data-slug attribute instead of parsing URL
           const viewDisplay = document.querySelector(".post-views-display")
           if (!viewDisplay) {
-            console.log("View display element not found")
+            // console.log("View display element not found")
             return
           }
 
           const slug = viewDisplay.getAttribute("data-slug")
           if (!slug) {
-            console.log("No slug found in data-slug attribute")
+            // console.log("No slug found in data-slug attribute")
             return
           }
 
@@ -317,11 +317,11 @@
           const thirtyMinutes = 30 * 60 * 1000 // 30 minutes in milliseconds
 
           if (lastViewTime && now - parseInt(lastViewTime) < thirtyMinutes) {
-            console.log("View already tracked recently, skipping...")
+            // console.log("View already tracked recently, skipping...")
             return // Already tracked within 30 minutes
           }
 
-          console.log("Tracking view for slug:", slug, "title:", title)
+          // console.log("Tracking view for slug:", slug, "title:", title)
 
           // Track the view
           const response = await fetch("/.netlify/functions/blog-views", {
@@ -338,7 +338,7 @@
           if (response.ok) {
             // Mark as tracked with timestamp
             localStorage.setItem(viewKey, now.toString())
-            console.log("Blog view tracked successfully")
+            // console.log("Blog view tracked successfully")
 
             // Reload the view count to show the updated number
             loadPostViewCount()
@@ -366,9 +366,9 @@
         function highlightCode() {
           if (window.hljs) {
             hljs.highlightAll()
-            console.log("highlight.js highlighting applied")
+            // console.log("highlight.js highlighting applied")
           } else {
-            console.log("highlight.js not loaded yet, retrying...")
+            // console.log("highlight.js not loaded yet, retrying...")
             setTimeout(highlightCode, 100)
           }
         }

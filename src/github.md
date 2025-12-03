@@ -78,7 +78,7 @@ styles:
         // Double-check that Chart is actually available after script loads
         if (typeof Chart !== 'undefined') {
           chartJSLoaded = true;
-          console.log('Chart.js loaded successfully from local file');
+          // console.log('Chart.js loaded successfully from local file');
           resolve();
         } else {
           reject(new Error('Chart.js loaded but Chart object not available'));

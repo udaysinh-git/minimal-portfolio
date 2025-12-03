@@ -46,7 +46,7 @@ exports.handler = async (event, context) => {
           spreadsheetId: SHEET_ID,
           range: range,
         });
-        
+
         const rows = result.data.values || [];
         const blogViews = rows.map(row => ({
           slug: row[0] || '',
@@ -54,7 +54,7 @@ exports.handler = async (event, context) => {
           views: parseInt(row[2]) || 0,
           lastViewed: row[3] || ''
         }));
-        
+
         return {
           statusCode: 200,
           headers: {
@@ -66,8 +66,8 @@ exports.handler = async (event, context) => {
         };
       } catch (sheetError) {
         // Sheet3 doesn't exist, create it
-        console.log("Sheet3 doesn't exist, creating it...");
-        
+        // console.log("Sheet3 doesn't exist, creating it...");
+
         // Create Sheet3
         await sheets.spreadsheets.batchUpdate({
           spreadsheetId: SHEET_ID,
@@ -83,7 +83,7 @@ exports.handler = async (event, context) => {
             ]
           }
         });
-        
+
         // Add headers to the new sheet
         const headers = [['Slug', 'Title', 'Views', 'Last Viewed']];
         await sheets.spreadsheets.values.update({
@@ -94,7 +94,7 @@ exports.handler = async (event, context) => {
             values: headers
           },
         });
-        
+
         // Return empty blog views since the sheet is new
         return {
           statusCode: 200,
@@ -118,9 +118,9 @@ exports.handler = async (event, context) => {
   } else if (event.httpMethod === "POST") {
     try {
       const { slug, title } = JSON.parse(event.body);
-      
-      console.log("Received POST request with slug:", slug, "title:", title);
-      
+
+      // console.log("Received POST request with slug:", slug, "title:", title);
+
       if (!slug || !title) {
         console.error("Missing required parameters:", { slug, title });
         return {
@@ -140,8 +140,8 @@ exports.handler = async (event, context) => {
         });
       } catch (sheetError) {
         // Sheet3 doesn't exist, create it
-        console.log("Sheet3 doesn't exist, creating it...");
-        
+        // console.log("Sheet3 doesn't exist, creating it...");
+
         // Create Sheet3
         await sheets.spreadsheets.batchUpdate({
           spreadsheetId: SHEET_ID,
@@ -157,7 +157,7 @@ exports.handler = async (event, context) => {
             ]
           }
         });
-        
+
         // Add headers to the new sheet
         const headers = [['Slug', 'Title', 'Views', 'Last Viewed']];
         await sheets.spreadsheets.values.update({
@@ -176,16 +176,16 @@ exports.handler = async (event, context) => {
         spreadsheetId: SHEET_ID,
         range: range,
       });
-      
+
       const rows = result.data.values || [];
       const existingRowIndex = rows.findIndex(row => row[0] === slug);
-      
+
       if (existingRowIndex !== -1) {
         // Update existing entry
         const currentViews = parseInt(rows[existingRowIndex][2]) || 0;
         const newViews = currentViews + 1;
         const timestamp = new Date().toISOString();
-        
+
         const updateRange = `Sheet3!C${existingRowIndex + 2}:D${existingRowIndex + 2}`;
         await sheets.spreadsheets.values.update({
           spreadsheetId: SHEET_ID,
@@ -195,8 +195,8 @@ exports.handler = async (event, context) => {
             values: [[newViews, timestamp]]
           },
         });
-        
-        console.log("Successfully updated view count for slug:", slug, "new count:", newViews);
+
+        // console.log("Successfully updated view count for slug:", slug, "new count:", newViews);
         return {
           statusCode: 200,
           headers: {
@@ -204,7 +204,7 @@ exports.handler = async (event, context) => {
             'Access-Control-Allow-Headers': 'Content-Type',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             message: "View count updated",
             views: newViews
           }),
@@ -213,7 +213,7 @@ exports.handler = async (event, context) => {
         // Add new entry
         const timestamp = new Date().toISOString();
         const newRow = [slug, title, 1, timestamp];
-        
+
         await sheets.spreadsheets.values.append({
           spreadsheetId: SHEET_ID,
           range: "Sheet3!A:D",
@@ -222,8 +222,8 @@ exports.handler = async (event, context) => {
             values: [newRow]
           },
         });
-        
-        console.log("Successfully created new blog view entry for slug:", slug);
+
+        // console.log("Successfully created new blog view entry for slug:", slug);
         return {
           statusCode: 200,
           headers: {
@@ -231,7 +231,7 @@ exports.handler = async (event, context) => {
             'Access-Control-Allow-Headers': 'Content-Type',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             message: "New blog view recorded",
             views: 1
           }),

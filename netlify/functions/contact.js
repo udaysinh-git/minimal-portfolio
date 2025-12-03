@@ -61,15 +61,15 @@ exports.handler = async (event, context) => {
 
     // Fetch user's location using a geolocation API
     const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
-    const geoData = await geoResponse.json();    
+    const geoData = await geoResponse.json();
     const location = `${geoData.city || 'Unknown City'}, ${geoData.region || 'Unknown Region'}, ${geoData.country_name || geoData.country || 'Unknown Country'}`;
 
     // Get current timestamp
     const timestamp = new Date().toISOString();
 
     // Log user's location and session duration
-    console.log(`User Location: ${location}`);
-    console.log(`Session Duration: ${sessionDuration}`);
+    // console.log(`User Location: ${location}`);
+    // console.log(`Session Duration: ${sessionDuration}`);
 
     // Send message to Discord webhook with embed
     const webhookURL = process.env.DISCORD_WEBHOOK_URL;

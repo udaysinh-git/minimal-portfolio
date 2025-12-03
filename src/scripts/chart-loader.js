@@ -5,7 +5,7 @@ function loadChartJS() {
       resolve();
       return;
     }
-    
+
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
     script.onload = resolve;
@@ -15,13 +15,13 @@ function loadChartJS() {
 }
 
 // Only initialize charts when Chart.js is loaded and DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const chartElements = document.querySelectorAll('canvas[id*="chart"], canvas[id*="Chart"]');
-  
+
   if (chartElements.length > 0) {
     loadChartJS().then(() => {
       // Initialize charts here after Chart.js is loaded
-      console.log('Chart.js loaded successfully');
+      // console.log('Chart.js loaded successfully');
     }).catch(error => {
       console.error('Failed to load Chart.js:', error);
     });
