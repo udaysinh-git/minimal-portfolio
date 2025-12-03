@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: Creating a Real-Time Hand-Tracking Drawing Application with Python
-date: 2024-12-30
+date: "2024-12-30"
 tags:
     - computer vision
     - python

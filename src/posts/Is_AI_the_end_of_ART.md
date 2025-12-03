@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Is AI the end of ART, or is ART just evolving into a new form?"
-date: 2025-08-31
+date: "2025-08-31"
 tags:
   - AI
   - Personal Experiences

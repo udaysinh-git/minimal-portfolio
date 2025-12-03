@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: My First Post
-date: 2024-12-25
+date: "2024-12-25"
 tags:
   - Personal Experiences
   - Software Development

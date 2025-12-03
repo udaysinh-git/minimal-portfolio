@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "The Digital Freedom Crisis ?"
-date: 2025-12-03
+date: "2025-12-03"
 time: "05:49 AM"
 tags:
   - android
