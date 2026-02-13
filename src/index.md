@@ -45,7 +45,7 @@ title: Home
 <div style="margin: 2rem 0;">
   <h3 style="color: var(--text-color); margin-bottom: 1rem;">What I Do</h3>
   <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
-    <li style="margin: 0.5rem 0;">• Develop <u>full-stack applications</u> using <u>React</u>, <u>Node.js</u>, and <u>Python</u></li>
+    <li style="margin: 0.5rem 0;">• Develop <u>full-stack applications</u> using <u>Next.js</u>, <u>React</u>, <u>Node.js</u>, and <u>Python</u></li>
     <li style="margin: 0.5rem 0;">• Build <u>Android applications</u> with <u>Flutter</u> for cross-platform development</li>
     <li style="margin: 0.5rem 0;">• Build and deploy <u>machine learning models</u> with <u>TensorFlow</u> and <u>PyTorch</u></li>
     <li style="margin: 0.5rem 0;">• Write <u>efficient backend systems</u> in <u>Golang</u>, <u>NestJS</u>, and <u>Python</u></li>
@@ -57,6 +57,8 @@ title: Home
   <h3 style="color: var(--text-color); margin-bottom: 1rem;">Tech Stack</h3>
   <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
     <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Python</span>
+    <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">NestJS</span>
+    <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Next.js</span>
     <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">JavaScript</span>
     <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Golang</span>
     <span style="background: var(--tag-background-color); color: var(--tag-text-color); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">C/C++</span>
