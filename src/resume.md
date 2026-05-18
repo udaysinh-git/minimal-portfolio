@@ -5,19 +5,46 @@ title: Resume
 
 # Udaysinh Sapate
 
-**Software Developer & AI Engineer**
+**CEO · AI Engineer · Software Developer**
 
-contact@udaysinh.me | [udaysinh.me](https://udaysinh.me) | Pune, India
+udaysinhsapate19@gmail.com | [udaysinh.me](https://udaysinh.me) | Pune, India
 
 ---
 
 ## SUMMARY
 
-Experienced Software Developer with expertise in Python programming, AI, cybersecurity, and web development. Proficient in identifying and resolving security vulnerabilities and bugs in web applications, as well as creating custom software solutions tailored to client needs. Skilled in AI technologies, including working with AI models and understanding their application in various domains.
+Software developer and AI engineer with experience spanning full-stack development, applied AI, cybersecurity, and open-source R&D. Currently leading WeLabs.in as CEO while building AI products as an engineer at LifeAt and contributing full-stack work at Neev Technologies. Comfortable taking ideas from prototype to production across Python, TypeScript, and Go ecosystems.
 
 ---
 
 ## EXPERIENCE
+
+### Chief Executive Officer
+
+**WeLabs.in** · Full-time  
+_October 2025 - Present_  
+Pune, Maharashtra, India · Remote
+
+- Leading WeLabs.in across research and development and open-source software initiatives.
+- Setting product direction, building the team, and shipping projects under the WeLabs umbrella.
+
+### AI Engineer
+
+**LifeAt** · Internship  
+_2026 - Present_  
+Remote
+
+- Working on a new frontier of AI-related projects as an AI engineer.
+- Building, evaluating, and integrating AI systems into production-facing surfaces.
+
+### Full Stack Developer
+
+**Neev Technologies** · Internship  
+_May 2025 - Present_  
+Pune, Maharashtra, India · Remote
+
+- Full-stack development across the company's product stack.
+- Shipping features end-to-end from API design to UI delivery.
 
 ### AI Engineer
 
