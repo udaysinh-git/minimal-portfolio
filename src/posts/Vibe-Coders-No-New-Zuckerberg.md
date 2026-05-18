@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "A Whole Sh*t Ton of Vibe Coders But No New Zuckerberg. Why?"
+title: "A Whole Shit Ton of Vibe Coders But No New Zuckerberg. Why?"
 date: "2026-05-19"
 tags:
   - AI
